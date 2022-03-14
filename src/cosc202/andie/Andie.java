@@ -56,7 +56,9 @@ public class Andie {
         frame.setIconImage(image);
         System.err.println("Successfully loaded ANDIE icon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        }catch (Exception e) {
+            System.err.println("Failed to load ANDIE icon");
+        }
 
         // The main content area is an ImagePanel
         ImagePanel imagePanel = new ImagePanel();
