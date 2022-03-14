@@ -4,7 +4,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
-
+//test comment
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -23,7 +23,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-
+    // Jack was here.
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
