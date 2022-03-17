@@ -1,14 +1,15 @@
 Filters
 
-Sharpen
-Gaussian Blur: Daniel
+Sharpen: Jack
+Gaussian Blur
 Median
 ***
 Brightness: Jake
 Contrast: Jake
 ***
 Translation Operations
-Resize
+
+Resize: Jack
 Rotate
 Flip
 ***
