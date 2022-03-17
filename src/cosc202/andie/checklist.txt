@@ -1,6 +1,6 @@
 Filters
 
-Sharpen Jack
+Sharpen: Jack
 Gaussian Blur
 Median
 ***
@@ -9,7 +9,7 @@ Contrast
 ***
 Translation Operations
 
-Resize Jack
+Resize: Jack
 Rotate
 Flip
 ***
