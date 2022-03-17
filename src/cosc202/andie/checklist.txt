@@ -1,0 +1,19 @@
+Filters
+
+Sharpen
+Gaussian Blur
+Median
+***
+Brightness
+Contrast
+***
+Translation Operations
+
+Resize
+Rotate
+Flip
+***
+Image Export
+Error Handling
+Toolbar for common operations
+Keyboard shortcuts
