@@ -1,7 +1,7 @@
 Filters
 
 Sharpen: Jack
-Gaussian Blur
+Gaussian Blur: Daniel
 Median
 ***
 Brightness: Jake
@@ -17,3 +17,4 @@ Image Export
 Error Handling
 Toolbar for common operations
 Keyboard shortcuts
+
