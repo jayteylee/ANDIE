@@ -4,6 +4,7 @@ Sharpen
 Gaussian Blur
 Median
 ***
+Jake
 Brightness
 Contrast
 ***
