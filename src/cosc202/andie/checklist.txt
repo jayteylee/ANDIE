@@ -1,15 +1,13 @@
 Filters
 
 Sharpen
-Gaussian Blur
+Gaussian Blur: Daniel
 Median
 ***
-Jake
-Brightness
-Contrast
+Brightness: Jake
+Contrast: Jake
 ***
 Translation Operations
-
 Resize
 Rotate
 Flip
