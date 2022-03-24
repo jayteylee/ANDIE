@@ -7,8 +7,8 @@ import java.awt.image.*;
  */
 
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
-    private static double contrast = 0;
-    private static double brightness = 10;
+    private static double contrast = 100;
+    private static double brightness = 0;
     
     public BrightnessAndContrast(){}
 
