@@ -4,7 +4,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
-
+// test 
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -23,7 +23,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-
+    // Jack was here.
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -51,15 +51,21 @@ public class Andie {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
 
+        try{
         Image image = ImageIO.read(new File("./src/icon.png"));
         frame.setIconImage(image);
+        System.err.println("Successfully loaded ANDIE icon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }catch (Exception e) {
+            System.err.println("Failed to load ANDIE icon");
+        }
 
         // The main content area is an ImagePanel
         ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+
         
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
