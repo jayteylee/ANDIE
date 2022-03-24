@@ -1,0 +1,20 @@
+Filters
+
+Sharpen: Jack
+Gaussian Blur: Daniel
+Median: Jay
+***
+Brightness: Jake
+Contrast: Jake
+***
+Translation Operations
+
+Resize: Jack
+Rotate
+Flip
+***
+Image Export
+Error Handling
+Toolbar for common operations
+Keyboard shortcuts
+
