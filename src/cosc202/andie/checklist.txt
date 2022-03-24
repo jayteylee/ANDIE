@@ -1,6 +1,6 @@
 Filters
 
-Sharpen: Jack
+Sharpen: Jack (Done)
 Gaussian Blur: Daniel
 Median: Jay
 ***
@@ -9,7 +9,7 @@ Contrast: Jake
 ***
 Translation Operations
 
-Resize: Jack
+Resize: Jack (working on)
 Rotate
 Flip
 ***
