@@ -10,8 +10,8 @@ Contrast: Jake
 Translation Operations
 
 Resize: Jack (working on)
-Rotate
-Flip
+Rotate: Jay
+Flip: Daniel?
 ***
 Image Export
 Error Handling
