@@ -158,6 +158,8 @@ public class FilterActions {
             target.getParent().revalidate();
         }
     }
+
+    
     public class GaussianBlurAction extends ImageAction {
         public GaussianBlurAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
