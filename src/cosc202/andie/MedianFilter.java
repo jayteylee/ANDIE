@@ -27,9 +27,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         ArrayList<Integer> gArray = new ArrayList<Integer>();
         ArrayList<Integer> bArray = new ArrayList<Integer>();
 
+            System.out.println(input.getHeight());
+            System.out.println(input.getWidth());
 
-        for (int y = 0; y < input.getHeight(); ++y) {
-            for (int x = 0; x < input.getWidth(); ++x) {
+
+
+        for (int y = 1; y < input.getHeight()-1; ++y) {
+            for (int x = 1; x < input.getWidth()-1; ++x) {
                 local.add(input.getRGB(x,y));
                 local.add(input.getRGB(x+1,y));
                 local.add(input.getRGB(x-1,y));
@@ -50,7 +54,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                     rArray.add(r);
                     gArray.add(g);
                     bArray.add(b);
-                    
+
                 }
 
                 Collections.sort(aArray);
@@ -59,17 +63,24 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Collections.sort(bArray);
 
                 
-               
-                int argb = (aArray.get(aArray.size()/2) << 24) | (rArray.get(rArray.size()/2) << 16) | (gArray.get(rArray.size()/2) << 8) | bArray.get(bArray.size()/2);
+                int argb = (aArray.get(aArray.size()/2) << 24) | (rArray.get(rArray.size()/2) << 16) | (gArray.get(gArray.size()/2) << 8) | bArray.get(bArray.size()/2);
               
+                
 
                 input.setRGB(x, y, argb);
 
+                
+
                 local.removeAll(local);
                 aArray.removeAll(aArray);
+                rArray.removeAll(rArray);
                 gArray.removeAll(gArray);
                 bArray.removeAll(bArray);
+
+               
+
             }
+        
         }
 
 
