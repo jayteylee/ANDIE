@@ -104,7 +104,26 @@ public class ColourActions {
         }
 
         public void actionPerformed(ActionEvent e){
-            target.getImage().apply(new BrightnessAndContrast());
+            int contrast = 0;
+            int brightness = 0;
+            // Pop-up dialog box to ask for the radius value.
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 100, 1);
+            JSpinner contrastRadiusSpinner = new JSpinner(radiusModel);
+            JSpinner brightnessRadiusSpinner = new JSpinner(radiusModel);
+            int contrastOption = JOptionPane.showOptionDialog(null, contrastRadiusSpinner, "Enter Contrast amount", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            int brightnessOption = JOptionPane.showOptionDialog(null, brightnessRadiusSpinner, "Enter Brightness amount", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            if (contrastOption == JOptionPane.CANCEL_OPTION) {
+                return;
+            }else if (brightnessOption == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (contrastOption == JOptionPane.OK_OPTION) {
+            contrast = radiusModel.getNumber().intValue();
+
+            } else if (brightnessOption == JOptionPane.OK_OPTION) {
+            brightness = radiusModel.getNumber().intValue();
+            }
+            target.getImage().apply(new BrightnessAndContrast(contrast, brightness));
             target.repaint();
             target.getParent().revalidate();
         }

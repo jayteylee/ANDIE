@@ -7,10 +7,13 @@ import java.awt.image.*;
  */
 
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
-    private static double contrast = 100;
-    private static double brightness = 0;
+    private double contrast;
+    private double brightness;
     
-    public BrightnessAndContrast(){}
+    public BrightnessAndContrast(int contrast, int brightness){
+        this.contrast = contrast;
+        this.brightness = brightness;
+    }
 
     public BufferedImage apply(BufferedImage input){
         for (int y = 0; y < input.getHeight(); ++y) {
@@ -25,7 +28,6 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
                 input.setRGB(x, y, argb);
             }
         }
-
         return input;
     }
     //Method to calculate the changed value of the pixel
