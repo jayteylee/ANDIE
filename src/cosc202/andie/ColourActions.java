@@ -35,7 +35,7 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessAndContrastAction("Contract and Brightness", null, "Changes contrast and brightness", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessAndContrastAction("Contrast and Brightness", null, "Changes contrast and brightness", Integer.valueOf(KeyEvent.VK_G)));
         
     }
 
