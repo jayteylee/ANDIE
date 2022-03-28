@@ -37,6 +37,7 @@ public class FilterActions {
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter to sharpen the image", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_B)));
     }
 
     /**
@@ -136,6 +137,19 @@ public class FilterActions {
             super(name, icon, desc, mnemonic);
         }
         
+        public void actionPerformed(ActionEvent e){
+            target.getImage().apply(new SoftBlur());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    public class MedianFilterAction extends ImageAction {
+
+
+        MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
         public void actionPerformed(ActionEvent e){
             target.getImage().apply(new SoftBlur());
             target.repaint();
