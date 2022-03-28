@@ -27,9 +27,6 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         ArrayList<Integer> gArray = new ArrayList<Integer>();
         ArrayList<Integer> bArray = new ArrayList<Integer>();
 
-            System.out.println(input.getHeight());
-            System.out.println(input.getWidth());
-
 
 
         for (int y = 1; y < input.getHeight()-1; ++y) {
