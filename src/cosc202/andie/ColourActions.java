@@ -108,8 +108,8 @@ public class ColourActions {
             int brightness;
             JPanel panel = new JPanel();
             JSlider contrastSlider = new JSlider(-100, 100);
-            JLabel contrastNumber = new JLabel("0");
-            JLabel brightnessNumber = new JLabel("0");
+            JLabel contrastNumber = new JLabel("Change contrast by: ");
+            JLabel brightnessNumber = new JLabel("Change brightness by: ");
             contrastSlider.setMajorTickSpacing(25);
             contrastSlider.setPaintTicks(true);
             contrastSlider.setPaintLabels(true);
@@ -123,9 +123,6 @@ public class ColourActions {
             brightnessSlider.setPaintLabels(true);
             brightnessSlider.addChangeListener(ce -> {
                 brightnessNumber.setText("Change brightness by: " + String.valueOf(brightnessSlider.getValue()) + "%");
-                target.getImage().apply(new BrightnessAndContrast(0, brightnessSlider.getValue()), "asfarf");
-                target.repaint();
-                target.getParent().revalidate();
             });
             JLabel brightnessLabel = new JLabel("Brightness");
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
