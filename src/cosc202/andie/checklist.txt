@@ -13,7 +13,7 @@ Resize: Jack (working on)
 Rotate: Jay
 Flip: Daniel?
 ***
-Image Export
+Image Export: Jake
 Error Handling
 Toolbar for common operations
 Keyboard shortcuts

@@ -104,28 +104,46 @@ public class ColourActions {
         }
 
         public void actionPerformed(ActionEvent e){
-            int contrast = 0;
-            int brightness = 0;
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 100, 1);
-            JSpinner contrastRadiusSpinner = new JSpinner(radiusModel);
-            JSpinner brightnessRadiusSpinner = new JSpinner(radiusModel);
-            int contrastOption = JOptionPane.showOptionDialog(null, contrastRadiusSpinner, "Enter Contrast amount", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-            int brightnessOption = JOptionPane.showOptionDialog(null, brightnessRadiusSpinner, "Enter Brightness amount", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-            if (contrastOption == JOptionPane.CANCEL_OPTION) {
-                return;
-            }else if (brightnessOption == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (contrastOption == JOptionPane.OK_OPTION) {
-            contrast = radiusModel.getNumber().intValue();
-
-            } else if (brightnessOption == JOptionPane.OK_OPTION) {
-            brightness = radiusModel.getNumber().intValue();
-            }
+            int contrast;
+            int brightness;
+            JPanel panel = new JPanel();
+            JSlider contrastSlider = new JSlider(-100, 100);
+            JLabel contrastNumber = new JLabel("0");
+            JLabel brightnessNumber = new JLabel("0");
+            contrastSlider.setMajorTickSpacing(25);
+            contrastSlider.setPaintTicks(true);
+            contrastSlider.setPaintLabels(true);
+            contrastSlider.addChangeListener(ce -> {
+                contrastNumber.setText("Change contrast by: " + String.valueOf(contrastSlider.getValue()) + "%");
+            });
+            JLabel contrastLabel = new JLabel("Contrast");
+            JSlider brightnessSlider = new JSlider(-100, 100);
+            brightnessSlider.setMajorTickSpacing(25);
+            brightnessSlider.setPaintTicks(true);
+            brightnessSlider.setPaintLabels(true);
+            brightnessSlider.addChangeListener(ce -> {
+                brightnessNumber.setText("Change brightness by: " + String.valueOf(brightnessSlider.getValue()) + "%");
+                target.getImage().apply(new BrightnessAndContrast(0, brightnessSlider.getValue()), "asfarf");
+                target.repaint();
+                target.getParent().revalidate();
+            });
+            JLabel brightnessLabel = new JLabel("Brightness");
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.add(contrastLabel);
+            panel.add(contrastSlider);
+            panel.add(contrastNumber);
+            panel.add(brightnessLabel);
+            panel.add(brightnessSlider);
+            panel.add(brightnessNumber);
+            JOptionPane.showOptionDialog(null, panel, "Brightness and contrast control panel", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            contrast = contrastSlider.getValue();
+            brightness = brightnessSlider.getValue();
             target.getImage().apply(new BrightnessAndContrast(contrast, brightness));
             target.repaint();
             target.getParent().revalidate();
+        }
+        public void changeListener(ActionEvent listener){
+
         }
     }
 }

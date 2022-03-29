@@ -224,6 +224,10 @@ class EditableImage {
         current = op.apply(current);
         ops.add(op);
     }
+    public void apply(ImageOperation op, String str) {
+        current = op.apply(current);
+        //ops.add(op);
+    }
 
     /**
      * <p>

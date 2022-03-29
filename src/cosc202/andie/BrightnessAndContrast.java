@@ -9,12 +9,12 @@ import java.awt.image.*;
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
     private double contrast;
     private double brightness;
+    private BufferedImage temporaryImage; 
     
     public BrightnessAndContrast(int contrast, int brightness){
         this.contrast = contrast;
         this.brightness = brightness;
     }
-
     public BufferedImage apply(BufferedImage input){
         for (int y = 0; y < input.getHeight(); ++y) {
             for (int x = 0; x < input.getWidth(); ++x) {
