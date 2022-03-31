@@ -32,14 +32,16 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         for (int y = 1; y < input.getHeight()-1; ++y) {
             for (int x = 1; x < input.getWidth()-1; ++x) {
                 local.add(input.getRGB(x,y));
-                local.add(input.getRGB(x+1,y));
-                local.add(input.getRGB(x-1,y));
-                local.add(input.getRGB(x,y+1));
-                local.add(input.getRGB(x,y-1));
-                local.add(input.getRGB(x-1,y-1));
-                local.add(input.getRGB(x-1,y+1));
-                local.add(input.getRGB(x+1,y+1));
-                local.add(input.getRGB(x+1,y-1));
+                for(int rad = 1; rad <= radius; rad++){
+                local.add(input.getRGB(x+rad,y));
+                local.add(input.getRGB(x-rad,y));
+                local.add(input.getRGB(x,y+rad));
+                local.add(input.getRGB(x,y-rad));
+                local.add(input.getRGB(x-rad,y-rad));
+                local.add(input.getRGB(x-rad,y+rad));
+                local.add(input.getRGB(x+rad,y+rad));
+                local.add(input.getRGB(x+rad,y-rad));
+                }
 
                 for(int px : local){
                     int a = (px & 0xFF000000) >> 24;
@@ -79,13 +81,10 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             }
         
         }
-
-
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
 
         return output;
 
-        
     }
 
 }
