@@ -65,8 +65,6 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
