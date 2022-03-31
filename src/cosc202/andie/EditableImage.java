@@ -181,7 +181,9 @@ class EditableImage {
             this.opsFilename = this.imageFilename + ".ops";
         }
         // Write image file based on file extension
+        
         String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+         
         ImageIO.write(original, extension, new File(imageFilename));
         // Write operations file
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
@@ -192,7 +194,9 @@ class EditableImage {
     }
 
     public void export(String imageFilename)throws Exception {
-        this.imageFilename = imageFilename;
+        if(!imageFilename.contains(".")){
+            imageFilename = imageFilename + ".jpg";
+        }
         String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
         ImageIO.write(current, extension, new File(imageFilename));
 
