@@ -16,10 +16,6 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     
     public BufferedImage apply(BufferedImage input) {
 
-        int size = (2*radius+1) * (2*radius+1);
-        float [] array = new float[size];
-        Arrays.fill(array, 1.0f/size);
-
         ArrayList<Integer> local = new ArrayList<Integer>();
 
         ArrayList<Integer> aArray = new ArrayList<Integer>();
@@ -28,20 +24,21 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         ArrayList<Integer> bArray = new ArrayList<Integer>();
 
 
-
-        for (int y = 1; y < input.getHeight()-1; ++y) {
-            for (int x = 1; x < input.getWidth()-1; ++x) {
+        for (int y = radius; y < input.getHeight()-radius; ++y) {
+            for (int x = radius; x < input.getWidth()-radius; ++x) {
                 local.add(input.getRGB(x,y));
-                for(int rad = 1; rad <= radius; rad++){
-                local.add(input.getRGB(x+rad,y));
-                local.add(input.getRGB(x-rad,y));
-                local.add(input.getRGB(x,y+rad));
-                local.add(input.getRGB(x,y-rad));
-                local.add(input.getRGB(x-rad,y-rad));
-                local.add(input.getRGB(x-rad,y+rad));
-                local.add(input.getRGB(x+rad,y+rad));
-                local.add(input.getRGB(x+rad,y-rad));
-                }
+                    for(int yRad = radius; yRad > 0; yRad--){
+                        for(int xRad = radius; xRad > 0; xRad--){
+                            local.add(input.getRGB(x-xRad, y));
+                            local.add(input.getRGB(x+xRad, y));
+                            local.add(input.getRGB(x,y-yRad));
+                            local.add(input.getRGB(x,y+yRad));
+                            local.add(input.getRGB(x+xRad,y+yRad));
+                            local.add(input.getRGB(x-xRad,y+yRad));
+                            local.add(input.getRGB(x+xRad,y-yRad));
+                            local.add(input.getRGB(x-xRad,y-yRad));
+                        }
+                    }
 
                 for(int px : local){
                     int a = (px & 0xFF000000) >> 24;

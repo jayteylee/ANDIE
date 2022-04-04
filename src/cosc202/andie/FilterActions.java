@@ -46,7 +46,7 @@ public class FilterActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of Filter actions.
+     * Create a menu containing the list of Filter actions.
      * </p>
      * 
      * @return The filter menu UI element.

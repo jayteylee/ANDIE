@@ -65,14 +65,16 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
         // File menus are pretty standard, so things that usually go in File menus go here.
         FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
+
+        //ImageImplementations apply actions to images such as rotate, resize etc
+        ImageImplementations imageImplementations = new ImageImplementations();
+        menuBar.add(imageImplementations.createMenu());
 
         // Likewise Edit menus are very common, so should be clear what might go here.
         EditActions editActions = new EditActions();
@@ -90,6 +92,10 @@ public class Andie {
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
         
+        //Creates a toolbar
+        Toolbar toolbar = new Toolbar();
+        JToolBar tbar = toolbar.createToolBar();
+        frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);

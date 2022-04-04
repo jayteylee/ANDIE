@@ -108,8 +108,8 @@ public class ColourActions {
             int brightness;
             JPanel panel = new JPanel();
             JSlider contrastSlider = new JSlider(-100, 100);
-            JLabel contrastNumber = new JLabel("Change contrast by: ");
-            JLabel brightnessNumber = new JLabel("Change brightness by: ");
+            JLabel contrastNumber = new JLabel("Change contrast by: 0%");
+            JLabel brightnessNumber = new JLabel("Change brightness by: 0%");
             contrastSlider.setMajorTickSpacing(25);
             contrastSlider.setPaintTicks(true);
             contrastSlider.setPaintLabels(true);
