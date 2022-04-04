@@ -41,7 +41,6 @@ public class FilterActions {
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new GaussianBlurAction("Gaussian blur", null, "Apply gaussian blur", Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new ResizeFilterAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
     }
 
     /**
@@ -206,33 +205,5 @@ public class FilterActions {
             target.repaint();
             target.getParent().revalidate();
         }
-    }
-    
-    public class ResizeFilterAction extends ImageAction {
-        public ResizeFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if(target.getImage().getCurrentImage() != null) {
-                int currW = target.getImage().getCurrentImage().getWidth();
-                int currH = target.getImage().getCurrentImage().getHeight();
-                JTextField wTxtField = new JTextField(String.valueOf(currW), 5); //Text field filled with the current image width value.
-                JTextField hTxtField = new JTextField(String.valueOf(currH), 5); //Filled with current height value.
-                Object[] content = {"Width: ", wTxtField, "Height: ", hTxtField};
-                String[] options = {"Resize", "Exit"};
-                int option = JOptionPane.showOptionDialog(null, content, "Resize", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-                if(option == 0) {
-                    int newW = Integer.parseInt(wTxtField.getText());
-                    int newH = Integer.parseInt(hTxtField.getText());
-                    if(newW > 0 && newH > 0) {
-                        target.getImage().apply(new ResizeFilter(newW, newH));
-                        target.repaint();
-                        target.getParent().revalidate();
-                    }
-                }
-            }
-        }
-    }
-    
+    }   
 }
