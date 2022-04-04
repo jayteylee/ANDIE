@@ -2,7 +2,7 @@ Filters
 
 Sharpen: Jack (Done)
 Gaussian Blur: Daniel
-Median: Jay
+Median: Jay (Done)
 ***
 Brightness: Jake (Done)
 Contrast: Jake (Done)
