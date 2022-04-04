@@ -88,6 +88,10 @@ public class Andie {
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
         
+        //Creates a toolbar
+        Toolbar toolbar = new Toolbar();
+        JToolBar tbar = toolbar.createToolBar();
+        frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
