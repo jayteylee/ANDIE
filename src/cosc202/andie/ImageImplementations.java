@@ -18,7 +18,8 @@ public class ImageImplementations { //Change to imageTransformations
          */
         public ImageImplementations() {
             actions = new ArrayList<Action>();
-            actions.add(new RotateImageClockwise("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
+            actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
+            actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_M)));
             actions.add(new ResizeAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
         }
     
@@ -42,13 +43,26 @@ public class ImageImplementations { //Change to imageTransformations
 
 
 
-        public class RotateImageClockwise extends ImageAction {
-            public RotateImageClockwise(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        public class RotateImageClockwiseAction extends ImageAction {
+            public RotateImageClockwiseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
             }
     
             public void actionPerformed(ActionEvent e) {
-                target.getImage().apply(new SharpenFilter());
+                target.getImage().apply(new RotateImageClockwise());
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }
+
+
+        public class RotateImageAntiClockwiseAction extends ImageAction {
+            public RotateImageAntiClockwiseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+                super(name, icon, desc, mnemonic);
+            }
+    
+            public void actionPerformed(ActionEvent e) {
+                target.getImage().apply(new RotateImageAntiClockwise());
                 target.repaint();
                 target.getParent().revalidate();
             }

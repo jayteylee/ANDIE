@@ -1,10 +1,8 @@
-package cosc202;
+package cosc202.andie;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-
-import cosc202.andie.ImageOperation;
 
 public class ResizeOperation implements ImageOperation, java.io.Serializable {
 
