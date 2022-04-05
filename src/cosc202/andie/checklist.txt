@@ -15,6 +15,6 @@ Flip: Daniel?
 ***
 Image Export: Jake (Done)
 Error Handling
-Toolbar for common operations
-Keyboard shortcuts
+Toolbar for common operations Jake
+Keyboard shortcuts (Jay)
 

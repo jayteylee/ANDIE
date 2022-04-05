@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import cosc202.*;
+
 /**
  * <p>
  * Actions provided by the Filter menu.
@@ -203,5 +205,5 @@ public class FilterActions {
             target.repaint();
             target.getParent().revalidate();
         }
-    }
+    }   
 }
