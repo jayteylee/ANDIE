@@ -121,6 +121,7 @@ public class Andie {
                 try {
                     createAndShowGUI();
                 } catch (Exception ex) {
+                    System.out.println(ex);
                     System.exit(1);
                 }
             }

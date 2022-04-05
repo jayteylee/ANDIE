@@ -32,7 +32,6 @@ import javax.imageio.*;
  * @version 1.0
  */
 class EditableImage {
-
     /** The original image. This should never be altered by ANDIE. */
     private BufferedImage original;
     /** The current image, the result of applying {@link ops} to {@link original}. */
@@ -199,7 +198,6 @@ class EditableImage {
         }
         String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
         ImageIO.write(current, extension, new File(imageFilename));
-
     } 
     /**
      * <p>
@@ -233,11 +231,6 @@ class EditableImage {
         current = op.apply(current);
         ops.add(op);
     }
-    public void apply(ImageOperation op, String str) {
-        current = op.apply(current);
-        //ops.add(op);
-    }
-
     /**
      * <p>
      * Undo the last {@link ImageOperation} applied to the image.
