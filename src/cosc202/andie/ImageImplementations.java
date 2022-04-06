@@ -19,7 +19,7 @@ public class ImageImplementations { //Change to imageTransformations
         public ImageImplementations() {
             actions = new ArrayList<Action>();
             actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
-            actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_M)));
+            actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_Y)));
             actions.add(new ResizeAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
         }
     
