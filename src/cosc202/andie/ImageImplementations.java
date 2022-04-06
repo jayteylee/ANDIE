@@ -21,6 +21,8 @@ public class ImageImplementations { //Change to imageTransformations
             actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
             actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_M)));
             actions.add(new ResizeAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
+            actions.add(new FlipImageHorizontalAction("Flip images horizontal", null, "Flip the image horizontally. ", Integer.valueOf(KeyEvent.VK_R)));
+            actions.add(new FlipImageVerticalAction("Flip images vertically", null, "Flip the image vertically. ", Integer.valueOf(KeyEvent.VK_R)));
         }
     
         /**
@@ -63,6 +65,30 @@ public class ImageImplementations { //Change to imageTransformations
     
             public void actionPerformed(ActionEvent e) {
                 target.getImage().apply(new RotateImageAntiClockwise());
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }
+
+        public class FlipImageHorizontalAction extends ImageAction {
+            public FlipImageHorizontalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+                super(name, icon, desc, mnemonic);
+            }
+    
+            public void actionPerformed(ActionEvent e) {
+                target.getImage().apply(new FlipImageHorizontal());
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }
+
+        public class FlipImageVerticalAction extends ImageAction {
+            public FlipImageVerticalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+                super(name, icon, desc, mnemonic);
+            }
+    
+            public void actionPerformed(ActionEvent e) {
+                target.getImage().apply(new FlipImageVertical());
                 target.repaint();
                 target.getParent().revalidate();
             }
