@@ -11,7 +11,7 @@ Translation Operations
 
 Resize: Jack (working on)
 Rotate: Jay
-Flip: Daniel?
+Flip: Daniel (done)
 ***
 Image Export: Jake (Done)
 Error Handling
