@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.*;
+import java.util.*;
 
 public class GaussianBlur implements ImageOperation, java.io.Serializable {
     /**
@@ -18,21 +19,32 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
         this.radius = radius;    
     }
 
+    /**
+     * <p>
+     * Construct a Mean filter with the default size.
+     * </p
+     * >
+     * <p>
+     * By default, a Mean filter has radius 1.
+     * </p>
+     * 
+     * @see GaussianBlur(int)
+     */
     //default constructor
-    public GaussianBlur() {}
+    GaussianBlur() {
+        this(1);
+    }
     
     public BufferedImage apply (BufferedImage input) {
-        // The values for the kernel as a 9-element array
-        float [] array = { 0 , 1/8.0f, 0 , 1/8.0f, 1/2.0f, 1/8.0f, 0 , 1/8.0f, 0 };
-
+        //need to apply gaussian formula here
+        float[] array = {};
+        
         // Make a 3x3 filter from the array
-        Kernel kernel = new Kernel(3, 3, array);
+        Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
 
         // Apply this as a convolution - same code as in MeanFilter
         ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(),
-        input.copyData(null),
-        input.isAlphaPremultiplied(), null);
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
  
         return output;
