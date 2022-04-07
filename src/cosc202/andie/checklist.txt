@@ -9,11 +9,11 @@ Contrast: Jake (Done)
 ***
 Translation Operations
 
-Resize: Jack (working on)
+Resize: Jack Done)
 Rotate: Jay (Done)
 Flip: Daniel (Done)
 ***
 Image Export: Jake (Done)
-Error Handling: 
+Error Handling: (Everyone!)
 Toolbar for common operations: Jake
 Keyboard shortcuts: Jay (Working on)
