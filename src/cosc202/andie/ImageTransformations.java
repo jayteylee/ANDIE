@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import cosc202.*;
 
-public class ImageImplementations { //Change to imageTransformations
+public class ImageTransformations { //Change to imageTransformations
     
         /** A list of actions for the Filter menu. */
         protected ArrayList<Action> actions;
@@ -16,7 +16,7 @@ public class ImageImplementations { //Change to imageTransformations
          * Create a set of Filter menu actions.
          * </p>
          */
-        public ImageImplementations() {
+        public ImageTransformations() {
             actions = new ArrayList<Action>();
             actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
             actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_M)));
