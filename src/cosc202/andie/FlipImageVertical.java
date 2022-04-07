@@ -13,16 +13,16 @@ public class FlipImageVertical implements ImageOperation, java.io.Serializable {
         int height = input.getHeight();
         int imageType = input.getType();
 
-        BufferedImage rotatedImage = new BufferedImage(height, width, imageType);
+        BufferedImage flipImage = new BufferedImage(width, height, imageType);
 
         //change the value of y to achieve the vertical flip.
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                rotatedImage.setRGB(x,(height - 1) - y, input.getRGB(x, y));
+                flipImage.setRGB(x,(height - 1) - y, input.getRGB(x, y));
             }
         }
         
-        return rotatedImage;
+        return flipImage;
     }
 
     
