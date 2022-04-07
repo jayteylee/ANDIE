@@ -2,7 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.*;
-import java.util.*;
+//import java.util.*;
 
 public class GaussianBlur implements ImageOperation, java.io.Serializable {
     /**
@@ -37,9 +37,27 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     
     public BufferedImage apply (BufferedImage input) {
         //need to apply gaussian formula here
-        float[] array = {};
+        int size = (2*radius+1) * (2*radius+1);
+        float [] array = new float[size];
+
+        //the algorithm of the gaussian blur equation
+        float sigma = radius / 3.0f;
+        float twoSigmaSquare = 2.0f * sigma * sigma;
+        float sigmaRoot = (float) Math.sqrt(twoSigmaSquare * Math.PI);
+        float total = 0.0f;
+
+        for (int i = -radius; i <= radius; i++) {
+            float distance = i * i;
+            int index = i + radius;
+            array[index] = (float) Math.exp(-distance / twoSigmaSquare)/ sigmaRoot;
+            total += array[index];
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] /= total;
+        }
         
-        // Make a 3x3 filter from the array
+        // Make a filter from the array
         Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
 
         // Apply this as a convolution - same code as in MeanFilter
