@@ -156,6 +156,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
+            System.out.println(ex);
         }
         this.refresh();
     }

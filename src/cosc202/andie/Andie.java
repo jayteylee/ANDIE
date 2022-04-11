@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.Dimension;
 import javax.imageio.*;
 
 // test 
@@ -92,14 +93,18 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
-        
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
         JToolBar tbar = toolbar.createToolBar();
+        frame.setMinimumSize(new Dimension(520,450));
         frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
+        fileActions.setFrame(frame);
+        toolbar.setFrame(frame);
+        
+       
     }
 
     /**

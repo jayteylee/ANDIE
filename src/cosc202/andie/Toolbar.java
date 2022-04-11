@@ -1,13 +1,14 @@
 package cosc202.andie;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
 /**
@@ -41,11 +42,9 @@ public class Toolbar{
     private JButton rotateAntiClockwise;
     private JButton flipHorizontal;
     private JButton flipVertical;
-
+    protected JFrame frame;
     private FileActions fileAction = new FileActions();
-    private ColourActions colourAction = new ColourActions();
     private EditActions editAction = new EditActions();
-    private FilterActions filterAction = new FilterActions();
     private ViewActions viewAction = new ViewActions();
     private ImageTransformations imageAction = new ImageTransformations();
     /**
@@ -85,6 +84,10 @@ public class Toolbar{
         toolbar.add(flipHorizontal);
         toolbar.add(flipVertical);
         return toolbar;
+    }
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+        fileAction.setFrame(frame);
     }
     /**
      * Method to create the open button and set its icon and instantiate an action listener.
@@ -164,7 +167,7 @@ public class Toolbar{
         }
     }
     /**
-     * Method to create the zoomOut button and set its icon and instantiate an action listener.
+     * Method to create the resize button and set its icon and instantiate an action listener.
      */
     public void resizeButton(){
         try {
@@ -174,40 +177,53 @@ public class Toolbar{
             System.out.println("failed to load resize button");
         }
     }
+    /**
+     * Method to create the rotateClockwise button and set its icon and instantiate an action listener.
+     */
     public void rotateClockwiseButton(){
         try {
             rotateClockwise = new JButton(resizeImage("./src/toolbarIcons/rotateClockwise.png")); 
             rotateClockwise.addActionListener(new Listener());
         } catch (Exception e) {
-            System.out.println("failed to load resize button");
+            System.out.println("failed to load rotateClockwise button");
         }
     }
+    /**
+     * Method to create the rotateAntiClockwise button and set its icon and instantiate an action listener.
+     */
     public void rotateAntiClockwiseButton(){
         try {
             rotateAntiClockwise = new JButton(resizeImage("./src/toolbarIcons/rotateAntiClockwise.png")); 
             rotateAntiClockwise.addActionListener(new Listener());
         } catch (Exception e) {
-            System.out.println("failed to load resize button");
+            System.out.println("failed to load rotateAntiClockwise button");
         }
     }
+    /**
+     * Method to create the flipHorizontal button and set its icon and instantiate an action listener.
+     */
     public void flipHorizontalButton(){
         try {
             flipHorizontal = new JButton(resizeImage("./src/toolbarIcons/flipHorizontal.png")); 
             flipHorizontal.addActionListener(new Listener());
         } catch (Exception e) {
-            System.out.println("failed to load resize button");
+            System.out.println("failed to load flipHorizontal button");
         }
     }
+    /**
+     * Method to create the flipVertical button and set its icon and instantiate an action listener.
+     */
     public void flipVerticalButton(){
         try {
             flipVertical = new JButton(resizeImage("./src/toolbarIcons/flipVertical.png")); 
             flipVertical.addActionListener(new Listener());
         } catch (Exception e) {
-            System.out.println("failed to load resize button");
+            System.out.println("failed to load flipVertical button");
         }
     }
     /**
      * Method which reads in an image, changes its size and then casts it to an icon for use on JButtons. 
+     * @throws Exception If something goes wrong.
      */
     public ImageIcon resizeImage(String path) throws Exception{
         Image image = ImageIO.read(new File(path));
@@ -219,7 +235,10 @@ public class Toolbar{
      * An action listener class to call the action methods when toolbar buttons are pressed.
      */
     public class Listener implements ActionListener{
-        
+        /**
+         * A method to call the function based off actions on the toolbar buttons.
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
             //Calls the open function.
             if(e.getSource() == open){
@@ -249,18 +268,23 @@ public class Toolbar{
             if(e.getSource() == zoomOut){
                 viewAction.actions.get(1).actionPerformed(e);
             }
+            //Calls the resize function.
             if(e.getSource() == resize){
                 imageAction.actions.get(2).actionPerformed(e);
             }
+            //Calls the rotateClockwise function.
             if(e.getSource() == rotateClockwise){
                 imageAction.actions.get(0).actionPerformed(e);
             }
+            //Calls the rotateAntiClockwise function.
             if(e.getSource() == rotateAntiClockwise){
                 imageAction.actions.get(1).actionPerformed(e);
             }
+            //Calls the flipHorizontal function.
             if(e.getSource() == flipHorizontal){
                 imageAction.actions.get(3).actionPerformed(e);
             }
+            //Calls the flipVertical function.
             if(e.getSource() == flipVertical){
                 imageAction.actions.get(4).actionPerformed(e);
             }

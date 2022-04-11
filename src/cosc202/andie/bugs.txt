@@ -2,5 +2,6 @@ Opening a non image file crashes the program >> should be fixed
 Errors with methods when no image file open
 edge cases, image size of 1
 pop out prompts for users to save if they haven't
+changed the program so that it will wrap the window around the file that is opened, if the file is too large it will maximize the window.
 
 
