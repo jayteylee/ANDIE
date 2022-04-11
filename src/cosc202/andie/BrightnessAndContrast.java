@@ -50,9 +50,12 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
     * @return The output of the contrast and brightness calculation
     */
     public int formula(int v){
-        int output = (int)((1.0 + contrast/100.0)*(v - 127.5) + (127.5*(1.0 + (brightness/100))));
+        int output = (int)((1.0 + contrast/100.0)*(v - 127.5) + (127.5*(1.0 + (brightness/100.0))));
         if (output > 255){
             output = 255;
+        }
+        if (output < 0){
+            output = 0;
         }
         return output;
     }

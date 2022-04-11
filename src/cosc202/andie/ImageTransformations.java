@@ -4,7 +4,11 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+<<<<<<< HEAD:src/cosc202/andie/ImageImplementations.java
 public class ImageImplementations { //Change to imageTransformations
+=======
+public class ImageTransformations { //Change to imageTransformations
+>>>>>>> cd77429f9d5f64e0b0445c7d4a4f5f4b0831bc3e:src/cosc202/andie/ImageTransformations.java
     
         /** A list of actions for the Filter menu. */
         protected ArrayList<Action> actions;
@@ -14,13 +18,13 @@ public class ImageImplementations { //Change to imageTransformations
          * Create a set of Filter menu actions.
          * </p>
          */
-        public ImageImplementations() {
+        public ImageTransformations() {
             actions = new ArrayList<Action>();
-            actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_M)));
-            actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_M)));
+            actions.add(new RotateImageClockwiseAction("Rotate Clockwise", null, "Rotate image clockwise", Integer.valueOf(KeyEvent.VK_CLOSE_BRACKET)));
+            actions.add(new RotateImageAntiClockwiseAction("Rotate Anti-Clockwise", null, "Rotate image anti-clockwise", Integer.valueOf(KeyEvent.VK_OPEN_BRACKET)));
             actions.add(new ResizeAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
-            actions.add(new FlipImageHorizontalAction("Flip images horizontal", null, "Flip the image horizontally. ", Integer.valueOf(KeyEvent.VK_R)));
-            actions.add(new FlipImageVerticalAction("Flip images vertically", null, "Flip the image vertically. ", Integer.valueOf(KeyEvent.VK_R)));
+            actions.add(new FlipImageHorizontalAction("Flip images horizontal", null, "Flip the image horizontally. ", Integer.valueOf(KeyEvent.VK_CLOSE_BRACKET)));
+            actions.add(new FlipImageVerticalAction("Flip images vertically", null, "Flip the image vertically. ", Integer.valueOf(KeyEvent.VK_OPEN_BRACKET)));
         }
     
         /**
@@ -46,6 +50,7 @@ public class ImageImplementations { //Change to imageTransformations
         public class RotateImageClockwiseAction extends ImageAction {
             public RotateImageClockwiseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
             }
     
             public void actionPerformed(ActionEvent e) {
@@ -59,6 +64,7 @@ public class ImageImplementations { //Change to imageTransformations
         public class RotateImageAntiClockwiseAction extends ImageAction {
             public RotateImageAntiClockwiseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
             }
     
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +77,7 @@ public class ImageImplementations { //Change to imageTransformations
         public class FlipImageHorizontalAction extends ImageAction {
             public FlipImageHorizontalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
             }
     
             public void actionPerformed(ActionEvent e) {
@@ -83,6 +90,7 @@ public class ImageImplementations { //Change to imageTransformations
         public class FlipImageVerticalAction extends ImageAction {
             public FlipImageVerticalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
             }
     
             public void actionPerformed(ActionEvent e) {
@@ -95,6 +103,7 @@ public class ImageImplementations { //Change to imageTransformations
         public class ResizeAction extends ImageAction {
             public ResizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
             }
     
             public void actionPerformed(ActionEvent e) {

@@ -54,15 +54,15 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
     */
 
     public BufferedImage apply (BufferedImage input) {
-        //need to apply gaussian formula here
-        int size = (2*radius+1) * (2*radius+1);
+        int size = (2*radius+1) * (2*radius +1);
         float [] array = new float[size];
 
-        //the algorithm of the gaussian blur equation
+        //the algorithm of the gaussian blur equation, defining the variables
         float sigma = radius / 3.0f;
         float twoSigmaSquare = 2.0f * sigma * sigma;
         float sigmaRoot = (float) Math.sqrt(twoSigmaSquare * Math.PI);
         float total = 0.0f;
+        
         //computing the algorithm of gaussian blur
         for (int i = -radius; i <= radius; i++) {
             float distance = i * i;

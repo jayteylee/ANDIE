@@ -156,7 +156,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
-            // Could be no file or something else. Carry on for now.
+            System.out.println(ex);
         }
         this.refresh();
     }
