@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -176,20 +177,33 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
-        if (this.opsFilename == null) {
-            this.opsFilename = this.imageFilename + ".ops";
+        try {
+
+            if(this.original == null || this.current == null) {
+                throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION,
+                 "Please open an image before attempting to save.");
+            }
+
+            if (this.opsFilename == null) {
+                this.opsFilename = this.imageFilename + ".ops";
+            }
+            // Write image file based on file extension
+            
+            String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+            
+            ImageIO.write(original, extension, new File(imageFilename));
+            // Write operations file
+            FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
+            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+            objOut.writeObject(this.ops);
+            objOut.close();
+            fileOut.close();
+        } catch (CustomException cE) {
+            if(cE.code == CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION) {
+                System.out.println(cE.getMessage());
+                JOptionPane.showMessageDialog(null, cE.getMessage(), "Invalid Operation", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        // Write image file based on file extension
-        
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-         
-        ImageIO.write(original, extension, new File(imageFilename));
-        // Write operations file
-        FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
-        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(this.ops);
-        objOut.close();
-        fileOut.close();
     }
 
     public void export(String imageFilename)throws Exception {

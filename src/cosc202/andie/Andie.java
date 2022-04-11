@@ -75,8 +75,8 @@ public class Andie {
         menuBar.add(fileActions.createMenu());
 
         //ImageImplementations apply actions to images such as rotate, resize etc
-        ImageTransformations imageImplementations = new ImageTransformations();
-        menuBar.add(imageImplementations.createMenu());
+        ImageTransformations imageTransformations = new ImageTransformations();
+        menuBar.add(imageTransformations.createMenu());
 
         // Likewise Edit menus are very common, so should be clear what might go here.
         EditActions editActions = new EditActions();
