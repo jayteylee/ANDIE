@@ -54,6 +54,7 @@ public class ImageTransformations {
                 target.getImage().apply(new RotateImageClockwise());
                 target.repaint();
                 target.getParent().revalidate();
+                Andie.frame.pack();
             }
         }
 
@@ -68,6 +69,7 @@ public class ImageTransformations {
                 target.getImage().apply(new RotateImageAntiClockwise());
                 target.repaint();
                 target.getParent().revalidate();
+                Andie.frame.pack();
             }
         }
 
@@ -119,6 +121,7 @@ public class ImageTransformations {
                             target.getImage().apply(new ResizeOperation(newW, newH));
                             target.repaint();
                             target.getParent().revalidate();
+                            Andie.resizeFrame();
                         }
                     }
                 }
