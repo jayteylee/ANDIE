@@ -29,7 +29,6 @@ public class FileActions {
     
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
-    protected JFrame frame;
 
     /**
      * <p>
@@ -70,10 +69,6 @@ public class FileActions {
      * 
      * @see EditableImage#open(String)
      */
-    public void setFrame(JFrame frame){
-        this.frame = frame;
-    }
-
     public class FileOpenAction extends ImageAction {
 
         /**
@@ -117,16 +112,10 @@ public class FileActions {
                     System.exit(1);
                 }
             }
-            Toolkit tk = Toolkit.getDefaultToolkit();  
-            int xSize = ((int) tk.getScreenSize().getWidth());  
-            int ySize = ((int) tk.getScreenSize().getHeight()); 
             target.repaint();
             target.getParent().revalidate();
-            frame.pack();
             //checks if the image opened is larger than the screen dimensions, if it is it maximises the window.
-            if(frame.getSize().getWidth()> xSize || frame.getSize().getHeight()> ySize){
-                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            }
+            Andie.resizeFrame();
         }
 
     }
