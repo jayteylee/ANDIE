@@ -4,8 +4,6 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import cosc202.*;
-
 public class ImageImplementations { //Change to imageTransformations
     
         /** A list of actions for the Filter menu. */
