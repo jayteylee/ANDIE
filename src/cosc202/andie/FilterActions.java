@@ -11,7 +11,7 @@ import javax.swing.*;
  * 
  * <p>
  * The Filter menu contains actions that update each pixel in an image based on
- * some small local neighbourhood. 
+ * some small local neighborhood. 
  * This includes a mean filter (a simple blur) in the sample code, but more operations will need to be added.
  * </p>
  * 
