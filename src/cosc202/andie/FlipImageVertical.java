@@ -3,7 +3,7 @@ package cosc202.andie;
 import java.awt.image.BufferedImage;
 
 /**
- * <p> An action that unables the image to be flip vertically.</p>
+ * <p> An action that enables the image to be flip vertically.</p>
  * 
  * @author Daniel Lee
  */

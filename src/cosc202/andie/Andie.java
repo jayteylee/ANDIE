@@ -25,7 +25,10 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-    // Jack was here.
+    protected static JFrame frame = new JFrame("ANDIE");
+    protected static Toolkit tk = Toolkit.getDefaultToolkit();  
+    protected static int xSize = ((int) tk.getScreenSize().getWidth());  
+    protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -51,7 +54,7 @@ public class Andie {
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
-        JFrame frame = new JFrame("ANDIE");
+        
 
         try{
         Image image = ImageIO.read(new File("./src/icon.png"));
@@ -101,12 +104,19 @@ public class Andie {
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
-        fileActions.setFrame(frame);
-        toolbar.setFrame(frame);
         
        
     }
-
+    /**
+     * A method which resizes the frame according to the new image size. If the image size is larger than the
+     * screen size, maximise frame.
+     */
+    protected static void resizeFrame(){
+        frame.pack();
+        if(frame.getSize().getWidth()> xSize || frame.getSize().getHeight()> ySize){
+            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
+    } 
     /**
      * <p>
      * Main entry point to the ANDIE program.
