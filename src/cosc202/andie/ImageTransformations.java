@@ -4,7 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ImageTransformations { //Change to imageTransformations
+
+public class ImageTransformations { //Change to imageTransformations>>>>>>> cd77429f9d5f64e0b0445c7d4a4f5f4b0831bc3e:src/cosc202/andie/ImageTransformations.java
     
         /** A list of actions for the Filter menu. */
         protected ArrayList<Action> actions;
