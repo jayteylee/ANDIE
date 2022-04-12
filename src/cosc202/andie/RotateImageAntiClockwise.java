@@ -23,7 +23,7 @@ public class RotateImageAntiClockwise implements ImageOperation, java.io.Seriali
                 rotatedImage.setRGB(y, width - x - 1, input.getRGB(x,y));
             }
         }
-    
+             
     
         return rotatedImage;
         }
