@@ -29,6 +29,7 @@ public class FileActions {
     
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
+    protected JFrame frame;
 
     /**
      * <p>
@@ -61,6 +62,11 @@ public class FileActions {
 
         return fileMenu;
     }
+
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+    }
+
 
     /**
      * <p>
