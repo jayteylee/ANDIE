@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import cosc202.andie.CustomException.CustomCode;
+
 /**
  * <p>
  * Actions provided by the File menu.
@@ -159,6 +161,7 @@ public class FileActions {
                 target.getImage().save();           
             } catch (Exception ex) {
                 System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "An error occurred while trying to save the image.", "Error", JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             }
         }
@@ -202,17 +205,27 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showSaveDialog(target);
 
-            if (result == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                    target.getImage().saveAs(imageFilepath);
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                    System.exit(1);
+            try {
+
+                if(target.getImage().getCurrentImage() == null) {
+                    throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION, "Please open an image before attempting to save.");
                 }
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showSaveDialog(target);
+
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        target.getImage().saveAs(imageFilepath);
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                        JOptionPane.showMessageDialog(null, "An error occured while saving the image.", "Error", JOptionPane.ERROR_MESSAGE);
+                        System.exit(1);
+                    }
+                }
+            } catch(CustomException cE) {
+                JOptionPane.showMessageDialog(null, cE.getMessage(), "Invalid operation.", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 

@@ -179,9 +179,10 @@ class EditableImage {
     public void save() throws Exception {
         try {
 
-            if(this.original == null || this.current == null) {
+            if(this.current == null) {
                 throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION,
                  "Please open an image before attempting to save.");
+                 //Throws error if no image has been opened.
             }
 
             if (this.opsFilename == null) {
