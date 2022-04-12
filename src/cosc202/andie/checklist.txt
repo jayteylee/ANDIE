@@ -1,20 +1,20 @@
 Filters
 
-Sharpen: Jack
-Gaussian Blur: Daniel
-Median: Jay
+Sharpen: Jack (Done)
+Gaussian Blur: Daniel (Done)
+Median: Jay (Done)
 ***
-Brightness: Jake
-Contrast: Jake
+Brightness: Jake (Done)
+Contrast: Jake (Done)
 ***
 Translation Operations
 
-Resize: Jack
-Rotate
-Flip
-***
-Image Export
-Error Handling
-Toolbar for common operations
-Keyboard shortcuts
+Resize: Jack (Done)
 
+Rotate: Jay (Done)
+Flip: Daniel (Done)
+***
+Image Export: Jake (Done)
+Error Handling: (Everyone!)
+Toolbar for common operations: Jake
+Keyboard shortcuts: Jay (Done)

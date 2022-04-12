@@ -76,6 +76,7 @@ public class EditActions {
          */
         UndoAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -91,10 +92,16 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+        try {
             target.getImage().undo();
             target.repaint();
             target.getParent().revalidate();
+        } catch (EmptyStackException emptyStack) {
+            System.out.println("No actions to undo");
         }
+            
+    
+    }
     }
 
      /**
@@ -118,6 +125,7 @@ public class EditActions {
          */
         RedoAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         
@@ -134,9 +142,13 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().redo();
-            target.repaint();
-            target.getParent().revalidate();
+            try {
+                target.getImage().redo();
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (EmptyStackException emptyStack) {
+                System.out.println("No actions to redo");
+            }
         }
     }
 

@@ -1,18 +1,9 @@
-## Getting Started
+## Context
+Andie is an image editing program. 'Andie' stands for A-non-destructible-image-editing program. This means that all changes made to an image (greyscale, blurring, etc.) can be undone. The edited image is output with an extra file that stores the operations applied on the image. 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Github repo
+The repository can be cloned from https://altitude.otago.ac.nz/cosc202-vscoders/andie.git
 
-## Folder Structure
+## Compiling and running
+The main class for this project is Andie.java inside of the cosc202.andie package.
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).

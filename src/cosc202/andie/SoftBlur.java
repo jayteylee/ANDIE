@@ -19,3 +19,5 @@ public class SoftBlur implements ImageOperation, java.io.Serializable{
        return output; 
     }
 }
+
+

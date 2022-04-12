@@ -19,7 +19,6 @@ public class ImagePanelTest {
     public void getZoomAfterSetZoom0(){
         ImagePanel testPanel = new ImagePanel();
         testPanel.setZoom(100.0);
-        Assertions.assertFalse(testPanel.getZoom() == 100.0);
         Assertions.assertTrue(testPanel.getZoom() >= 50.0);
     }
 }

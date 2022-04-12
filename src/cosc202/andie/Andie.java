@@ -3,7 +3,9 @@ package cosc202.andie;
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.Dimension;
 import javax.imageio.*;
+
 // test 
 /**
  * <p>
@@ -23,7 +25,10 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-    // Jack was here.
+    protected static JFrame frame = new JFrame("ANDIE");
+    protected static Toolkit tk = Toolkit.getDefaultToolkit();  
+    protected static int xSize = ((int) tk.getScreenSize().getWidth());  
+    protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -49,7 +54,7 @@ public class Andie {
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
-        JFrame frame = new JFrame("ANDIE");
+        
 
         try{
         Image image = ImageIO.read(new File("./src/icon.png"));
@@ -65,14 +70,16 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
         // File menus are pretty standard, so things that usually go in File menus go here.
         FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
+
+        //ImageImplementations apply actions to images such as rotate, resize etc
+        ImageTransformations imageTransformations = new ImageTransformations();
+        menuBar.add(imageTransformations.createMenu());
 
         // Likewise Edit menus are very common, so should be clear what might go here.
         EditActions editActions = new EditActions();
@@ -89,12 +96,27 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
-        
+        //Creates a toolbar
+        Toolbar toolbar = new Toolbar();
+        JToolBar tbar = toolbar.createToolBar();
+        frame.setMinimumSize(new Dimension(520,450));
+        frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
+        
+       
     }
-
+    /**
+     * A method which resizes the frame according to the new image size. If the image size is larger than the
+     * screen size, maximise frame.
+     */
+    protected static void resizeFrame(){
+        frame.pack();
+        if(frame.getSize().getWidth()> xSize || frame.getSize().getHeight()> ySize){
+            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
+    } 
     /**
      * <p>
      * Main entry point to the ANDIE program.
@@ -115,6 +137,7 @@ public class Andie {
                 try {
                     createAndShowGUI();
                 } catch (Exception ex) {
+                    System.out.println(ex);
                     System.exit(1);
                 }
             }

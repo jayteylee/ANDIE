@@ -98,6 +98,7 @@ public class ViewActions {
             target.setZoom(target.getZoom()+10);
             target.repaint();
             target.getParent().revalidate();
+            Andie.resizeFrame();
         }
 
     }
@@ -143,6 +144,7 @@ public class ViewActions {
             target.setZoom(target.getZoom()-10);
             target.repaint();
             target.getParent().revalidate();
+            Andie.resizeFrame();
         }
 
     }
@@ -186,8 +188,9 @@ public class ViewActions {
          */
         public void actionPerformed(ActionEvent e) {
             target.setZoom(100);
-            target.revalidate();
+            target.repaint();
             target.getParent().revalidate();
+            Andie.resizeFrame();
         }
 
     }

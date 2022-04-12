@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -32,7 +33,6 @@ import javax.imageio.*;
  * @version 1.0
  */
 class EditableImage {
-
     /** The original image. This should never be altered by ANDIE. */
     private BufferedImage original;
     /** The current image, the result of applying {@link ops} to {@link original}. */
@@ -157,7 +157,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
-            // Could be no file or something else. Carry on for now.
+            System.out.println(ex);
         }
         this.refresh();
     }
@@ -177,21 +177,42 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
-        if (this.opsFilename == null) {
-            this.opsFilename = this.imageFilename + ".ops";
+        try {
+
+            if(this.original == null || this.current == null) {
+                throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION,
+                 "Please open an image before attempting to save.");
+            }
+
+            if (this.opsFilename == null) {
+                this.opsFilename = this.imageFilename + ".ops";
+            }
+            // Write image file based on file extension
+            
+            String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+            
+            ImageIO.write(original, extension, new File(imageFilename));
+            // Write operations file
+            FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
+            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+            objOut.writeObject(this.ops);
+            objOut.close();
+            fileOut.close();
+        } catch (CustomException cE) {
+            if(cE.code == CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION) {
+                System.out.println(cE.getMessage());
+                JOptionPane.showMessageDialog(null, cE.getMessage(), "Invalid Operation", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        // Write image file based on file extension
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-        ImageIO.write(original, extension, new File(imageFilename));
-        // Write operations file
-        FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
-        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(this.ops);
-        objOut.close();
-        fileOut.close();
     }
 
-
+    public void export(String imageFilename)throws Exception {
+        if(!imageFilename.contains(".")){
+            imageFilename = imageFilename + ".jpg";
+        }
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+        ImageIO.write(current, extension, new File(imageFilename));
+    } 
     /**
      * <p>
      * Save an image to a speficied file.
@@ -218,13 +239,12 @@ class EditableImage {
      * Apply an {@link ImageOperation} to this image.
      * </p>
      * 
-     * @param op The operation to apply.
+     * @param imageOperation The operation to apply.
      */
-    public void apply(ImageOperation op) {
-        current = op.apply(current);
-        ops.add(op);
+    public void apply(ImageOperation imageOperation) {
+        current = imageOperation.apply(current);
+        ops.add(imageOperation);
     }
-
     /**
      * <p>
      * Undo the last {@link ImageOperation} applied to the image.

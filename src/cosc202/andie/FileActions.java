@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * <p>
@@ -27,6 +28,7 @@ public class FileActions {
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
 
+
     /**
      * <p>
      * Create a set of File menu actions.
@@ -36,8 +38,10 @@ public class FileActions {
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileExportAction("Export", null, "Export the file", Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+
     }
 
     /**
@@ -64,6 +68,7 @@ public class FileActions {
      * 
      * @see EditableImage#open(String)
      */
+
     public class FileOpenAction extends ImageAction {
 
         /**
@@ -78,6 +83,7 @@ public class FileActions {
          */
         FileOpenAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -94,8 +100,10 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Input files", "jpg", "jpeg", "png","JFIF");
+            fileChooser.setFileFilter(filter);
             int result = fileChooser.showOpenDialog(target);
-
+            target.setSize(target.getPreferredSize());
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
@@ -105,8 +113,7 @@ public class FileActions {
                 }
             }
 
-            target.repaint();
-            target.getParent().revalidate();
+            Andie.resizeFrame();
         }
 
     }
@@ -132,6 +139,7 @@ public class FileActions {
          */
         FileSaveAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -150,6 +158,7 @@ public class FileActions {
             try {
                 target.getImage().save();           
             } catch (Exception ex) {
+                System.out.println(ex);
                 System.exit(1);
             }
         }
@@ -177,6 +186,7 @@ public class FileActions {
          */
         FileSaveAsAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.VK_C));
         }
 
          /**
@@ -193,19 +203,66 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showOpenDialog(target);
+            int result = fileChooser.showSaveDialog(target);
 
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().saveAs(imageFilepath);
                 } catch (Exception ex) {
+                    System.out.println(ex);
                     System.exit(1);
                 }
             }
         }
 
     }
+    public class FileExportAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new file-save-as action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        FileExportAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+
+         /**
+         * <p>
+         * Callback for when the file-save-as action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the FileSaveAsAction is triggered.
+         * It prompts the user to select a file and saves the image to it.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            int result = fileChooser.showSaveDialog(target);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                try {
+                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    target.getImage().export(imageFilepath);
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                    System.exit(1);
+                }
+            }
+        }
+
+    }
+
 
     /**
      * <p>
