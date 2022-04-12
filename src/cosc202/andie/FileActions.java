@@ -30,6 +30,7 @@ public class FileActions {
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
 
+
     /**
      * <p>
      * Create a set of File menu actions.
@@ -69,6 +70,7 @@ public class FileActions {
      * 
      * @see EditableImage#open(String)
      */
+
     public class FileOpenAction extends ImageAction {
 
         /**
@@ -112,9 +114,7 @@ public class FileActions {
                     System.exit(1);
                 }
             }
-            target.repaint();
-            target.getParent().revalidate();
-            //checks if the image opened is larger than the screen dimensions, if it is it maximises the window.
+
             Andie.resizeFrame();
         }
 
