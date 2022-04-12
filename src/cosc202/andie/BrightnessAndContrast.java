@@ -11,10 +11,13 @@ import java.util.ArrayList;
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
     private double contrast;
     private double brightness;
-    
+    private ArrayList<Integer> origin = new ArrayList<Integer>();
+    private ArrayList<Integer> newImage = new ArrayList<Integer>();
     public BrightnessAndContrast(int contrast, int brightness){
         this.contrast = contrast;
         this.brightness = brightness;
+        this.origin.add(0);
+        this.newImage.add(0);
     }
     /**
      * <p>
@@ -39,25 +42,6 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
                 int r = (argb & 0x00FF0000) >> 16;
                 int g = (argb & 0x0000FF00) >> 8;
                 int b = (argb & 0x000000FF);
-
-                argb = (a << 24) | (formula(r) << 16) | (formula(g) << 8) | formula(b);
-                input.setRGB(x, y, argb);
-            }
-        }
-        return input;
-    }
-    public BufferedImage apply(BufferedImage input, String str){
-        ArrayList<Integer> rOriginMatrix = new ArrayList<Integer>();
-        ArrayList<Integer> rChangedMatrix = new ArrayList<Integer>();
-        for (int y = 0; y < input.getHeight(); ++y) {
-            for (int x = 0; x < input.getWidth(); ++x) {
-                int argb = input.getRGB(x, y);
-                int a = (argb & 0xFF000000) >> 24;
-                int r = (argb & 0x00FF0000) >> 16;
-                int g = (argb & 0x0000FF00) >> 8;
-                int b = (argb & 0x000000FF);
-                rOriginMatrix.add(r);
-                rChangedMatrix.add(formula(r));
                 argb = (a << 24) | (formula(r) << 16) | (formula(g) << 8) | formula(b);
                 input.setRGB(x, y, argb);
             }
@@ -69,7 +53,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
     * @return The output of the contrast and brightness calculation
     */
     public int formula(int v){
-        int output = (int)((1.0 + contrast/100.0)*(v - 127.5) + (127.5*(1.0 + (brightness/100.0))));
+        int output = (int)Math.round(((1.0 + contrast/100.0)*(v - 127.5) + (127.5*(1.0 + (brightness/100.0)))));
         if (output > 255){
             output = 255;
         }

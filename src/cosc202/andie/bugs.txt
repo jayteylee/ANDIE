@@ -8,3 +8,4 @@ changed the program so that it will wrap the window around the file that is open
 (Jay) To look into "Exception in thread "AppKit Thread" java.lang.NoSuchMethodError: accessibilityHitTest"
 fixed bug in zoomfull
 (Jay) problem with ops 
+(Jake)tested b & c and found it was always rounding down, fixed it to a math.round method.

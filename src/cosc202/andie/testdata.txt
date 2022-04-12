@@ -1,2 +1,4 @@
 File to test git interactions
 testing my computer at home
+origin: [0, 164, 112, 168, 128, 91, 146, 84, 92, 119]
+newImage: [0, 195, 143, 199, 159, 122, 177, 115, 123, 150]
