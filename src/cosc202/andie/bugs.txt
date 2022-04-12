@@ -1,9 +1,11 @@
 Opening a non image file crashes the program >> should be fixed
 Errors with methods when no image file open
-edge cases, image size of 1
+edge cases, image size of 1 >> seems fine?
 pop out prompts for users to save if they haven't
 changed the program so that it will wrap the window around the file that is opened, if the file is too large it will maximize the window.
 (Jay) Using the rotate filter with the new fitted window means that non square images are outside of the window once rotated
 (Jay) Errors when trying to undo when there is nothing to undo -> semi fixed, still prints error message when it successfully undoes and edit.
 (Jay) To look into "Exception in thread "AppKit Thread" java.lang.NoSuchMethodError: accessibilityHitTest"
 (Jay) Opening a new image after applying some edits already causes the new image to have same edits applied.
+fixed bug in zoom full
+(Jay) problem with ops 
