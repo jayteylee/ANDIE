@@ -26,20 +26,20 @@ The current implementation of the filter is known to be very slow when run with 
 
 ***Brightness & Contrast:*** Jake 
 
-Accessed by : Colour menu (brightness and contrast option); Keyboard shortcut C
+Accessed by : Colour menu (brightness and contrast option); Keyboard shortcut 'C'
 
 Tested on many images with different colour palettes and sizes. Did some more in depth pixel testing by using a 3x3 pixel image and checking the calculations on the pixels. From this I found that there was some rounding error due to java int division, which was then fixed. Testing on a greyscale image showed some strange behaviour, the lightest values turning yellow. This was fixed with a lower bound converting anything below zero to zero. However I am unsure why the colour would turn yellow as all the different rgb channels in a greyscale image should be flattened. 
 
 ----
 ***Rotate Image Clockwise:*** Jay
 
-Accessed by: Image menu and keyboard shortcut Ctrl + ]
+Accessed by: Image menu and keyboard shortcut 'Ctrl + ]'
 
 No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
 
 ***Rotate Image Anti-Clockwise:*** Jay
 
-Accessed by: Image menu and keyboard shortcut Ctrl + [
+Accessed by: Image menu and keyboard shortcut 'Ctrl + ['
 
 No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
 
