@@ -24,6 +24,13 @@ The current implementation of the filter is known to be very slow when run with 
 
 ----
 
+***Brightness & Contrast:*** Jake 
+
+Accessed by : Colour menu (brightness and contrast option); Keyboard shortcut C
+
+Tested on many images with different colour palettes and sizes. Did some more in depth pixel testing by using a 3x3 pixel image and checking the calculations on the pixels. From this I found that there was some rounding error due to java int division, which was then fixed. Testing on a greyscale image showed some strange behaviour, the lightest values turning yellow. This was fixed with a lower bound converting anything below zero to zero. However I am unsure why the colour would turn yellow as all the different rgb channels in a greyscale image should be flattened. 
+
+----
 ***Rotate Image Clockwise:*** Jay
 
 Accessed by: Image menu and keyboard shortcut Ctrl + ]
@@ -37,7 +44,16 @@ Accessed by: Image menu and keyboard shortcut Ctrl + [
 No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
 
 
----
+----
+
+***Image Export:*** Jake 
+
+Accessed by: File menu(export option); Toolbar (rectangle with an arrow pointing right); Keyboard shortcut CTRL E.
+
+Testing involved checking what happened with or without the inclusion of file extensions. It will now default to outputting a .jpg file if the user does not add a file extension to their file name.
+
+----
+
 ### **Table of Keyboard Shortcuts:** Jay
 
 | ***Function*** | ***Keyboard Shortcut*** |
@@ -68,8 +84,26 @@ No formal testing framework was used but a variety of images with different colo
 For all non-filter functions I decided to make the shortcuts double keyed and for the filter functions, I allocated them single key shortcuts. Most of these follow conventional shortcuts from popular photo editing softwares (such as Adobe Photoshop).
 ___
 
+***Toolbar for common operations***: Jake
+
+Accessed by: Toolbar frame on the andie window. 
+
+Toolbar includes: Open, save, export, zoom in, zoom out, rotate clockwise, rotate anticlockwise, flip horizontal, flip vertical.
+Testing mainly involved checking the implementation of the methods called by the toolbar worked as intended. One issue I ran into was when implementing the resizeFrame method on the toolbar operations as the toolbar was calling a separate instance of actionsPerformed and so with one implementation that method would only work from the menu. However with the current implementation that has been fixed.
+
+----
 ## **General Error Cases:**
 
 (Jay) Problem with previous image edits applying to a newly opened image. Fixed this bug by clearing ops and redoOps stacks whenever a new image is opened via the "FileOpenAction" function.
 
 (Jay) A EmptyStackException would be thrown if user tried to undo when there were no edits to undo. Program now catches the exception and prints out "No action to undo" when the EmptyStackException is thrown.
+
+(Jake) Changed the program so that it wraps the frame around the image opened, limited to a minimum size of 520x450. If the image is larger than the users screen size the window will maximise. 
+
+(Jake) Caught errors if the user tried to use any image actions while there was no image present.
+
+(Jake) Stopped program crash if the user tried to open a non image file. The open explorer will now only show jpg, jpeg, png, JFIF files. If more file types are needed they can easily be added.
+
+(Jake) Found a problem with the saveAs method which would show an open dialog box instead of a save dialog box.
+
+----
