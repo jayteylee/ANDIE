@@ -64,6 +64,8 @@ No formal testing framework was used but a variety of images with different colo
 | Convert to Grey | V | 
 | Contrast and Brightness | C | 
 
+
+For all non-filter functions I decided to make the shortcuts double keyed and for the filter functions, I allocated them single key shortcuts. Most of these follow conventional shortcuts from popular photo editing softwares (such as Adobe Photoshop).
 ___
 
 ## **General Error Cases:**
