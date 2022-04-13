@@ -8,7 +8,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
 /**
@@ -42,7 +41,6 @@ public class Toolbar{
     private JButton rotateAntiClockwise;
     private JButton flipHorizontal;
     private JButton flipVertical;
-    protected JFrame frame;
     private FileActions fileAction = new FileActions();
     private EditActions editAction = new EditActions();
     private ViewActions viewAction = new ViewActions();
@@ -84,10 +82,6 @@ public class Toolbar{
         toolbar.add(flipHorizontal);
         toolbar.add(flipVertical);
         return toolbar;
-    }
-    public void setFrame(JFrame frame){
-        this.frame = frame;
-        fileAction.setFrame(frame);
     }
     /**
      * Method to create the open button and set its icon and instantiate an action listener.

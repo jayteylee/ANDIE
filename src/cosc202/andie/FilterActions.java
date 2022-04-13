@@ -4,7 +4,6 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
 /**
  * <p>
  * Actions provided by the Filter menu.
@@ -12,7 +11,7 @@ import javax.swing.*;
  * 
  * <p>
  * The Filter menu contains actions that update each pixel in an image based on
- * some small local neighbourhood. 
+ * some small local neighborhood. 
  * This includes a mean filter (a simple blur) in the sample code, but more operations will need to be added.
  * </p>
  * 
@@ -36,9 +35,9 @@ public class FilterActions {
     public FilterActions() {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter to sharpen the image", Integer.valueOf(KeyEvent.VK_Q)));
+        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter to sharpen the image", Integer.valueOf(KeyEvent.VK_P)));
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_N)));
         actions.add(new GaussianBlurAction("Gaussian blur", null, "Apply gaussian blur", Integer.valueOf(KeyEvent.VK_G)));
     }
 
@@ -80,6 +79,7 @@ public class FilterActions {
          */
         MeanFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
 
         /**
@@ -123,6 +123,7 @@ public class FilterActions {
     public class SharpenFilterAction extends ImageAction {
         public SharpenFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -134,9 +135,9 @@ public class FilterActions {
     }
     public class SoftBlurAction extends ImageAction{
 
-        SoftBlurAction(String name, ImageIcon icon, 
-                        String desc, Integer mnemonic){
+        SoftBlurAction(String name, ImageIcon icon, String desc, Integer mnemonic){
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
         
         public void actionPerformed(ActionEvent e){
@@ -152,6 +153,7 @@ public class FilterActions {
 
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
         public void actionPerformed(ActionEvent e){
 
@@ -180,6 +182,7 @@ public class FilterActions {
     public class GaussianBlurAction extends ImageAction {
         public GaussianBlurAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
 
         public void actionPerformed(ActionEvent e) {

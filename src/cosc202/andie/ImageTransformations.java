@@ -4,7 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ImageTransformations { //Change to imageTransformations
+
+public class ImageTransformations { 
     
         /** A list of actions for the Filter menu. */
         protected ArrayList<Action> actions;
@@ -53,6 +54,7 @@ public class ImageTransformations { //Change to imageTransformations
                 target.getImage().apply(new RotateImageClockwise());
                 target.repaint();
                 target.getParent().revalidate();
+                Andie.frame.pack();
             }
         }
 
@@ -67,6 +69,7 @@ public class ImageTransformations { //Change to imageTransformations
                 target.getImage().apply(new RotateImageAntiClockwise());
                 target.repaint();
                 target.getParent().revalidate();
+                Andie.frame.pack();
             }
         }
 
@@ -118,6 +121,7 @@ public class ImageTransformations { //Change to imageTransformations
                             target.getImage().apply(new ResizeOperation(newW, newH));
                             target.repaint();
                             target.getParent().revalidate();
+                            Andie.resizeFrame();
                         }
                     }
                 }

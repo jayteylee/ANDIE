@@ -2,6 +2,11 @@ package cosc202.andie;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * <p> An action to rotate an image clockwise.</p>
+ * 
+ * @author Jay Lee
+ */
 public class RotateImageClockwise implements ImageOperation, java.io.Serializable{
 
     RotateImageClockwise(){}
@@ -16,7 +21,7 @@ public class RotateImageClockwise implements ImageOperation, java.io.Serializabl
     
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                rotatedImage.setRGB(height - y - 1,x , input.getRGB(x,y));
+                rotatedImage.setRGB(height - y - 1, x , input.getRGB(x,y));
             }
         }
     
