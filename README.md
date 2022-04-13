@@ -7,9 +7,38 @@ The repository can be cloned from https://altitude.otago.ac.nz/cosc202-vscoders/
 ## Compiling and running
 The main class for this project is Andie.java inside of the cosc202.andie package.
 
+---
 
 
-### **Table of Keyboard Shortcuts**
+## Filters
+
+***Median Filter:*** Jay
+
+Accessed by: Filter menu (Median filter option) and keyboard shortcut 'N'
+
+Tested on many images with different colour palettes and sizes.
+
+No formal testing framework was used but an image with randomly scatted chromatic aberrations was used to test whether the median filter effectively removed these spots while blurring the image. The results come out as expected however the edges of the image is unaffected by the filter due to how the filter iterates through the image.
+
+The current implementation of the filter is known to be very slow when run with radius values of above 4. A more efficient implementation of the filter is planned for further along the project timeline.
+
+----
+
+***Rotate Image Clockwise:*** Jay
+
+Accessed by: Image menu and keyboard shortcut Ctrl + ]
+
+No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
+
+***Rotate Image Anti-Clockwise:*** Jay
+
+Accessed by: Image menu and keyboard shortcut Ctrl + [
+
+No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
+
+
+---
+### **Table of Keyboard Shortcuts:** Jay
 
 | ***Function*** | ***Keyboard Shortcut*** |
 | :--- | :---: | 
@@ -35,3 +64,8 @@ The main class for this project is Andie.java inside of the cosc202.andie packag
 | Convert to Grey | V | 
 | Contrast and Brightness | C | 
 
+___
+
+## **General Error Cases:**
+
+(Jay) Problem with previous image edits applying to a newly opened image. Fixed this bug by clearing ops and redoOps stacks whenever a new image is opened via the "FileOpenAction" function.
