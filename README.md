@@ -130,6 +130,8 @@ Exceptions were handled for when the user tries to save a file but has not opene
 
 (Jake) Found a problem with the saveAs method which would show an open dialog box instead of a save dialog box.
 
+(Jake)I think there may still be some edge problems with export and save to do with file extensions, however I think I have the major problems sorted. If the file does not contain a jpg, jpeg, png, JFIF extension, it will have .jpg appended to the file. This can lead to strange naming, if for example the file was test.txt it would be saved as test.txt.jpg. However the save would still work fine.
+
 ----
 
 
