@@ -32,6 +32,13 @@ The current implementation of the filter is known to be very slow when run with 
 
 ----
 
+***Gaussian Blur:*** Daniel
+Accessed by: Filter menu (Gaussian blur option); 
+Keyboard shortcut ‘G’.
+Tested on different images with different colours and sizes. One of the issue I face is when we apply the Gaussian blur filter to an image, the pixels of the image will be shifted slightly upwards.
+
+----
+
 ***Brightness & Contrast:*** Jake 
 
 Accessed by : Colour menu (brightness and contrast option); Keyboard shortcut 'C'
@@ -60,6 +67,18 @@ No formal testing framework was used but a variety of images with different colo
 Accessed by: Image menu and keyboard shortcut 'Ctrl + ['
 
 No formal testing framework was used but a variety of images with different colour palettes and sizes were used to test the implementation of the function.
+
+----
+
+***Flip vertically*** Daniel
+Accessed by: Image menu (Flip images vertically option); Keyboard shortcut: 'Shift + ['
+No formal testing was used, just test the transformation with different images of different sizes to make sure the image are flipped properly.
+
+----
+
+***Flip horizontally*** Daniel
+Accessed by: Image menu (Flip images horizontally option); Keyboard shortcut: 'Shift + ]'
+No formal testing was used, just test the transformation with different images of different sizes to make sure the image are flipped properly.
 
 ----
 
