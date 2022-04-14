@@ -43,7 +43,7 @@ Tested on many images with different colour palettes and sizes. Did some more in
 ## Tranformation operations
 
 ***Resize:*** Jack
-Accessed via Image menu and toolbar. Shortcut ‘R’.
+Accessed via Image menu and toolbar. Shortcut ‘Ctrl + R’.
 
 Resize was tested manually on a range of different sizes. Resizing to smaller or larger sizes produces a resized image with satisfactory results. Negative values make no change to the image.
 
