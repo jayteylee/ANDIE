@@ -182,11 +182,10 @@ class EditableImage {
         if(!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg") && !imageFilename.contains(".JFIF")){
             imageFilename = imageFilename + ".jpg";
         }
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
         if (this.opsFilename == null) {
             this.opsFilename = this.imageFilename + ".ops";
-        }
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            
+        } 
         ImageIO.write(original, extension, new File(imageFilename));
         // Write operations file
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
