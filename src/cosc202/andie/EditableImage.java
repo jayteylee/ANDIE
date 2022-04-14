@@ -159,7 +159,6 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
-            System.out.println(ex);
         }
         this.refresh();
     }
@@ -179,11 +178,13 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
+        // Write image file based on file extension
+        if(!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg") && !imageFilename.contains(".JFIF")){
+            imageFilename = imageFilename + ".jpg";
+        }
         if (this.opsFilename == null) {
             this.opsFilename = this.imageFilename + ".ops";
         }
-        // Write image file based on file extension
-            
         String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
             
         ImageIO.write(original, extension, new File(imageFilename));
@@ -194,14 +195,6 @@ class EditableImage {
         objOut.close();
         fileOut.close();
     }
-
-    public void export(String imageFilename)throws Exception {
-        if(!imageFilename.contains(".")){
-            imageFilename = imageFilename + ".jpg";
-        }
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-        ImageIO.write(current, extension, new File(imageFilename));
-    } 
     /**
      * <p>
      * Save an image to a speficied file.
@@ -222,7 +215,25 @@ class EditableImage {
         this.opsFilename = imageFilename + ".ops";
         save();
     }
-
+    /**
+     * <p>
+     * Export an image to a speficied file.
+     * </p>
+     * 
+     * <p>
+     * Export an image to the file provided as a parameter.
+     * </p>
+     * 
+     * @param imageFilename The file location to save the image to.
+     * @throws Exception If something goes wrong.
+     */
+    public void export(String imageFilename)throws Exception {
+        if(!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg") && !imageFilename.contains(".JFIF")){
+            imageFilename = imageFilename + ".jpg";
+        }
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+        ImageIO.write(current, extension, new File(imageFilename));
+    } 
     /**
      * <p>
      * Apply an {@link ImageOperation} to this image.
