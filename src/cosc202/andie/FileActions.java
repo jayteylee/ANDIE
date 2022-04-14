@@ -114,7 +114,7 @@ public class FileActions {
                     System.exit(1);
                 }
             }
-
+            
             Andie.resizeFrame();
         }
 
@@ -158,8 +158,21 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                target.getImage().save();           
-            } catch (Exception ex) {
+                try {
+                    if(target.getImage().getCurrentImage() == null) {
+                        throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION, 
+                        "Please open a file before attempting to save.");
+                    }
+                    target.getImage().save();           
+                } catch (CustomException cE) {
+                    if(cE.code == CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION) {
+                        System.out.println(cE.getMessage());
+                        JOptionPane.showMessageDialog(target, cE.getMessage(), "Invalid Operation", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        throw cE;
+                    }
+                }
+            }catch (Exception ex) {
                 System.out.println(ex);
                 JOptionPane.showMessageDialog(null, "An error occurred while trying to save the image.", "Error", JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
@@ -207,25 +220,29 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
 
             try {
+                try {
 
-                if(target.getImage().getCurrentImage() == null) {
-                    throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION, "Please open an image before attempting to save.");
-                }
-                JFileChooser fileChooser = new JFileChooser();
-                int result = fileChooser.showSaveDialog(target);
+                    if(target.getImage().getCurrentImage() == null) {
+                        throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION, "Please open an image before attempting to save.");
+                    }
+                    JFileChooser fileChooser = new JFileChooser();
+                    int result = fileChooser.showSaveDialog(target);
 
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    try {
+                    if (result == JFileChooser.APPROVE_OPTION) {
                         String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                         target.getImage().saveAs(imageFilepath);
-                    } catch (Exception ex) {
-                        System.out.println(ex);
-                        JOptionPane.showMessageDialog(null, "An error occured while saving the image.", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.exit(1);
+                    }
+
+                } catch(CustomException cE) {
+                    if(cE.code == CustomCode.FILE_SAVE_NULL_EXCEPTION) {
+                        JOptionPane.showMessageDialog(target, cE.getMessage(), "Invalid operation.", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        throw cE;
                     }
                 }
-            } catch(CustomException cE) {
-                JOptionPane.showMessageDialog(null, cE.getMessage(), "Invalid operation.", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "An error occured while saving the image.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -260,17 +277,28 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showSaveDialog(target);
-
-            if (result == JFileChooser.APPROVE_OPTION) {
+            try {
                 try {
-                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                    target.getImage().export(imageFilepath);
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                    System.exit(1);
+                    if(target.getImage().getCurrentImage() == null) {
+                        throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION, "Please open a file before trying to export.");
+                    }
+                    JFileChooser fileChooser = new JFileChooser();
+                    int result = fileChooser.showSaveDialog(target);
+
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        target.getImage().export(imageFilepath);
+                    }
+                } catch(CustomException cE) {
+                    if(cE.code == CustomCode.FILE_SAVE_NULL_EXCEPTION) {
+                        JOptionPane.showMessageDialog(target, cE.getMessage(), "Invalid Operation", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        throw cE;
+                    }
                 }
+            } catch(Exception ex) {
+                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "An error occured while trying to export the image.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 

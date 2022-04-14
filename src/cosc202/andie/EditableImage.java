@@ -138,6 +138,8 @@ class EditableImage {
         File imageFile = new File(imageFilename);
         original = ImageIO.read(imageFile);
         current = deepCopy(original);
+        ops.clear();
+        redoOps.clear();
         
         try {
             FileInputStream fileIn = new FileInputStream(this.opsFilename);
@@ -157,7 +159,6 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
-            System.out.println(ex);
         }
         this.refresh();
     }
@@ -177,43 +178,22 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
-        try {
-
-            if(this.current == null) {
-                throw new CustomException(CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION,
-                 "Please open an image before attempting to save.");
-                 //Throws error if no image has been opened.
-            }
-
-            if (this.opsFilename == null) {
-                this.opsFilename = this.imageFilename + ".ops";
-            }
-            // Write image file based on file extension
-            
-            String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            
-            ImageIO.write(original, extension, new File(imageFilename));
-            // Write operations file
-            FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
-            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.writeObject(this.ops);
-            objOut.close();
-            fileOut.close();
-        } catch (CustomException cE) {
-            if(cE.code == CustomException.CustomCode.FILE_SAVE_NULL_EXCEPTION) {
-                System.out.println(cE.getMessage());
-                JOptionPane.showMessageDialog(null, cE.getMessage(), "Invalid Operation", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }
-
-    public void export(String imageFilename)throws Exception {
-        if(!imageFilename.contains(".")){
+        // Write image file based on file extension
+        if(!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg") && !imageFilename.contains(".JFIF")){
             imageFilename = imageFilename + ".jpg";
         }
         String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-        ImageIO.write(current, extension, new File(imageFilename));
-    } 
+        if (this.opsFilename == null) {
+            this.opsFilename = this.imageFilename + ".ops";
+        } 
+        ImageIO.write(original, extension, new File(imageFilename));
+        // Write operations file
+        FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
+        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+        objOut.writeObject(this.ops);
+        objOut.close();
+        fileOut.close();
+    }
     /**
      * <p>
      * Save an image to a speficied file.
@@ -234,7 +214,25 @@ class EditableImage {
         this.opsFilename = imageFilename + ".ops";
         save();
     }
-
+    /**
+     * <p>
+     * Export an image to a speficied file.
+     * </p>
+     * 
+     * <p>
+     * Export an image to the file provided as a parameter.
+     * </p>
+     * 
+     * @param imageFilename The file location to save the image to.
+     * @throws Exception If something goes wrong.
+     */
+    public void export(String imageFilename)throws Exception {
+        if(!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg") && !imageFilename.contains(".JFIF")){
+            imageFilename = imageFilename + ".jpg";
+        }
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+        ImageIO.write(current, extension, new File(imageFilename));
+    } 
     /**
      * <p>
      * Apply an {@link ImageOperation} to this image.

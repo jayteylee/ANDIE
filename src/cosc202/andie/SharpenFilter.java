@@ -18,7 +18,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
 
     /**<p>Applys the sharpen filter to an input BufferedImage.</p>
      * 
-     * <p>A convolution is applied to the image using a special kernel. Every pixels final colour value is influenced by the 
+     * <p>A convolution is applied to the image using a special kernel. Each pixels final colour value is influenced by the 
      * neighbouring pixels colour values. The amount a which the neighbours effect the color is specified in a kernel.
      * </p>
      * 

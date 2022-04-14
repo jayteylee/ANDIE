@@ -110,6 +110,7 @@ public class Andie {
     /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the
      * screen size, maximise frame.
+     * @author Jake
      */
     protected static void resizeFrame(){
         frame.pack();

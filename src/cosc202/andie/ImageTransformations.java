@@ -102,7 +102,7 @@ public class ImageTransformations {
         public class ResizeAction extends ImageAction {
             public ResizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
-                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
             }
     
             public void actionPerformed(ActionEvent e) {
