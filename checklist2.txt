@@ -9,10 +9,21 @@ Filters with negative results - apply positive and negative offset numbers in th
 
 Emboss and edge detection filter - NEW FILTER, implement the eight emboss and two sobel filters mentioned in lab book.
 
-Posterise effect - NEW EFFECT, decide what color to use and 
+Posterise effect - NEW EFFECT, changing subtle gradients of many colours into more obvious sections of just a few colours.
+    -> decide what color to use and what level of control to give the user.
 
-Mouse selection of rectangular regions
-Crop to selection
-Drawing functions – rectangle, ellipse, line
-Macros for record and replay of operations
-Show us something. . .
+Mouse selection of rectangular regions - able to select a rectangle region in an image. 
+    -> decide how the user will do this (click and drag vs two clicks, one for each corner); how to cancel selection, 
+    how to see what region is selected in the interface.
+
+Crop to selection - crop an image based on a selection of region in the image.
+
+Drawing functions – rectangle, ellipse, line. ABle to choose color of shapes, if shape is filled, outlined or both. 
+    -> able to draw rectangle and ellipse in selected region, draw line between two selected corners.
+
+Macros for record and replay of operations - ablity to record a set of actions as macros and save the file to disk.
+    -> open the file afterwards and apply to any image.
+
+Show us something - add an interesting feature to current filters and effects.
+    ->could be an extra image processing operation, a refinement to the user experience, or any other enhancement that 
+    is interesting and useful.
