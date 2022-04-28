@@ -1,5 +1,7 @@
 DUE 20 MAY (Friday) @5pm
 
+| week 1 (next week) | week 2 | week 3 |
+
 Checklist for part 2:
 -------------------------------
 Extended filters - handle the edges of images for both **sharpen** and **blur** (posssibly **median** too)
