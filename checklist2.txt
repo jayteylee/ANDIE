@@ -1,0 +1,18 @@
+DUE 20 MAY (Friday) @5pm
+
+Checklist for part 2:
+-------------------------------
+Extended filters - handle the edges of images for both **sharpen** and **blur** (posssibly **median** too)
+    -> watch Image Filtering video on Blackboard
+
+Filters with negative results - apply positive and negative offset numbers in the result of a convulsion 
+
+Emboss and edge detection filter - NEW FILTER, implement the eight emboss and two sobel filters mentioned in lab book.
+
+Posterise effect - NEW EFFECT, decide what color to use and 
+
+Mouse selection of rectangular regions
+Crop to selection
+Drawing functions – rectangle, ellipse, line
+Macros for record and replay of operations
+Show us something. . .
