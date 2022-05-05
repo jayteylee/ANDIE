@@ -1,15 +1,15 @@
 DUE 20 MAY (Friday) @5pm
 
-| week 1 (next week) | week 2 | week 3 |
+| week 1 | week 2 (this week) | week 3 |
 
 Checklist for part 2:
 -------------------------------
-Extended filters - handle the edges of images for both **sharpen** and **blur** (posssibly **median** too)
+(Jack) Extended filters - handle the edges of images for both **sharpen** and **blur** (posssibly **median** too)
     -> watch Image Filtering video on Blackboard
 
-Filters with negative results - apply positive and negative offset numbers in the result of a convulsion 
+(Jack + Daniel) Filters with negative results - apply positive and negative offset numbers in the result of a convulsion 
 
-Emboss and edge detection filter - NEW FILTER, implement the eight emboss and two sobel filters mentioned in lab book.
+(Daniel) Emboss and edge detection filter - NEW FILTER, implement the eight emboss and two sobel filters mentioned in lab book.
 
 Posterise effect - NEW EFFECT, changing subtle gradients of many colours into more obvious sections of just a few colours.
     -> decide what color to use and what level of control to give the user.
