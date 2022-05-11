@@ -45,7 +45,8 @@ class EditableImage {
     private String imageFilename;
     /** The file where the operation sequence is stored. */
     private String opsFilename;
-
+    /**Sequence of operations recorded for a potential macro */
+    private Stack<ImageOperation> macro;
     /**
      * <p>
      * Create a new EditableImage.
