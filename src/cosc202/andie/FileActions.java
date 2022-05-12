@@ -304,7 +304,6 @@ public class FileActions {
 
     }
 
-
     /**
      * <p>
      * Action to quit the ANDIE application.

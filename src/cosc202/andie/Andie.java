@@ -29,6 +29,7 @@ public class Andie {
     protected static Toolkit tk = Toolkit.getDefaultToolkit();  
     protected static int xSize = ((int) tk.getScreenSize().getWidth());  
     protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
+    protected static JToolBar tbar = new JToolBar();
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -96,9 +97,12 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
+        //
+        MacroActions macroActions = new MacroActions();
+        menuBar.add(macroActions.createMenu());
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
-        JToolBar tbar = toolbar.createToolBar();
+        tbar = toolbar.createToolBar();
         frame.setMinimumSize(new Dimension(520,450));
         frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
@@ -106,6 +110,13 @@ public class Andie {
         frame.setVisible(true);
         
        
+    }
+    protected static void resetToolbar() throws Exception{
+        Toolbar toolbar = new Toolbar();
+        tbar = toolbar.createToolBar();
+        tbar.setVisible(false);
+        tbar.repaint();
+        //frame.setVisible(true);
     }
     /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the

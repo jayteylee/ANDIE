@@ -14,6 +14,8 @@ import javax.swing.JToolBar;
  * A class to create and output a toolbar, with functions like open, save, export, undo, redo. 
  * The toolbar makes frequent uses methods easier and quicker to access.
  * The icons used come from the links below.
+ * <a href="https://www.flaticon.com/free-icons/rec" title="rec icons">Rec icons created by Freepik - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/rec" title="rec icons">Rec icons created by Freepik - Flaticon</a>
  * <a href="https://www.flaticon.com/free-icons/open-folder" title="open folder icons">Open folder icons created by kumakamu - Flaticon</a>
  * <a href="https://www.flaticon.com/free-icons/undo" title="undo icons">Undo icons created by Freepik - Flaticon</a>
  * <a href="https://www.flaticon.com/free-icons/curved-arrow" title="curved arrow icons">Curved arrow icons created by Freepik - Flaticon</a>
@@ -41,6 +43,8 @@ public class Toolbar{
     private JButton rotateAntiClockwise;
     private JButton flipHorizontal;
     private JButton flipVertical;
+    private JButton macro;
+    private MacroActions macroAction = new MacroActions();
     private FileActions fileAction = new FileActions();
     private EditActions editAction = new EditActions();
     private ViewActions viewAction = new ViewActions();
@@ -61,6 +65,7 @@ public class Toolbar{
         rotateAntiClockwiseButton();
         flipHorizontalButton();
         flipVerticalButton();
+        macroButton();
         }
     /**
      * A method to create and populate a toolbar
@@ -81,6 +86,7 @@ public class Toolbar{
         toolbar.add(rotateAntiClockwise);
         toolbar.add(flipHorizontal);
         toolbar.add(flipVertical);
+        toolbar.add(macro);
         return toolbar;
     }
     /**
@@ -215,6 +221,20 @@ public class Toolbar{
             System.out.println("failed to load flipVertical button");
         }
     }
+    public void macroButton(){
+        try {
+            if(EditableImage.macroRunning){
+                System.out.println("running");
+                macro = new JButton(resizeImage("./src/toolbarIcons/recRed.png")); 
+                macro.addActionListener(new Listener());  
+            }else{System.out.println("stopped");
+            macro = new JButton(resizeImage("./src/toolbarIcons/recBlack.png")); 
+            macro.addActionListener(new Listener());
+        }
+        } catch (Exception e) {
+            System.out.println("failed to load macro button");
+        }
+    }
     /**
      * Method which reads in an image, changes its size and then casts it to an icon for use on JButtons. 
      * @throws Exception If something goes wrong.
@@ -282,7 +302,14 @@ public class Toolbar{
             if(e.getSource() == flipVertical){
                 imageAction.actions.get(4).actionPerformed(e);
             }
+            if(e.getSource() == macro){
+                if(EditableImage.macroRunning){
+                    macroAction.actions.get(1).actionPerformed(e);
+                    }
+                    }
+                    macroAction.actions.get(0).actionPerformed(e); 
+                }
+            }
          }
 
-}
-}
+    }
