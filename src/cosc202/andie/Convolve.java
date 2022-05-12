@@ -11,11 +11,24 @@ import java.awt.image.*;
  * @author Jack Bredenbeck.
  */
 public class Convolve {
+
+    private static final int OFFSET = 127;
     private Kernel kernel;
+    private Boolean applyOffset;
 
     /**<p>Constructs a new convolve object.</p>*/
     public Convolve(Kernel k) {
         kernel = k;
+        applyOffset = false;
+    }
+
+    /**<p>Constructs a new convolve object with offset enabled. 
+     * 
+     * @param applyOffset if true, an offset is applied to the convolution so that negative results are now shifted to zero.
+    */
+    public Convolve(Kernel k, Boolean applyOffset) {
+        kernel = k;
+        this.applyOffset = applyOffset;
     }
 
     /**<p>Splits a color into different channels.</p>
@@ -43,6 +56,9 @@ public class Convolve {
         for(int i = 0; i < colors.length; i++) {
             finalColor = finalColor << 8;
             // If there is an offset then add it to colors[i] here.
+            if(applyOffset) {
+                colors[i] += OFFSET; // Offset applied.
+            }
             if(colors[i] > 255) {
                 //Clipping to large values.
                 colors[i] = 255;
