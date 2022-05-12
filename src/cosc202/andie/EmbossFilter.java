@@ -61,7 +61,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable {
         //Emboss algorithm here
 
         // Apply this as a convolution - same code as in MeanFilter
-        ConvolveOp convOp = new ConvolveOp(kernel);
+        Convolve convOp = new Convolve(kernel);
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
  

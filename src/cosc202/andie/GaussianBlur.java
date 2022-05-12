@@ -79,7 +79,7 @@ public class GaussianBlur implements ImageOperation, java.io.Serializable {
         Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
 
         // Apply this as a convolution - same code as in MeanFilter
-        ConvolveOp convOp = new ConvolveOp(kernel);
+        Convolve convOp = new Convolve(kernel);
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
  
