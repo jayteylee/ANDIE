@@ -11,7 +11,7 @@ import javax.swing.Action;
 
 public class MouseActions {
     protected ArrayList<Action> actions;
-    protected boolean running;
+    protected static boolean running;
 
     /**
      * <p>
@@ -20,7 +20,7 @@ public class MouseActions {
      */
     public MouseActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MouseStartAction("Start recording", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
 
     }
     public JMenu createMenu() {
@@ -62,7 +62,7 @@ public class MouseActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-          EditableImage.macroRunning = true;
+          running = true;
         }
 
     }

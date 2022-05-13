@@ -31,7 +31,7 @@ public class ImagePanel extends JPanel {
      * The image to display in the ImagePanel.
      */
     private EditableImage image;
-
+    private CustomListener l = new CustomListener();
     /**
      * <p>
      * The zoom-level of the current view.
@@ -56,11 +56,10 @@ public class ImagePanel extends JPanel {
      * </p>
      */
     public ImagePanel() {
-        CustomListener l = new CustomListener();
+        
         this.addMouseListener(l);
         this.addMouseMotionListener(l);
         image = new EditableImage();
-        //l.getEndX();
         scale = 1.0;
     }
 
@@ -150,137 +149,37 @@ public class ImagePanel extends JPanel {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
-            g2.drawRect(CustomListener.startX, CustomListener.startY, CustomListener.currentX - CustomListener.startX,
-                    CustomListener.currentY - CustomListener.startY);
+            //if(MouseActions.running){
+            g2.drawRect(l.getStartX(), l.getStartY(), l.getCurrentX() - l.getStartX(), l.getCurrentY() - l.getStartY());
             repaint();
+            //}
             g2.dispose();
         }
     }
 
-// public static class CustomListener implements MouseInputListener{
-//         private boolean entered = false;
-//         private boolean pressed = false;
-//         private boolean crop = false;
-//         private int startX = 0;
-//         private int startY = 0;
-//         private int endX = 0;
-//         private int endY = 0;
-//         private int currentX = 0;
-//         private int currentY = 0;
-
-//     public CustomListener(){};
-//         @Override
-//         public void mouseClicked(MouseEvent e) {
-//         }
-//         @Override
-//         public void mousePressed(MouseEvent e) {
-//             pressed = true;
-//             startX = e.getX();
-//             startY = e.getY();
-//         }
-//         @Override
-//         public void mouseReleased(MouseEvent e) {
-//             Andie.imagePanel.repaint();
-            
-//         }
-//         @Override
-//         public void mouseEntered(MouseEvent e) {
-//             entered = true;
-            
-//         }
-//         @Override
-//         public void mouseExited(MouseEvent e) {
-//             entered = false;  
-//         }
-//         @Override
-//         public void mouseDragged(MouseEvent e) {
-//                 currentX = e.getX();
-//                 currentY = e.getY();
-//         }
-//         @Override
-//         public void mouseMoved(MouseEvent e) {
-            
-//         }
-//         public boolean isEntered() {
-//             return entered;
-//         }
-//         public void setEntered(boolean entered) {
-//             this.entered = entered;
-//         }
-//         public boolean isPressed() {
-//             return pressed;
-//         }
-//         public void setPressed(boolean pressed) {
-//             this.pressed = pressed;
-//         }
-//         public boolean isCrop() {
-//             return crop;
-//         }
-//         public void setCrop(boolean crop) {
-//             this.crop = crop;
-//         }
-//         public int getStartX() {
-//             return startX;
-//         }
-//         public void setStartX(int startX) {
-//             this.startX = startX;
-//         }
-//         public int getStartY() {
-//             return startY;
-//         }
-//         public void setStartY(int startY) {
-//             this.startY = startY;
-//         }
-//         public int getEndX() {
-//             return endX;
-//         }
-//         public void setEndX(int endX) {
-//             this.endX = endX;
-//         }
-//         public int getEndY() {
-//             return endY;
-//         }
-//         public void setEndY(int endY) {
-//             this.endY = endY;
-//         }
-//         public int getCurrentX() {
-//             return currentX;
-//         }
-//         public void setCurrentX(int currentX) {
-//             this.currentX = currentX;
-//         }
-//         public int getCurrentY() {
-//             return currentY;
-//         }
-//         public void setCurrentY(int currentY) {
-//             this.currentY = currentY;
-//         }
-        
-    public static class CustomListener implements MouseInputListener{
+public static class CustomListener implements MouseInputListener{
         private boolean entered = false;
         private boolean pressed = false;
         private boolean crop = false;
-        private static int startX = 0;
-        private static int startY = 0;
-        private static int endX = 0;
-        private static int endY = 0;
-        private static int currentX = 0;
-        private static int currentY = 0;
+        private int startX = 0;
+        private int startY = 0;
+        private int endX = 0;
+        private int endY = 0;
+        private int currentX = 0;
+        private int currentY = 0;
 
+    public CustomListener(){};
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("clicked");
-            
         }
         @Override
         public void mousePressed(MouseEvent e) {
             pressed = true;
-            startX = e.getX();
-            startY = e.getY();
+            setStartX(e.getX());
+            setStartY(e.getY());
         }
         @Override
         public void mouseReleased(MouseEvent e) {
-            Andie.imagePanel.repaint();
             
         }
         @Override
@@ -294,14 +193,114 @@ public class ImagePanel extends JPanel {
         }
         @Override
         public void mouseDragged(MouseEvent e) {
-                currentX = e.getX();
-                currentY = e.getY();
+            setCurrentX(e.getX());
+            setCurrentY(e.getY());
         }
         @Override
         public void mouseMoved(MouseEvent e) {
-            //System.out.println("moved");
             
         }
+        public boolean isEntered() {
+            return entered;
+        }
+        public void setEntered(boolean entered) {
+            this.entered = entered;
+        }
+        public boolean isPressed() {
+            return pressed;
+        }
+        public void setPressed(boolean pressed) {
+            this.pressed = pressed;
+        }
+        public boolean isCrop() {
+            return crop;
+        }
+        public void setCrop(boolean crop) {
+            this.crop = crop;
+        }
+        public int getStartX() {
+            return startX;
+        }
+        public void setStartX(int startX) {
+            this.startX = startX;
+        }
+        public int getStartY() {
+            return startY;
+        }
+        public void setStartY(int startY) {
+            this.startY = startY;
+        }
+        public int getEndX() {
+            return endX;
+        }
+        public void setEndX(int endX) {
+            this.endX = endX;
+        }
+        public int getEndY() {
+            return endY;
+        }
+        public void setEndY(int endY) {
+            this.endY = endY;
+        }
+        public int getCurrentX() {
+            return currentX;
+        }
+        public void setCurrentX(int currentX) {
+            this.currentX = currentX;
+        }
+        public int getCurrentY() {
+            return currentY;
+        }
+        public void setCurrentY(int currentY) {
+            this.currentY = currentY;
+        }
+        
+    // public static class CustomListener implements MouseInputListener{
+    //     private boolean entered = false;
+    //     private boolean pressed = false;
+    //     private boolean crop = false;
+    //     private static int startX = 0;
+    //     private static int startY = 0;
+    //     private static int endX = 0;
+    //     private static int endY = 0;
+    //     private static int currentX = 0;
+    //     private static int currentY = 0;
 
-    }
+    //     @Override
+    //     public void mouseClicked(MouseEvent e) {
+    //         System.out.println("clicked");
+            
+    //     }
+    //     @Override
+    //     public void mousePressed(MouseEvent e) {
+    //         pressed = true;
+    //         startX = e.getX();
+    //         startY = e.getY();
+    //     }
+    //     @Override
+    //     public void mouseReleased(MouseEvent e) {
+    //         Andie.imagePanel.repaint();
+            
+    //     }
+    //     @Override
+    //     public void mouseEntered(MouseEvent e) {
+    //         entered = true;
+            
+    //     }
+    //     @Override
+    //     public void mouseExited(MouseEvent e) {
+    //         entered = false;  
+    //     }
+    //     @Override
+    //     public void mouseDragged(MouseEvent e) {
+    //             currentX = e.getX();
+    //             currentY = e.getY();
+    //     }
+    //     @Override
+    //     public void mouseMoved(MouseEvent e) {
+    //         //System.out.println("moved");
+            
+    //     }
+
+     }
 }

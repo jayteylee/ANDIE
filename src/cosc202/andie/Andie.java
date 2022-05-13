@@ -39,6 +39,7 @@ public class Andie {
     protected static FilterActions filterActions = new FilterActions();
     protected static ColourActions colourActions = new ColourActions();
     protected static MacroActions macroActions = new MacroActions();
+    protected static MouseActions mouseActions = new MouseActions();
     protected static ImagePanel imagePanel = new ImagePanel();
     protected static JScrollPane scrollPane = new JScrollPane(imagePanel);
     /**
@@ -111,6 +112,8 @@ public class Andie {
         //
         //MacroActions macroActions = new MacroActions();
         menuBar.add(macroActions.createMenu());
+        //
+        menuBar.add(mouseActions.createMenu());
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
         tbar = toolbar.createToolBar();
