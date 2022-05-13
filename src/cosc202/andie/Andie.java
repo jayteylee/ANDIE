@@ -30,6 +30,17 @@ public class Andie {
     protected static int xSize = ((int) tk.getScreenSize().getWidth());  
     protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
     protected static JToolBar tbar = new JToolBar();
+    Toolbar toolbar = new Toolbar();
+    protected static JMenuBar menuBar = new JMenuBar();
+    protected static FileActions fileActions = new FileActions();
+    protected static ImageTransformations imageTransformations = new ImageTransformations();
+    protected static EditActions editActions = new EditActions();
+    protected static ViewActions viewActions = new ViewActions();
+    protected static FilterActions filterActions = new FilterActions();
+    protected static ColourActions colourActions = new ColourActions();
+    protected static MacroActions macroActions = new MacroActions();
+    protected static ImagePanel imagePanel = new ImagePanel();
+    protected static JScrollPane scrollPane = new JScrollPane(imagePanel);
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -67,38 +78,38 @@ public class Andie {
         }
 
         // The main content area is an ImagePanel
-        ImagePanel imagePanel = new ImagePanel();
+        //ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
-        JScrollPane scrollPane = new JScrollPane(imagePanel);
+        //JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
         // Add in menus for various types of action the user may perform.
-        JMenuBar menuBar = new JMenuBar();
+        //JMenuBar menuBar = new JMenuBar();
 
         // File menus are pretty standard, so things that usually go in File menus go here.
-        FileActions fileActions = new FileActions();
+        //FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
 
         //ImageImplementations apply actions to images such as rotate, resize etc
-        ImageTransformations imageTransformations = new ImageTransformations();
+        //ImageTransformations imageTransformations = new ImageTransformations();
         menuBar.add(imageTransformations.createMenu());
 
         // Likewise Edit menus are very common, so should be clear what might go here.
-        EditActions editActions = new EditActions();
+        //EditActions editActions = new EditActions();
         menuBar.add(editActions.createMenu());
 
         // View actions control how the image is displayed, but do not alter its actual content
-        ViewActions viewActions = new ViewActions();
+        //ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());
 
         // Filters apply a per-pixel operation to the image, generally based on a local window
-        FilterActions filterActions = new FilterActions();
+        //FilterActions filterActions = new FilterActions();
         menuBar.add(filterActions.createMenu());
 
         // Actions that affect the representation of colour in the image
-        ColourActions colourActions = new ColourActions();
+        //ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
         //
-        MacroActions macroActions = new MacroActions();
+        //MacroActions macroActions = new MacroActions();
         menuBar.add(macroActions.createMenu());
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
@@ -112,11 +123,12 @@ public class Andie {
        
     }
     protected static void resetToolbar() throws Exception{
+        frame.remove(tbar);
         Toolbar toolbar = new Toolbar();
         tbar = toolbar.createToolBar();
-        tbar.setVisible(false);
-        tbar.repaint();
-        //frame.setVisible(true);
+        frame.add(tbar, BorderLayout.NORTH);
+        frame.setVisible(true);
+        resizeFrame();
     }
     /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the

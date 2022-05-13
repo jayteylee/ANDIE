@@ -4,7 +4,6 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
-import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -278,6 +277,7 @@ class EditableImage {
             macro.add(imageOperation);
         }
         ops.add(imageOperation);
+        Andie.resizeFrame();
     }
 
     public void macroOpen(String filePath) {
@@ -303,6 +303,7 @@ class EditableImage {
         } catch (Exception ex) {
         }
         this.refresh();
+        
     }
 
     public void saveAsMacro(String macroFileName) throws Exception {
