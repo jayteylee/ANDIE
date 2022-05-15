@@ -63,6 +63,7 @@ public class MouseActions {
          */
         public void actionPerformed(ActionEvent e) {
           running = true;
+          Andie.imagePanel.repaint();
         }
 
     }
