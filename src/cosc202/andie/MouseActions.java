@@ -12,6 +12,7 @@ import javax.swing.Action;
 public class MouseActions {
     protected ArrayList<Action> actions;
     protected static boolean running;
+    protected static boolean drawing;
 
     /**
      * <p>
@@ -65,6 +66,41 @@ public class MouseActions {
           running = true;
           Andie.imagePanel.repaint();
         }
+        public class MouseDrawAction extends ImageAction {
 
+            
+
+            /**
+             * <p>
+             * Create a new file-open action.
+             * </p>
+             * 
+             * @param name The name of the action (ignored if null).
+             * @param icon An icon to use to represent the action (ignored if null).
+             * @param desc A brief description of the action  (ignored if null).
+             * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+             */
+            MouseDrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+                super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            }
+    
+            /**
+             * <p>
+             * Callback for when the macro start action is triggered.
+             * </p>
+             * 
+             * <p>
+             * This method is called whenever the MacroStartAction is triggered.
+             * Starts recording operations by setting the running boolean to true
+             * </p>
+             * 
+             * @param e The event triggering this callback.
+             */
+            public void actionPerformed(ActionEvent e) {
+              running = true;
+              drawing = true;
+            }
     }
+}
 }
