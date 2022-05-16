@@ -30,6 +30,18 @@ public class Andie {
     protected static int xSize = ((int) tk.getScreenSize().getWidth());  
     protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
     protected static JToolBar tbar = new JToolBar();
+    Toolbar toolbar = new Toolbar();
+    // protected static JMenuBar menuBar = new JMenuBar();
+    // protected static FileActions fileActions = new FileActions();
+    // protected static ImageTransformations imageTransformations = new ImageTransformations();
+    // protected static EditActions editActions = new EditActions();
+    // protected static ViewActions viewActions = new ViewActions();
+    // protected static FilterActions filterActions = new FilterActions();
+    // protected static ColourActions colourActions = new ColourActions();
+    // protected static MacroActions macroActions = new MacroActions();
+    // protected static MouseActions mouseActions = new MouseActions();
+    protected static ImagePanel imagePanel = new ImagePanel();
+    // protected static JScrollPane scrollPane = new JScrollPane(imagePanel);
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -65,9 +77,9 @@ public class Andie {
         }catch (Exception e) {
             System.err.println("Failed to load ANDIE icon");
         }
-
+        imagePanel.getImage().openDefault("bin/whiteboard.jpg");
         // The main content area is an ImagePanel
-        ImagePanel imagePanel = new ImagePanel();
+        //ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -100,6 +112,9 @@ public class Andie {
         //
         MacroActions macroActions = new MacroActions();
         menuBar.add(macroActions.createMenu());
+        //
+        MouseActions mouseActions = new MouseActions();
+        menuBar.add(mouseActions.createMenu());
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
         tbar = toolbar.createToolBar();
@@ -112,11 +127,12 @@ public class Andie {
        
     }
     protected static void resetToolbar() throws Exception{
+        frame.remove(tbar);
         Toolbar toolbar = new Toolbar();
         tbar = toolbar.createToolBar();
-        tbar.setVisible(false);
-        tbar.repaint();
-        //frame.setVisible(true);
+        frame.add(tbar, BorderLayout.NORTH);
+        frame.setVisible(true);
+        resizeFrame();
     }
     /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the

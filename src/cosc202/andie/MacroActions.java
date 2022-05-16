@@ -1,10 +1,7 @@
 package cosc202.andie;
 
 import java.util.ArrayList;
-import java.util.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,7 +22,7 @@ public class MacroActions {
         actions = new ArrayList<Action>();
         actions.add(new MacroStartAction("Start recording", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new MacroStopAction("Stop recording", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new MacroOpenAction("Open", null, "Add macro to file", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new MacroOpenAction("Load", null, "Add macro to file", Integer.valueOf(KeyEvent.VK_E)));
 
     }
     public JMenu createMenu() {
