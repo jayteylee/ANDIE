@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import cosc202.andie.CustomException.CustomCode;
 import javax.swing.Action;
 
 public class MouseActions {
     protected ArrayList<Action> actions;
     protected static boolean running;
     protected static boolean drawing;
+    protected static final int crop = 0;
+    protected static final int drawRect = 1;
+    protected static final int drawFillRect = 2;
+    protected static final int drawOval = 3;
+    protected static final int drawFillOval = 4;
 
     /**
      * <p>
@@ -21,7 +23,10 @@ public class MouseActions {
      */
     public MouseActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseSelectAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
 
     }
     public JMenu createMenu() {
@@ -33,7 +38,7 @@ public class MouseActions {
 
         return fileMenu;
     }
-    public class MouseStartAction extends ImageAction {
+    public class MouseSelectAction extends ImageAction {
 
         /**
          * <p>
@@ -45,11 +50,10 @@ public class MouseActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        MouseStartAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        MouseSelectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
-
         /**
          * <p>
          * Callback for when the macro start action is triggered.
@@ -66,7 +70,8 @@ public class MouseActions {
           running = true;
           Andie.imagePanel.repaint();
         }
-        public class MouseDrawAction extends ImageAction {
+    }
+        public class MouseDrawRectAction extends ImageAction {
 
             
 
@@ -80,7 +85,7 @@ public class MouseActions {
              * @param desc A brief description of the action  (ignored if null).
              * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
              */
-            MouseDrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            MouseDrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
                 super(name, icon, desc, mnemonic);
                 putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
             }
@@ -100,7 +105,9 @@ public class MouseActions {
             public void actionPerformed(ActionEvent e) {
               running = true;
               drawing = true;
+             DrawPanel.setCurrent(drawRect); 
             }
+        }
     }
-}
-}
+    
+
