@@ -11,10 +11,10 @@ public class MouseActions {
     protected static boolean running;
     protected static boolean drawing;
     protected static final int crop = 0;
-    protected static final int drawRect = 1;
-    protected static final int drawFillRect = 2;
-    protected static final int drawOval = 3;
-    protected static final int drawFillOval = 4;
+    protected static final int DRAWRECT = 1;
+    protected static final int DRAWFILLRECT = 2;
+    protected static final int DRAWOVAL = 3;
+    protected static final int DRAWFILLOVAL = 4;
 
     /**
      * <p>
@@ -24,7 +24,7 @@ public class MouseActions {
     public MouseActions() {
         actions = new ArrayList<Action>();
         actions.add(new MouseSelectAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
         //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
         //actions.add(new MouseStartAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
 
@@ -105,7 +105,8 @@ public class MouseActions {
             public void actionPerformed(ActionEvent e) {
               running = true;
               drawing = true;
-             DrawPanel.setCurrent(drawRect); 
+             DrawPanel.setCurrent(DRAWRECT); 
+             Andie.imagePanel.repaint();
             }
         }
     }

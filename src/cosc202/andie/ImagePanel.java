@@ -146,23 +146,12 @@ public class ImagePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // if(!image.hasImage()){
-        //     Graphics2D g2 = (Graphics2D) g.create();
-        //     g2.scale(scale, scale);
-        //     try {
-        //         image.openDefault("bin/whiteboard.jpg");
-        //     } catch (Exception e) {
-        //         e.printStackTrace();
-        //     }
-        //     g2.drawImage(image.getCurrentImage(), null, 0, 0); 
-        //     repaint();
-        // }
         if (image.hasImage()) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
             if(MouseActions.running){
-            DrawPanel d = new DrawPanel(this);
+            DrawPanel d = new DrawPanel();
             d.paintComponent(g);
             repaint();
             }

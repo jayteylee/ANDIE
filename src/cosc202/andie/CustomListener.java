@@ -6,6 +6,7 @@ import javax.swing.event.MouseInputListener;
 public class CustomListener implements MouseInputListener{
     private static boolean entered = false;
     private static boolean pressed = false;
+    private static boolean running = false;
     // public static final int ENTERED = 0;
     // public static final int EXITED = 1;
     // public static final int CLICKED = 2;
@@ -27,6 +28,7 @@ public CustomListener(){};
     @Override
     public void mousePressed(MouseEvent e) {
         pressed = true;
+        running = true;
         if(MouseActions.running && entered){
         setStartX(e.getX());
         setStartY(e.getY());
@@ -35,6 +37,7 @@ public CustomListener(){};
     @Override
     public void mouseReleased(MouseEvent e) {
         pressed = false;
+        running = false;
     }
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -45,6 +48,7 @@ public CustomListener(){};
     @Override
     public void mouseExited(MouseEvent e) {
         entered = false;  
+        running = false;
     }
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -65,6 +69,9 @@ public CustomListener(){};
     }
     public static boolean isPressed() {
         return pressed;
+    }
+    public static boolean isRunning() {
+        return running;
     }
     public static void setPressed(boolean pressed) {
         CustomListener.pressed = pressed;
