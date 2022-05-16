@@ -3,8 +3,6 @@ package cosc202.andie;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.swing.DebugGraphics;
-
 public class DrawPanel extends ImagePanel implements ImageOperation {
     private static int current = 0;
 
@@ -17,11 +15,23 @@ public class DrawPanel extends ImagePanel implements ImageOperation {
         if (MouseActions.drawing && CustomListener.isRunning()) {
             if (current == MouseActions.DRAWRECT) {
                 g.drawRect(calcCoordinates()[0], calcCoordinates()[1],
-                        calcCoordinates()[2] - calcCoordinates()[0],
-                        calcCoordinates()[3] - calcCoordinates()[1]);
+                    calcCoordinates()[2] - calcCoordinates()[0],
+                    calcCoordinates()[3] - calcCoordinates()[1]);
             }else if(current == MouseActions.DRAWFILLRECT){
-
+                g.fillRect(calcCoordinates()[0], calcCoordinates()[1],
+                    calcCoordinates()[2] - calcCoordinates()[0],
+                    calcCoordinates()[3] - calcCoordinates()[1]);
+            }else if(current == MouseActions.DRAWOVAL){
+                g.drawOval(calcCoordinates()[0], calcCoordinates()[1],
+                    calcCoordinates()[2] - calcCoordinates()[0],
+                    calcCoordinates()[3] - calcCoordinates()[1]);
+            }else if(current == MouseActions.DRAWFILLOVAL){
+                g.fillOval(calcCoordinates()[0], calcCoordinates()[1],
+                    calcCoordinates()[2] - calcCoordinates()[0],
+                    calcCoordinates()[3] - calcCoordinates()[1]);
             }
+        }else{
+           // super.apply(EditableImage.getCurrentImage());
         }
     }
     public int[] calcCoordinates(){
@@ -34,7 +44,7 @@ public class DrawPanel extends ImagePanel implements ImageOperation {
     }
     @Override
     public BufferedImage apply(BufferedImage input) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
 

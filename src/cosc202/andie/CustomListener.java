@@ -7,6 +7,7 @@ public class CustomListener implements MouseInputListener{
     private static boolean entered = false;
     private static boolean pressed = false;
     private static boolean running = false;
+    private static boolean apply = false;
     // public static final int ENTERED = 0;
     // public static final int EXITED = 1;
     // public static final int CLICKED = 2;
@@ -22,6 +23,7 @@ public class CustomListener implements MouseInputListener{
     private static int currentY = 0;
 
 public CustomListener(){};
+  
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -60,6 +62,12 @@ public CustomListener(){};
     @Override
     public void mouseMoved(MouseEvent e) {
         
+    }
+    public static boolean isApply() {
+        return apply;
+    }
+    public static void setApply(boolean apply) {
+        CustomListener.apply = apply;
     }
     public static boolean isEntered() {
         return entered;
