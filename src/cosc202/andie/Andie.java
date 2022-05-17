@@ -77,7 +77,7 @@ public class Andie {
         }catch (Exception e) {
             System.err.println("Failed to load ANDIE icon");
         }
-        imagePanel.getImage().openDefault("bin/whiteboard.jpg");
+        
         // The main content area is an ImagePanel
         //ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
@@ -121,6 +121,7 @@ public class Andie {
         frame.setMinimumSize(new Dimension(520,450));
         frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
+        imagePanel.getImage().open("bin/whiteboard.jpg");
         frame.pack();
         frame.setVisible(true);
         
