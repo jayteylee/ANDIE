@@ -1,30 +1,38 @@
 package cosc202.andie;
 
 import java.util.ArrayList;
-import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.DimensionUIResource;
 
 public class MouseActions {
     protected ArrayList<Action> actions;
     protected static boolean running;
     protected static boolean drawing;
     protected static boolean released = false;
-    protected static Color colour;
+    protected static Color colour = Color.BLACK;
     protected static final int crop = 0;
     protected static final int DRAWRECT = 1;
     protected static final int DRAWFILLRECT = 2;
     protected static final int DRAWOVAL = 3;
     protected static final int DRAWFILLOVAL = 4;
     protected static int current;
+    protected static JFrame f = new JFrame("Choose new colour");
+    protected static JColorChooser chooser = new JColorChooser();
+    protected static JPanel previewP = new JPanel();
+    protected static JButton ok = new JButton("Ok");
+    protected static JButton cancel = new JButton("cancel");
+    protected static JLabel previewText = new JLabel("Colour preview");
+    protected static JPanel p = new JPanel();
+    protected static JPanel buttonP = new JPanel();
+    protected static JPanel dummyPanel1 = new JPanel();
+    protected static JPanel dummyPanel2 = new JPanel();
+    protected static JPanel previewPanels = new JPanel();
 
     /**
      * <p>
@@ -35,10 +43,12 @@ public class MouseActions {
         actions = new ArrayList<Action>();
         actions.add(new MouseSelectAction("Mouse selection", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Start recording",Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Start recording",
+                Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new MouseDrawOvalAction("Draw oval", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Start recording",Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseColourAction("Choose colour", null, "Start recording",Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Start recording",
+                Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseColourAction("Choose colour", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
 
     }
 
@@ -231,10 +241,9 @@ public class MouseActions {
             Andie.imagePanel.repaint();
         }
     }
-    public class MouseColourAction extends ImageAction implements ChangeListener{
-        protected static JFrame f = new JFrame("Choose new colour");
-        protected static JColorChooser chooser = new JColorChooser();
-        protected static JPanel previewP = new JPanel();
+
+    public class MouseColourAction extends ImageAction implements ChangeListener {
+
         /**
          * <p>
          * Create a new file-open action.
@@ -245,7 +254,7 @@ public class MouseActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        MouseColourAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+        MouseColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
@@ -263,35 +272,48 @@ public class MouseActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            f.setSize(new Dimension(550, 500));
-            f.setLayout(new FlowLayout(FlowLayout.LEFT));
+            f.setSize(new Dimension(650, 400));
+            f.setLayout(new FlowLayout());
+            f.setResizable(false);
+
             AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
             for (AbstractColorChooserPanel accp : panels) {
-                System.out.println(accp.getDisplayName());
-                if(!accp.getDisplayName().equals("HSV")) {
+                if (!accp.getDisplayName().equals("HSV")) {
                     chooser.removeChooserPanel(accp);
-                } 
+                }
             }
             chooser.getSelectionModel().addChangeListener(this);
             ArrayList<JButton> buttons = new ArrayList<JButton>();
-            JPanel p = new JPanel();
-            previewP.setBackground(Color.GREEN);
-            //previewP.setSize(1000, 1000);
-            previewP.setPreferredSize(new Dimension(200, 200));
-            p.setLayout(new FlowLayout(FlowLayout.LEFT));
-            JButton ok = new JButton("Ok");
-            JButton cancel = new JButton("cancel");
+
+            p.setBackground(Color.black);
+            chooser.setBackground(Color.BLACK);
+            previewP.setBackground(MouseActions.colour);
+            // previewP.setSize(1000, 1000);
+            previewP.setPreferredSize(new Dimension(100, 100));
+            p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+            ok.setPreferredSize(new Dimension(60, 20));
+            cancel.setPreferredSize(new Dimension(60, 20));
+            dummyPanel1.setPreferredSize(new Dimension(60, 20));
+            dummyPanel2.setPreferredSize(new Dimension(60, 20));
+            previewPanels.add(previewP);
+            previewPanels.add(dummyPanel2);
+            dummyPanel1.add(previewText);
+            dummyPanel1.add(dummyPanel2);
             buttons.add(ok);
             buttons.add(cancel);
+            buttonP.add(ok);
+            buttonP.add(cancel);
             Listener l = new Listener(buttons, chooser);
             ok.addActionListener(l);
             cancel.addActionListener(l);
             chooser.setPreviewPanel(previewP);
             p.add(chooser);
-            p.add(ok);
-            p.add(cancel);
+            p.add(dummyPanel1);
+            p.add(previewPanels);
+            p.add(dummyPanel2);
+            p.add(buttonP);
+            // p.add(new DrawPanel(Andie.imagePanel, current));
             f.add(p);
-            f.add(previewP);
             f.setVisible(true);
             f.pack();
         }
@@ -301,24 +323,27 @@ public class MouseActions {
             previewP.setBackground(chooser.getColor());
         }
     }
-    public class Listener implements ActionListener{
+
+    public class Listener implements ActionListener {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
         JColorChooser chooser;
-        public Listener(ArrayList<JButton> buttons, JColorChooser chooser){
+
+        public Listener(ArrayList<JButton> buttons, JColorChooser chooser) {
             // for(JButton button: buttons){
-            //     buttons.add(button);
+            // buttons.add(button);
             // }
             this.buttons = buttons;
             this.chooser = chooser;
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == buttons.get(0)){
+            if (e.getSource() == buttons.get(0)) {
                 MouseActions.colour = chooser.getColor();
-                MouseColourAction.f.dispose();
+                MouseActions.f.dispose();
             }
-            if(e.getSource() == buttons.get(1)){
-                MouseColourAction.f.dispose();
+            if (e.getSource() == buttons.get(1)) {
+                MouseActions.f.dispose();
             }
         }
 

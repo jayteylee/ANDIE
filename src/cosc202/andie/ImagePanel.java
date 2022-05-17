@@ -1,10 +1,7 @@
 package cosc202.andie;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 
 /**
  * <p>
@@ -151,7 +148,7 @@ public class ImagePanel extends JPanel {
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
             if(CustomListener.isRunning()){
-            DrawPanel d = new DrawPanel(this, MouseActions.current);
+            DrawPanel d = new DrawPanel(this, MouseActions.current, MouseActions.colour);
             d.paintComponent(g);
             repaint();
             revalidate();
