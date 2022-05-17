@@ -1,58 +1,80 @@
 package cosc202.andie;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class DrawPanel extends ImagePanel implements ImageOperation {
-    private static int current = 0;
+    private int current = 0;
+    private static Color color = new Color(0, 0, 0);
+    private int[] coordArr = new int[4];
 
-    public DrawPanel() {
+    public DrawPanel(ImagePanel panel, int current) {
+        this.coordArr = calcCoordinates();
+        this.current = current;
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (MouseActions.drawing && CustomListener.isRunning()) {
+        g.setColor(color);
+        if(CustomListener.isRunning()){
             if (current == MouseActions.DRAWRECT) {
-                g.drawRect(calcCoordinates()[0], calcCoordinates()[1],
-                    calcCoordinates()[2] - calcCoordinates()[0],
-                    calcCoordinates()[3] - calcCoordinates()[1]);
-            }else if(current == MouseActions.DRAWFILLRECT){
-                g.fillRect(calcCoordinates()[0], calcCoordinates()[1],
-                    calcCoordinates()[2] - calcCoordinates()[0],
-                    calcCoordinates()[3] - calcCoordinates()[1]);
-            }else if(current == MouseActions.DRAWOVAL){
-                g.drawOval(calcCoordinates()[0], calcCoordinates()[1],
-                    calcCoordinates()[2] - calcCoordinates()[0],
-                    calcCoordinates()[3] - calcCoordinates()[1]);
-            }else if(current == MouseActions.DRAWFILLOVAL){
-                g.fillOval(calcCoordinates()[0], calcCoordinates()[1],
-                    calcCoordinates()[2] - calcCoordinates()[0],
-                    calcCoordinates()[3] - calcCoordinates()[1]);
+                g.drawRect(coordArr[0], coordArr[1],
+                        coordArr[2] - coordArr[0],
+                        coordArr[3] - coordArr[1]);
+            } else if (current == MouseActions.DRAWFILLRECT) {
+                g.fillRect(coordArr[0], coordArr[1],
+                        coordArr[2] - coordArr[0],
+                        coordArr[3] - coordArr[1]);
+            } else if (current == MouseActions.DRAWOVAL) {
+                g.drawOval(coordArr[0], coordArr[1],
+                        coordArr[2] - coordArr[0],
+                        coordArr[3] - coordArr[1]);
+            } else if (current == MouseActions.DRAWFILLOVAL) {
+                g.fillOval(coordArr[0], coordArr[1],
+                        coordArr[2] - coordArr[0],
+                        coordArr[3] - coordArr[1]);
             }
-        }else{
-           // super.apply(EditableImage.getCurrentImage());
         }
+        repaint();
+        revalidate();
     }
-    public int[] calcCoordinates(){
-        int[] arr = new int[4];
-        arr[0] = Math.min(CustomListener.getCurrentX(), CustomListener.getStartX());
-        arr[1] = Math.min(CustomListener.getCurrentY(), CustomListener.getStartY());
-        arr[2] = Math.max(CustomListener.getCurrentX(), CustomListener.getStartX());
-        arr[3] = Math.max(CustomListener.getCurrentY(), CustomListener.getStartY());
-        return arr;
+
+    public static int[] calcCoordinates() {
+        int coordArr[] = new int[4];
+        coordArr[0] = Math.min(CustomListener.getCurrentX(), CustomListener.getStartX());
+        coordArr[1] = Math.min(CustomListener.getCurrentY(), CustomListener.getStartY());
+        coordArr[2] = Math.max(CustomListener.getCurrentX(), CustomListener.getStartX());
+        coordArr[3] = Math.max(CustomListener.getCurrentY(), CustomListener.getStartY());
+        return coordArr;
     }
+
     @Override
     public BufferedImage apply(BufferedImage input) {
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),input.isAlphaPremultiplied(), null);
+        Graphics outputGraphics = output.getGraphics();
+        outputGraphics.setColor(DrawPanel.color);
+        if (current == MouseActions.DRAWRECT) {
+            outputGraphics.drawRect(coordArr[0], coordArr[1],
+                    coordArr[2] - coordArr[0],
+                    coordArr[3] - coordArr[1]);
+        } else if (current == MouseActions.DRAWFILLRECT) {
+            outputGraphics.fillRect(coordArr[0], coordArr[1],
+                    coordArr[2] - coordArr[0],
+                    coordArr[3] - coordArr[1]);
+        } else if (current == MouseActions.DRAWOVAL) {
+            outputGraphics.drawOval(coordArr[0], coordArr[1],
+                    coordArr[2] - coordArr[0],
+                    coordArr[3] - coordArr[1]);
+        } else if (current == MouseActions.DRAWFILLOVAL) {
+            outputGraphics.fillOval(coordArr[0], coordArr[1],
+                    coordArr[2] - coordArr[0],
+                    coordArr[3] - coordArr[1]);
+        }
+        repaint();
+        revalidate();
         
-        return null;
-    }
 
-    public static int getCurrent() {
-        return current;
-    }
-
-    public static void setCurrent(int current) {
-        DrawPanel.current = current;
+        return output;
     }
 }

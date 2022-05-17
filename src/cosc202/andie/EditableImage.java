@@ -355,6 +355,7 @@ class EditableImage {
         if (macroRunning)
             macro.pop();
         refresh();
+        Andie.resizeFrame();
     }
 
     /**
@@ -364,6 +365,7 @@ class EditableImage {
      */
     public void redo() {
         apply(redoOps.pop());
+        Andie.resizeFrame();
     }
 
     /**
