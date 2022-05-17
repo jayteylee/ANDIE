@@ -11,7 +11,7 @@ Checklist for part 2:
 
 (Daniel) Emboss and edge detection filter - NEW FILTER, implement the eight emboss and two sobel filters mentioned in lab book.
 
-Posterise effect - NEW EFFECT, changing subtle gradients of many colours into more obvious sections of just a few colours.
+(Jack) Posterise effect - NEW EFFECT, changing subtle gradients of many colours into more obvious sections of just a few colours.
     -> decide what color to use and what level of control to give the user.
 
 Mouse selection of rectangular regions - able to select a rectangle region in an image. 
