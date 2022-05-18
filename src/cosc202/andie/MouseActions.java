@@ -312,9 +312,10 @@ public class MouseActions {
             p.add(previewPanels);
             p.add(dummyPanel2);
             p.add(buttonP);
-            // p.add(new DrawPanel(Andie.imagePanel, current));
+            //p.add(new DrawPanel(Andie.imagePanel, current, MouseActions.colour));
             f.add(p);
             f.setVisible(true);
+            f.setLocationRelativeTo(null);
             f.pack();
         }
 
