@@ -6,12 +6,13 @@ import java.util.ArrayList;
 
 public class Posterize implements ImageOperation, Serializable{
     private int[] colorBands;
+
     public Posterize(int colorBands[]) { 
         this.colorBands = colorBands;
     }
 
     private int[] splitARGB(int color) {
-        int split[] = {(color & 0xFF000000) >> 24, (color & 0x00FF0000) >> 16, (color & 0x0000FF00) >> 8, (color & 0x000000FF)};
+        int split[] = {(color & 0xFF000000) >>> 24, (color & 0x00FF0000) >>> 16, (color & 0x0000FF00) >>> 8, (color & 0x000000FF)};
         return split;
     }
 
@@ -32,6 +33,7 @@ public class Posterize implements ImageOperation, Serializable{
             for(int y = 0; y < output.getHeight(); y++) {
                 int argb[] = splitARGB(input.getRGB(x, y));
                 int closestColor[] = splitARGB(colorBands[0]);
+                System.out.println("Before: " + argb[0] + " " + argb[1] + " " + argb[2] + " " + argb[3]);
                 for(int i = 1; i < colorBands.length; i++) {
                     int bandColor[] =  splitARGB(colorBands[i]);
                     for(int j = 0; j < argb.length; j++) {
@@ -41,9 +43,10 @@ public class Posterize implements ImageOperation, Serializable{
                         }
                     }
                 }
+                System.out.println(closestColor[0] + " " + closestColor[1] + " " + closestColor[2] + " " + closestColor[3]);
                 output.setRGB(x, y, combineARGB(closestColor));
             }
         }
-        return null;
+        return output;
     }
 }
