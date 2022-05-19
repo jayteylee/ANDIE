@@ -2,9 +2,10 @@ package cosc202.andie;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
-public class DrawPanel extends ImagePanel implements ImageOperation {
+import javax.swing.JPanel;
+
+public class DrawPanel extends JPanel {
     private int current = 0;
     private Color colour;
     private int[] coordArr = new int[4];
@@ -13,12 +14,14 @@ public class DrawPanel extends ImagePanel implements ImageOperation {
         this.coordArr = calcCoordinates();
         this.current = current;
         this.colour = colour;
+        
     }
-    @Override
+
+   
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(this.colour);
-        if(CustomListener.isRunning()){
+        g.setColor(colour);
+        if (CustomListener.isRunning()) {
             if (current == MouseActions.DRAWRECT) {
                 g.drawRect(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
@@ -37,8 +40,8 @@ public class DrawPanel extends ImagePanel implements ImageOperation {
                         coordArr[3] - coordArr[1]);
             }
         }
-        repaint();
-        revalidate();
+        Andie.imagePanel.repaint();
+        Andie.imagePanel.revalidate();
     }
 
     public static int[] calcCoordinates() {
@@ -50,32 +53,60 @@ public class DrawPanel extends ImagePanel implements ImageOperation {
         return coordArr;
     }
 
-    @Override
-    public BufferedImage apply(BufferedImage input) {
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),input.isAlphaPremultiplied(), null);
-        Graphics outputGraphics = output.getGraphics();
-        outputGraphics.setColor(this.colour);
-        if (current == MouseActions.DRAWRECT) {
-            outputGraphics.drawRect(coordArr[0], coordArr[1],
-                    coordArr[2] - coordArr[0],
-                    coordArr[3] - coordArr[1]);
-        } else if (current == MouseActions.DRAWFILLRECT) {
-            outputGraphics.fillRect(coordArr[0], coordArr[1],
-                    coordArr[2] - coordArr[0],
-                    coordArr[3] - coordArr[1]);
-        } else if (current == MouseActions.DRAWOVAL) {
-            outputGraphics.drawOval(coordArr[0], coordArr[1],
-                    coordArr[2] - coordArr[0],
-                    coordArr[3] - coordArr[1]);
-        } else if (current == MouseActions.DRAWFILLOVAL) {
-            outputGraphics.fillOval(coordArr[0], coordArr[1],
-                    coordArr[2] - coordArr[0],
-                    coordArr[3] - coordArr[1]);
-        }
-        repaint();
-        revalidate();
-        
+    // @Override
+    // public BufferedImage apply(BufferedImage input) {
+    //     BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
+    //             input.isAlphaPremultiplied(), null);
+    //     //Graphics outputGraphics = output.getGraphics();
+    //     Graphics2D outputGraphics = output.createGraphics();
+    //     outputGraphics.setColor(this.colour);
+    //     if (current == MouseActions.DRAWRECT) {
+    //         outputGraphics.drawRect(coordArr[0], coordArr[1],
+    //                 coordArr[2] - coordArr[0],
+    //                 coordArr[3] - coordArr[1]);
+    //     } else if (current == MouseActions.DRAWFILLRECT) {
+    //         outputGraphics.fillRect(coordArr[0], coordArr[1],
+    //                 coordArr[2] - coordArr[0],
+    //                 coordArr[3] - coordArr[1]);
+    //     } else if (current == MouseActions.DRAWOVAL) {
+    //         outputGraphics.drawOval(coordArr[0], coordArr[1],
+    //                 coordArr[2] - coordArr[0],
+    //                 coordArr[3] - coordArr[1]);
+    //     } else if (current == MouseActions.DRAWFILLOVAL) {
+    //         outputGraphics.fillOval(coordArr[0], coordArr[1],
+    //                 coordArr[2] - coordArr[0],
+    //                 coordArr[3] - coordArr[1]);
+    //     }
+    //     // repaint();
+    //     // revalidate();
 
-        return output;
-    }
+    //     return output;
+    // }
+
+    // private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+    //     for (int i=0; i<coordArr.length; i++) {
+    //         this.coordArr[i] = aInputStream.readInt();
+    //     }
+    //     int red = aInputStream.readInt();
+    //     int green = aInputStream.readInt();
+    //     int blue = aInputStream.readInt();
+    //     int alpha = aInputStream.readInt();
+    //     this.colour = new Color(red, green, blue, alpha);
+    //     this.current = aInputStream.readInt();
+    // }
+
+    // private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
+    //     for (int i=0; i<coordArr.length; i++) {
+    //         aOutputStream.writeInt(this.coordArr[i]);
+    //     }
+    //     int red = this.colour.getRed();
+    //     int green = this.colour.getGreen();
+    //     int blue = this.colour.getBlue();
+    //     int alpha = this.colour.getAlpha();
+    //     aOutputStream.writeInt(red);
+    //     aOutputStream.writeInt(green);
+    //     aOutputStream.writeInt(blue);
+    //     aOutputStream.writeInt(alpha);
+    //     aOutputStream.writeInt(this.current);
+    // }
 }

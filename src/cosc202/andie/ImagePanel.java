@@ -27,7 +27,8 @@ public class ImagePanel extends JPanel {
     /**
      * The image to display in the ImagePanel.
      */
-    private EditableImage image;
+
+    protected EditableImage image;
    // private CustomListener l = new CustomListener();
 
     /**

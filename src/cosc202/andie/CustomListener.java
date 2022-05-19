@@ -33,7 +33,7 @@ public class CustomListener implements MouseInputListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (CustomListener.running && CustomListener.entered) {
-            Andie.imagePanel.getImage().apply(new DrawPanel(Andie.imagePanel, MouseActions.current, MouseActions.colour));
+            Andie.imagePanel.getImage().apply(new DrawApply(Andie.imagePanel, MouseActions.current, MouseActions.colour));
             ImageAction.target.repaint();
             ImageAction.target.revalidate();
             pressed = false;

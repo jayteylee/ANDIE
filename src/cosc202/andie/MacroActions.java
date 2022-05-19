@@ -105,7 +105,7 @@ public class MacroActions {
             if(option == JOptionPane.YES_OPTION){
                 try {
                     try {
-                        JFileChooser fileChooser = new JFileChooser("./bin/macros");
+                        JFileChooser fileChooser = new JFileChooser("./macros");
                         int result = fileChooser.showSaveDialog(target);
     
                         if (result == JFileChooser.APPROVE_OPTION) {
@@ -159,7 +159,7 @@ public class MacroActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser("./bin/macros");
+            JFileChooser fileChooser = new JFileChooser("./macros");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Input files", "macro", "ops");
             fileChooser.setFileFilter(filter);
             int result = fileChooser.showOpenDialog(target);

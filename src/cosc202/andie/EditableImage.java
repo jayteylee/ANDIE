@@ -157,6 +157,9 @@ class EditableImage {
      */
     public void open(String filePath) throws Exception {
         imageFilename = filePath;
+        if(imageFilename.contains(".")){
+            opsFilename = imageFilename.substring(0, imageFilename.indexOf("."));
+        }
         opsFilename = imageFilename + ".ops";
         File imageFile = new File(imageFilename);
         original = ImageIO.read(imageFile);
@@ -182,6 +185,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
         } catch (Exception ex) {
+            System.out.println(ex);
         }
         this.refresh();
     }
@@ -208,9 +212,7 @@ class EditableImage {
             imageFilename = imageFilename + ".jpg";
         }
         String extension = imageFilename.substring(1 + imageFilename.lastIndexOf(".")).toLowerCase();
-        if (this.opsFilename == null) {
-            this.opsFilename = this.imageFilename + ".ops";
-        }
+        this.opsFilename = this.imageFilename + ".ops";
         ImageIO.write(original, extension, new File(imageFilename));
         // Write operations file
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
@@ -238,7 +240,7 @@ class EditableImage {
      */
     public void saveAs(String imageFilename) throws Exception {
         this.imageFilename = imageFilename;
-        this.opsFilename = imageFilename + ".ops";
+        //this.opsFilename = imageFilename;
         save();
     }
 
@@ -367,8 +369,8 @@ class EditableImage {
     private void refresh() {
         current = deepCopy(original);
         for (ImageOperation op : ops) {
+            System.out.println(op);
             current = op.apply(current);
         }
     }
-
 }
