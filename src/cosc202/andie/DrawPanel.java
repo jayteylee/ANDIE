@@ -9,9 +9,11 @@ public class DrawPanel extends JPanel {
     private int current = 0;
     private Color colour;
     private int[] coordArr = new int[4];
+    private int[] lineArr = new int[4];
 
     public DrawPanel(ImagePanel panel, int current, Color colour ) {
         this.coordArr = calcCoordinates();
+        this.lineArr = lineCoordinates();
         this.current = current;
         this.colour = colour;
         
@@ -38,6 +40,9 @@ public class DrawPanel extends JPanel {
                 g.fillOval(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
+            }else if (current == MouseActions.DRAWLINE) {
+                g.drawLine(lineArr[0], lineArr[1],
+                        lineArr[2],lineArr[3]);
             }
         }
         Andie.imagePanel.repaint();
@@ -51,6 +56,14 @@ public class DrawPanel extends JPanel {
         coordArr[2] = Math.max(CustomListener.getCurrentX(), CustomListener.getStartX());
         coordArr[3] = Math.max(CustomListener.getCurrentY(), CustomListener.getStartY());
         return coordArr;
+    }
+    public static int[] lineCoordinates() {
+        int lineArr[] = new int[4];
+        lineArr[0] = CustomListener.getStartX();
+        lineArr[1] = CustomListener.getStartY();
+        lineArr[2] = CustomListener.getCurrentX();
+        lineArr[3] = CustomListener.getCurrentY();
+        return lineArr;
     }
 
     // @Override
