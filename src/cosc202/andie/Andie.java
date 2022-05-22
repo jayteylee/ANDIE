@@ -127,6 +127,10 @@ public class Andie {
         
        
     }
+    /**
+     * Refreshs the toolbar to all the macro toolbar button to change on record start
+     * @author Jake
+     */
     protected static void resetToolbar() throws Exception{
         frame.remove(tbar);
         Toolbar toolbar = new Toolbar();
