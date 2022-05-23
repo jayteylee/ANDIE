@@ -14,13 +14,13 @@ Checklist for part 2:
 (Jack) Posterise effect - NEW EFFECT, changing subtle gradients of many colours into more obvious sections of just a few colours.
     -> decide what color to use and what level of control to give the user.
 
-Mouse selection of rectangular regions - able to select a rectangle region in an image. 
+(Jake) Mouse selection of rectangular regions - able to select a rectangle region in an image. 
     -> decide how the user will do this (click and drag vs two clicks, one for each corner); how to cancel selection, 
     how to see what region is selected in the interface.
 
 Crop to selection - crop an image based on a selection of region in the image.
 
-Drawing functions – rectangle, ellipse, line. ABle to choose color of shapes, if shape is filled, outlined or both. 
+(Jake)Drawing functions – rectangle, ellipse, line. ABle to choose color of shapes, if shape is filled, outlined or both. 
     -> able to draw rectangle and ellipse in selected region, draw line between two selected corners.
 
 Macros for record and replay of operations - ablity to record a set of actions as macros and save the file to disk.
