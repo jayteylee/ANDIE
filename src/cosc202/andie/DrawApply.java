@@ -9,7 +9,6 @@ public class DrawApply implements ImageOperation, Serializable{
     private Color colour;
     private int[] coordArr = new int[4];
     private int[] lineArr = new int[4];
-    private double zoom;
 
     public DrawApply(ImagePanel panel, int current, Color colour ) {
         this.coordArr = calcCoordinates();
