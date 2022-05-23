@@ -115,6 +115,10 @@ public class Andie {
         //
         MouseActions mouseActions = new MouseActions();
         menuBar.add(mouseActions.createMenu());
+        // Actions that will apply different emboss based on the directions
+        EmbossActions embossActions = new EmbossActions();
+        menuBar.add(embossActions.createEmbossMenu());    
+
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
         tbar = toolbar.createToolBar();
@@ -127,10 +131,6 @@ public class Andie {
         
        
     }
-    /**
-     * Refreshs the toolbar to all the macro toolbar button to change on record start
-     * @author Jake
-     */
     protected static void resetToolbar() throws Exception{
         frame.remove(tbar);
         Toolbar toolbar = new Toolbar();
