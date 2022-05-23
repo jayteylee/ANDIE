@@ -6,12 +6,13 @@ import java.util.ArrayList;
 
 public class Posterize implements ImageOperation, Serializable{
     private int[] colorBands;
+
     public Posterize(int colorBands[]) { 
         this.colorBands = colorBands;
     }
 
     private int[] splitARGB(int color) {
-        int split[] = {(color & 0xFF000000) >> 24, (color & 0x00FF0000) >> 16, (color & 0x0000FF00) >> 8, (color & 0x000000FF)};
+        int split[] = {(color & 0xFF000000) >>> 24, (color & 0x00FF0000) >>> 16, (color & 0x0000FF00) >>> 8, (color & 0x000000FF)};
         return split;
     }
 
@@ -44,6 +45,6 @@ public class Posterize implements ImageOperation, Serializable{
                 output.setRGB(x, y, combineARGB(closestColor));
             }
         }
-        return null;
+        return output;
     }
 }

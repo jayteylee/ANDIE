@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.awt.image.*;
 /**
  * <p> A filter that apply emboss to image.</p>
@@ -10,19 +11,19 @@ import java.awt.image.*;
  * @author Daniel Lee
  */
 public class EmbossFilter implements ImageOperation, java.io.Serializable { 
-    /**
-     * The size of filter to apply. A radius of 1 is a 3x3 filter, a radius of 2 a 5x5 filter, and so forth.
-     */
-    private int radius;
+    // /**
+    //  * The size of filter to apply. A radius of 1 is a 3x3 filter, a radius of 2 a 5x5 filter, and so forth.
+    //  */
+    // private int radius;
 
-    /**
-     * Construct a Emboss filter with the given size.
-     * @param radius The radius of the newly constructed Emboss filter.
-     */
+    // /**
+    //  * Construct a Emboss filter with the given size.
+    //  * @param radius The radius of the newly constructed Emboss filter.
+    //  */
 
-    EmbossFilter(int radius) {
-        this.radius = radius;    
-    }
+    // EmbossFilter(int radius) {
+    //     this.radius = radius;    
+    // }
 
     /**
      * <p>
@@ -36,9 +37,9 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable {
      * @see EmbossFilter(int)
      */
     //default constructor
-    EmbossFilter() {
-        this(1);
-    }
+    // EmbossFilter() {
+    //     this(1);
+    // }
 
     /**<p>Applys the Emboss filter to an input BufferedImage.</p>
      * 
@@ -52,18 +53,18 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable {
     */
 
     public BufferedImage apply (BufferedImage input) {
-        int size = (2*radius + 1) * (2*radius + 1);
-        float[] array = new float[size];
+        // int size = (2*radius + 1) * (2*radius + 1);
+         float[] array = {0, 0, 0,
+                         +1, 0, -1,
+                          0, 0, 0};
 
         // Make a filter from the array
-        Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
-
-        //Emboss algorithm here
+        Kernel kernel = new Kernel(3, 3, array);
 
         // Apply this as a convolution - same code as in MeanFilter
-        Convolve convOp = new Convolve(kernel);
+        Convolve convo = new Convolve(kernel, true);
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+        convo.filter(input, output);
  
         return output;
     }
