@@ -38,6 +38,10 @@ public class DrawPanel extends JPanel {
                 g.fillOval(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
+            }else if (current == MouseActions.CROP){
+                g.drawRect(coordArr[0], coordArr[1],
+                coordArr[2] - coordArr[0],
+                coordArr[3] - coordArr[1]);
             }
         }
         Andie.imagePanel.repaint();

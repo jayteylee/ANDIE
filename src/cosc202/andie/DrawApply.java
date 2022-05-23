@@ -48,7 +48,7 @@ public class DrawApply implements ImageOperation, Serializable{
                 outputGraphics.fillOval(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
-            }
+            } 
             // repaint();
             // revalidate();
     

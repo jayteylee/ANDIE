@@ -16,7 +16,7 @@ public class MouseActions {
     protected static boolean drawing;
     protected static boolean released = false;
     protected static Color colour = Color.BLACK;
-    protected static final int crop = 0;
+    protected static final int CROP = 0;
     protected static final int DRAWRECT = 1;
     protected static final int DRAWFILLRECT = 2;
     protected static final int DRAWOVAL = 3;
