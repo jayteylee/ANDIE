@@ -1,6 +1,5 @@
 package cosc202.andie;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -9,27 +8,42 @@ public class DrawApply implements ImageOperation, Serializable{
     private int current = 0;
     private Color colour;
     private int[] coordArr = new int[4];
-    //private static final long serialVersionUID = 7829136421241571165L;
+    private int[] lineArr = new int[4];
+    private double zoom;
 
     public DrawApply(ImagePanel panel, int current, Color colour ) {
         this.coordArr = calcCoordinates();
+        this.lineArr = lineCoordinates();
         this.current = current;
         this.colour = colour;
         
     }
     public static int[] calcCoordinates() {
         int coordArr[] = new int[4];
-        coordArr[0] = Math.min(CustomListener.getCurrentX(), CustomListener.getStartX());
-        coordArr[1] = Math.min(CustomListener.getCurrentY(), CustomListener.getStartY());
-        coordArr[2] = Math.max(CustomListener.getCurrentX(), CustomListener.getStartX());
-        coordArr[3] = Math.max(CustomListener.getCurrentY(), CustomListener.getStartY());
+        coordArr[0] = (int) (Math.min(CustomListener.getCurrentX(), CustomListener.getStartX()) / ((Andie.imagePanel.getZoom())/100));
+        coordArr[1] = (int) (Math.min(CustomListener.getCurrentY(), CustomListener.getStartY()) / ((Andie.imagePanel.getZoom())/100));
+        coordArr[2] = (int) (Math.max(CustomListener.getCurrentX(), CustomListener.getStartX()) / ((Andie.imagePanel.getZoom())/100));
+        coordArr[3] = (int) (Math.max(CustomListener.getCurrentY(), CustomListener.getStartY()) / ((Andie.imagePanel.getZoom())/100));
         return coordArr;
+    }
+    public static int[] lineCoordinates() {
+        int lineArr[] = new int[4];
+        double temp;
+        //lineArr[0] = CustomListener.getStartX()* Andie.imagePanel.getZoom();
+        temp = (CustomListener.getStartX()* Andie.imagePanel.getZoom())/100;
+        lineArr[0] = (int)temp;
+        temp = (CustomListener.getStartY()* Andie.imagePanel.getZoom())/100;
+        lineArr[1] = (int)temp;
+        temp = (CustomListener.getCurrentX()* Andie.imagePanel.getZoom())/100;
+        lineArr[2] = CustomListener.getCurrentX();
+        temp = (CustomListener.getCurrentY()* Andie.imagePanel.getZoom())/100;
+        lineArr[3] = CustomListener.getCurrentY();
+        return lineArr;
     }
     @Override
     public BufferedImage apply(BufferedImage input) {
             BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
                     input.isAlphaPremultiplied(), null);
-            //Graphics outputGraphics = output.getGraphics();
             Graphics2D outputGraphics = output.createGraphics();
             outputGraphics.setColor(this.colour);
             if (current == MouseActions.DRAWRECT) {
@@ -48,12 +62,13 @@ public class DrawApply implements ImageOperation, Serializable{
                 outputGraphics.fillOval(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
-            } 
-            // repaint();
-            // revalidate();
-    
+            }else if (current == MouseActions.DRAWLINE) {
+                outputGraphics.drawLine(lineArr[0], lineArr[1],
+                        lineArr[2],lineArr[3]);
+            }
             return output;
         }
+        
 
 }
     

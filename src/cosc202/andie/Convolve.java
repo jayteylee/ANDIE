@@ -39,8 +39,8 @@ public class Convolve {
      * @return An array of color channels.
      * */
     private int[] extractColors(int local) {
-        int[] colors = {(local & 0xFF000000) >> 24,
-        (local & 0x00FF0000) >> 16, (local & 0x0000FF00) >> 8, (local & 0x000000FF)};
+        int[] colors = {(local & 0xFF000000) >>> 24,
+        (local & 0x00FF0000) >>> 16, (local & 0x0000FF00) >>> 8, (local & 0x000000FF)};
         return colors;
     }
 

@@ -296,8 +296,12 @@ class EditableImage {
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
             System.out.println(opsFromFile.toString());
+            Stack<ImageOperation> opsReversed = new Stack<ImageOperation>();;
             while (!opsFromFile.isEmpty()) {
-                apply(opsFromFile.pop());
+                opsReversed.add(opsFromFile.pop());
+            }
+            while (!opsReversed.isEmpty()) {
+                apply(opsReversed.pop());
             }
             objIn.close();
             fileIn.close();

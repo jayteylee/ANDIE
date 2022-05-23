@@ -36,7 +36,7 @@ public class ColourActions {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new BrightnessAndContrastAction("Contrast and Brightness", null, "Changes contrast and brightness", Integer.valueOf(KeyEvent.VK_C)));
-        
+        actions.add(new PosterizeAction("Posterize", null, "Reduce the images color palette", null));
     }
 
     /**
@@ -144,5 +144,29 @@ public class ColourActions {
         public void changeListener(ActionEvent listener){
 
         }
+    }
+
+    public class PosterizeAction extends ImageAction {
+
+        PosterizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            //TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // JFrame frame = new JFrame("Select color bands");
+            // //JPanel panel = new JPanel(new BorderLayout());
+            // frame.setLocationRelativeTo(Andie.frame);
+            // frame.setResizable(false);
+            // frame.add(panel);
+            // frame.setSize(200, 200);
+            // frame.setVisible(true);
+            int colorBands[] = {0};
+            target.getImage().apply(new Posterize(colorBands));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
     }
 }

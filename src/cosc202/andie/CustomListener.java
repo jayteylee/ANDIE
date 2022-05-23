@@ -141,7 +141,9 @@ public class CustomListener implements MouseInputListener {
     public static void setCurrentY(int currentY) {
         CustomListener.currentY = currentY;
     }
-
+    /**
+     * A method to clear all the static coordinates between runs
+     */
     public static void clear() {
         startX = 0;
         startY = 0;
