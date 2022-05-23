@@ -238,7 +238,11 @@ public class MouseActions {
         }
     }
 
+<<<<<<< HEAD
     public class MouseColourAction extends ImageAction{
+=======
+    public class MouseColourAction extends ImageAction {
+>>>>>>> a4a5e84457f15044c59e4cfd11ae0544ffb00cac
 
         /**
          * <p>
@@ -268,7 +272,7 @@ public class MouseActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            CustomColourPanel frame = new CustomColourPanel();
+            CustomColourPanel frame = new CustomColourPanel("HSV", false);
         }
      }
 }

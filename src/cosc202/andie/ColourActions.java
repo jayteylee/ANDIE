@@ -162,8 +162,9 @@ public class ColourActions {
             // frame.add(panel);
             // frame.setSize(200, 200);
             // frame.setVisible(true);
-            int colorBands[] = {0};
-            target.getImage().apply(new Posterize(colorBands));
+            CustomColourPanel colourPanel = new CustomColourPanel("RGB", true);
+            int colourBands[] = {0};
+            target.getImage().apply(new Posterize(colourBands));
             target.repaint();
             target.getParent().revalidate();
         }
