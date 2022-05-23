@@ -22,7 +22,8 @@ public class ImageTransformations {
             actions.add(new ResizeAction("Resize the image", null, "Make the image larger or smaller.", Integer.valueOf(KeyEvent.VK_R)));
             actions.add(new FlipImageHorizontalAction("Flip images horizontal", null, "Flip the image horizontally. ", Integer.valueOf(KeyEvent.VK_CLOSE_BRACKET)));
             actions.add(new FlipImageVerticalAction("Flip images vertically", null, "Flip the image vertically. ", Integer.valueOf(KeyEvent.VK_OPEN_BRACKET)));
-        }
+            actions.add(new CropSelectionAction("Crop Selection", null, "Crop image to selected size. ", Integer.valueOf(KeyEvent.VK_OPEN_BRACKET)));
+        }   
     
         /**
          * <p>
@@ -41,7 +42,20 @@ public class ImageTransformations {
             return fileMenu;
         }
 
+        public class CropSelectionAction extends ImageAction {
+            public CropSelectionAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+                super(name, icon, desc, mnemonic);
+                putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            }
 
+            public void actionPerformed(ActionEvent e) {
+                CustomListener.setRunning(true);
+                MouseActions.current = MouseActions.CROP;
+                Andie.imagePanel.repaint();
+                Andie.frame.pack();
+
+            }
+        }
 
 
         public class RotateImageClockwiseAction extends ImageAction {
