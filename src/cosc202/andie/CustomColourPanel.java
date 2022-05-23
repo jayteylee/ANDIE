@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
      * Constructor for CustomColourPanel that also instantiates a colour chooser panel
      */
 public class CustomColourPanel implements ChangeListener {
-    protected static JFrame f = new JFrame("Choose new colour");
+    protected static JDialog frame;
     protected static JColorChooser chooser = new JColorChooser();
     protected static JPanel previewP = new JPanel();
     protected static JButton ok = new JButton("Ok");
@@ -30,19 +30,21 @@ public class CustomColourPanel implements ChangeListener {
     /**
      * Constructor for CustomColourPanel that also instantiates a colour chooser panel
      */
-    public CustomColourPanel() {
+    public CustomColourPanel(String colorType, boolean modal) {
+        frame = new JDialog(Andie.frame, "Choose a colour", modal);
+
         ArrayList<JButton> buttons = new ArrayList<JButton>();
         Listener l = new Listener(buttons, chooser);
         //Set dimensions and layout of the frame
-        f.setSize(new Dimension(650, 400));
-        f.setLayout(new FlowLayout());
-        f.setResizable(false);
+        frame.setSize(new Dimension(650, 400));
+        frame.setLayout(new FlowLayout());
+        frame.setResizable(false);
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
         //Removes all chooser panels apart from HSV
         AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels) {
             System.out.println(accp.getDisplayName());
-            if (!accp.getDisplayName().equals("HSV")) {
+            if (!accp.getDisplayName().equals(colorType)) {
                 chooser.removeChooserPanel(accp);
             }
         }
@@ -87,10 +89,10 @@ public class CustomColourPanel implements ChangeListener {
         p.add(buttonP);
 
         //Add main panel to the frame and set the open location to the centre of the screen
-        f.add(p);
-        f.setVisible(true);
-        f.setLocationRelativeTo(null);
-        f.pack();
+        frame.add(p);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     @Override
@@ -111,10 +113,10 @@ public class CustomColourPanel implements ChangeListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == buttons.get(0)) {
                 MouseActions.colour = chooser.getColor();
-                f.dispose();
+                frame.dispose();
             }
             if (e.getSource() == buttons.get(1)) {
-                f.dispose();
+                frame.dispose();
             }
             if (e.getSource() == buttons.get(2)) {
                 colourArray.add(chooser.getColor());

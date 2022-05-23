@@ -243,7 +243,7 @@ public class MouseActions {
         }
     }
 
-    public class MouseColourAction extends ImageAction implements ChangeListener {
+    public class MouseColourAction extends ImageAction {
 
         /**
          * <p>
@@ -319,7 +319,7 @@ public class MouseActions {
             //f.setVisible(true);
             //f.setLocationRelativeTo(null);
             //f.pack();
-            CustomColourPanel frame = new CustomColourPanel();
+            CustomColourPanel frame = new CustomColourPanel("HSV", false);
         }
 
     //     @Override
