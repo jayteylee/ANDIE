@@ -73,6 +73,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         BufferedImage input = new BufferedImage(inputs.getWidth()+(radius*2), inputs.getHeight()+(radius*2), BufferedImage.TYPE_INT_ARGB);
         Graphics grap = input.getGraphics();
         grap.drawImage(inputs,0,0,input.getWidth(),input.getHeight(),null);
+        grap.drawImage(inputs, radius, radius, null);
         grap.dispose();
 
 
@@ -139,8 +140,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         
         }
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+        BufferedImage img = output.getSubimage(radius, radius, inputs.getWidth(), inputs.getHeight());
 
-        return output;
+        return img;
 
     }
 
