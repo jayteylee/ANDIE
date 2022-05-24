@@ -3,12 +3,7 @@ package cosc202.andie;
 import java.util.ArrayList;
 import java.awt.event.*;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.*;
-import javax.swing.colorchooser.AbstractColorChooserPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class MouseActions {
     protected ArrayList<Action> actions;
@@ -22,6 +17,7 @@ public class MouseActions {
     protected static final int DRAWOVAL = 3;
     protected static final int DRAWFILLOVAL = 4;
     protected static final int DRAWLINE = 5;
+    protected static final int FREEDRAW = 6;
     protected static int current;
     protected static JFrame f = new JFrame("Choose new colour");
     protected static JColorChooser chooser = new JColorChooser();
@@ -42,14 +38,15 @@ public class MouseActions {
      */
     public MouseActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MouseDrawLineAction("Draw Line", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawOvalAction("Draw oval", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseColourAction("Choose colour", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawLineAction("Draw Line", null, "Draws a straight line", Integer.valueOf(KeyEvent.VK_L)));
+        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Draws an empty rectangle", Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Draws a filled rectangle",
+                Integer.valueOf(KeyEvent.VK_T)));
+        actions.add(new MouseDrawOvalAction("Draw oval", null, "Draws an empty oval", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Draws a filled oval",
+                Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new MouseColourAction("Choose colour", null, "Choose a colour", Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new MouseFreeDrawAction("Free Draw", null, "free draw tool", Integer.valueOf(KeyEvent.VK_D)));
 
     }
 
@@ -77,7 +74,7 @@ public class MouseActions {
          */
         MouseDrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -99,6 +96,42 @@ public class MouseActions {
         }
     }
 
+    public class MouseFreeDrawAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new file-open action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        MouseFreeDrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
+        }
+
+        /**
+         * <p>
+         * Callback for when the macro start action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MacroStartAction is triggered.
+         * Starts recording operations by setting the running boolean to true
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            CustomListener.setRunning(true);
+            current = FREEDRAW;
+            Andie.imagePanel.repaint();
+        }
+    }
+
     public class MouseDrawRectAction extends ImageAction {
 
         /**
@@ -113,7 +146,7 @@ public class MouseActions {
          */
         MouseDrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -149,7 +182,7 @@ public class MouseActions {
          */
         MouseDrawFillRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -185,7 +218,7 @@ public class MouseActions {
          */
         MouseDrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -221,7 +254,7 @@ public class MouseActions {
          */
         MouseDrawFillOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -243,7 +276,7 @@ public class MouseActions {
         }
     }
 
-    public class MouseColourAction extends ImageAction {
+    public class MouseColourAction extends ImageAction{
 
         /**
          * <p>
@@ -257,7 +290,7 @@ public class MouseActions {
          */
         MouseColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
         /**
@@ -321,35 +354,5 @@ public class MouseActions {
             //f.pack();
             CustomColourPanel frame = new CustomColourPanel("HSV", true, false);
         }
-
-    //     @Override
-    //     public void stateChanged(ChangeEvent e) {
-    //         previewP.setBackground(chooser.getColor());
-    //     }
-    // }
-
-    // public class Listener implements ActionListener {
-    //     ArrayList<JButton> buttons = new ArrayList<JButton>();
-    //     JColorChooser chooser;
-
-    //     public Listener(ArrayList<JButton> buttons, JColorChooser chooser) {
-    //         // for(JButton button: buttons){
-    //         // buttons.add(button);
-    //         // }
-    //         this.buttons = buttons;
-    //         this.chooser = chooser;
-    //     }
-
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //         if (e.getSource() == buttons.get(0)) {
-    //             MouseActions.colour = chooser.getColor();
-    //             MouseActions.f.dispose();
-    //         }
-    //         if (e.getSource() == buttons.get(1)) {
-    //             MouseActions.f.dispose();
-    //         }
-    //     }
-
      }
 }

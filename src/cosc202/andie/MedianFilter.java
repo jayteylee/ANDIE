@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.util.*;
+import java.awt.Graphics;
 
 
 /**
@@ -10,7 +11,7 @@ import java.util.*;
  * </p>
  * 
  * <p>
- * A Mean filter blurs an image by replacing each pixel by the median of the
+ * A Median filter blurs an image by replacing each pixel by the median of the
  * pixels in a surrounding neighborhood.
  * </p>
  * 
@@ -67,7 +68,14 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * @param input The image to which the median filter is going to be applied to.
      * @return The resulting image.
      */
-    public BufferedImage apply(BufferedImage input) {
+    public BufferedImage apply(BufferedImage inputs) {
+
+        BufferedImage input = new BufferedImage(inputs.getWidth()+(radius*2), inputs.getHeight()+(radius*2), BufferedImage.TYPE_INT_ARGB);
+        Graphics grap = input.getGraphics();
+        grap.drawImage(inputs,0,0,input.getWidth(),input.getHeight(),null);
+        grap.drawImage(inputs, radius, radius, null);
+        grap.dispose();
+
 
         ArrayList<Integer> local = new ArrayList<Integer>(); //ArrayList for local neighborhood
 
@@ -132,8 +140,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         
         }
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+        BufferedImage img = output.getSubimage(radius, radius, inputs.getWidth(), inputs.getHeight());
 
-        return output;
+        return img;
 
     }
 

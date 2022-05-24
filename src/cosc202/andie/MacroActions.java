@@ -20,9 +20,9 @@ public class MacroActions {
      */
     public MacroActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MacroStartAction("Start recording", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MacroStartAction("Start recording", null, "Start recording", Integer.valueOf(KeyEvent.VK_R)));
         actions.add(new MacroStopAction("Stop recording", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new MacroOpenAction("Load", null, "Add macro to file", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new MacroOpenAction("Load", null, "Add macro to file", Integer.valueOf(KeyEvent.VK_L)));
 
     }
     public JMenu createMenu() {
@@ -48,7 +48,7 @@ public class MacroActions {
          */
         MacroStartAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
         /**
@@ -82,7 +82,7 @@ public class MacroActions {
          */
         MacroStopAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
         /**
@@ -143,7 +143,7 @@ public class MacroActions {
          */
         MacroOpenAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
          /**

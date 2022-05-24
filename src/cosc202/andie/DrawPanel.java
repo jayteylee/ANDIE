@@ -2,6 +2,8 @@ package cosc202.andie;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 import javax.swing.JPanel;
 
@@ -10,6 +12,7 @@ public class DrawPanel extends JPanel {
     private Color colour;
     private int[] coordArr = new int[4];
     private int[] lineArr = new int[4];
+    protected int[] xArr, yArr;
 
     public DrawPanel(ImagePanel panel, int current, Color colour) {
         this.coordArr = calcCoordinates();
@@ -20,6 +23,7 @@ public class DrawPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
         super.paintComponent(g);
         g.setColor(colour);
         if (CustomListener.isRunning()) {
@@ -43,16 +47,24 @@ public class DrawPanel extends JPanel {
                 g.drawRect(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
-
             } else if (current == MouseActions.DRAWLINE) {
                 g.drawLine(lineArr[0], lineArr[1],
                         lineArr[2], lineArr[3]);
-
+            }  else if (current == MouseActions.FREEDRAW) {
+                this.xArr = new int [CustomListener.getxList().size()];
+                this.yArr = new int [CustomListener.getyList().size()];
+                for(int i = 0; i < CustomListener.getxList().size(); i++){
+                    xArr[i] = CustomListener.getxList().get(i);
+                    yArr[i] = CustomListener.getyList().get(i);
+                }
+                g2.setStroke(new BasicStroke(6));
+                g2.drawPolyline( xArr, yArr, xArr.length); 
             }
         }
         Andie.imagePanel.repaint();
         Andie.imagePanel.revalidate();
     }
+
 
     public static int[] calcCoordinates() {
         int coordArr[] = new int[4];
@@ -71,64 +83,4 @@ public class DrawPanel extends JPanel {
         lineArr[3] = CustomListener.getCurrentY();
         return lineArr;
     }
-
-    // @Override
-    // public BufferedImage apply(BufferedImage input) {
-    // BufferedImage output = new BufferedImage(input.getColorModel(),
-    // input.copyData(null),
-    // input.isAlphaPremultiplied(), null);
-    // //Graphics outputGraphics = output.getGraphics();
-    // Graphics2D outputGraphics = output.createGraphics();
-    // outputGraphics.setColor(this.colour);
-    // if (current == MouseActions.DRAWRECT) {
-    // outputGraphics.drawRect(coordArr[0], coordArr[1],
-    // coordArr[2] - coordArr[0],
-    // coordArr[3] - coordArr[1]);
-    // } else if (current == MouseActions.DRAWFILLRECT) {
-    // outputGraphics.fillRect(coordArr[0], coordArr[1],
-    // coordArr[2] - coordArr[0],
-    // coordArr[3] - coordArr[1]);
-    // } else if (current == MouseActions.DRAWOVAL) {
-    // outputGraphics.drawOval(coordArr[0], coordArr[1],
-    // coordArr[2] - coordArr[0],
-    // coordArr[3] - coordArr[1]);
-    // } else if (current == MouseActions.DRAWFILLOVAL) {
-    // outputGraphics.fillOval(coordArr[0], coordArr[1],
-    // coordArr[2] - coordArr[0],
-    // coordArr[3] - coordArr[1]);
-    // }
-    // // repaint();
-    // // revalidate();
-
-    // return output;
-    // }
-
-    // private void readObject(ObjectInputStream aInputStream) throws
-    // ClassNotFoundException, IOException {
-    // for (int i=0; i<coordArr.length; i++) {
-    // this.coordArr[i] = aInputStream.readInt();
-    // }
-    // int red = aInputStream.readInt();
-    // int green = aInputStream.readInt();
-    // int blue = aInputStream.readInt();
-    // int alpha = aInputStream.readInt();
-    // this.colour = new Color(red, green, blue, alpha);
-    // this.current = aInputStream.readInt();
-    // }
-
-    // private void writeObject(ObjectOutputStream aOutputStream) throws IOException
-    // {
-    // for (int i=0; i<coordArr.length; i++) {
-    // aOutputStream.writeInt(this.coordArr[i]);
-    // }
-    // int red = this.colour.getRed();
-    // int green = this.colour.getGreen();
-    // int blue = this.colour.getBlue();
-    // int alpha = this.colour.getAlpha();
-    // aOutputStream.writeInt(red);
-    // aOutputStream.writeInt(green);
-    // aOutputStream.writeInt(blue);
-    // aOutputStream.writeInt(alpha);
-    // aOutputStream.writeInt(this.current);
-    // }
 }

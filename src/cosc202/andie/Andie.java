@@ -31,17 +31,7 @@ public class Andie {
     protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
     protected static JToolBar tbar = new JToolBar();
     Toolbar toolbar = new Toolbar();
-    // protected static JMenuBar menuBar = new JMenuBar();
-    // protected static FileActions fileActions = new FileActions();
-    // protected static ImageTransformations imageTransformations = new ImageTransformations();
-    // protected static EditActions editActions = new EditActions();
-    // protected static ViewActions viewActions = new ViewActions();
-    // protected static FilterActions filterActions = new FilterActions();
-    // protected static ColourActions colourActions = new ColourActions();
-    // protected static MacroActions macroActions = new MacroActions();
-    // protected static MouseActions mouseActions = new MouseActions();
     protected static ImagePanel imagePanel = new ImagePanel();
-    // protected static JScrollPane scrollPane = new JScrollPane(imagePanel);
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.

@@ -37,7 +37,7 @@ public class ColourActions {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new BrightnessAndContrastAction("Contrast and Brightness", null, "Changes contrast and brightness", Integer.valueOf(KeyEvent.VK_C)));
-        actions.add(new PosterizeAction("Posterize", null, "Reduce the images color palette", null));
+        actions.add(new PosterizeAction("Posterize", null, "Reduce the images color palette", Integer.valueOf(KeyEvent.VK_Z)));
     }
 
     /**
@@ -151,6 +151,7 @@ public class ColourActions {
 
         PosterizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
             //TODO Auto-generated constructor stub
         }
 
