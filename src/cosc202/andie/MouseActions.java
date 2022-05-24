@@ -238,11 +238,7 @@ public class MouseActions {
         }
     }
 
-<<<<<<< HEAD
     public class MouseColourAction extends ImageAction{
-=======
-    public class MouseColourAction extends ImageAction {
->>>>>>> a4a5e84457f15044c59e4cfd11ae0544ffb00cac
 
         /**
          * <p>
