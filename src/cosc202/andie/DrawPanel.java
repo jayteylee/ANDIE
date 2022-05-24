@@ -2,6 +2,8 @@ package cosc202.andie;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 import javax.swing.JPanel;
 
@@ -10,16 +12,24 @@ public class DrawPanel extends JPanel {
     private Color colour;
     private int[] coordArr = new int[4];
     private int[] lineArr = new int[4];
+    protected static int[][] xArr, yArr;
+    protected static int[] numPoints;
 
     public DrawPanel(ImagePanel panel, int current, Color colour) {
         this.coordArr = calcCoordinates();
         this.lineArr = lineCoordinates();
         this.current = current;
         this.colour = colour;
+        numPoints = new int[1];
+        xArr = new int[1][10000];
+        yArr = new int [1][10000];
+
+        addMouseListener(new CustomListener());
 
     }
 
     public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
         super.paintComponent(g);
         g.setColor(colour);
         if (CustomListener.isRunning()) {
@@ -43,11 +53,12 @@ public class DrawPanel extends JPanel {
                 g.drawRect(coordArr[0], coordArr[1],
                         coordArr[2] - coordArr[0],
                         coordArr[3] - coordArr[1]);
-
             } else if (current == MouseActions.DRAWLINE) {
                 g.drawLine(lineArr[0], lineArr[1],
                         lineArr[2], lineArr[3]);
-
+            }  else if (current == MouseActions.FREEDRAW) {
+                g2.setStroke(new BasicStroke(6));
+                g.drawPolyline(xArr[0], yArr[0], numPoints[0]);
             }
         }
         Andie.imagePanel.repaint();
@@ -131,4 +142,6 @@ public class DrawPanel extends JPanel {
     // aOutputStream.writeInt(alpha);
     // aOutputStream.writeInt(this.current);
     // }
+
+
 }

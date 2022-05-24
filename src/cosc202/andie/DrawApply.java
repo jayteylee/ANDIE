@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.awt.BasicStroke;
 
 public class DrawApply implements ImageOperation, Serializable{
     private int current = 0;
@@ -10,12 +11,17 @@ public class DrawApply implements ImageOperation, Serializable{
     private int[] coordArr = new int[4];
     private int[] lineArr = new int[4];
     private double zoom;
+    protected static int[][] xArr, yArr;
+    protected static int[] numPoints;
 
     public DrawApply(ImagePanel panel, int current, Color colour ) {
         this.coordArr = calcCoordinates();
         this.lineArr = lineCoordinates();
         this.current = current;
         this.colour = colour;
+        numPoints = new int[1];
+        xArr = new int[1][10000];
+        yArr = new int [1][10000];
         
     }
     public static int[] calcCoordinates() {
@@ -65,6 +71,9 @@ public class DrawApply implements ImageOperation, Serializable{
             }else if (current == MouseActions.DRAWLINE) {
                 outputGraphics.drawLine(lineArr[0], lineArr[1],
                         lineArr[2],lineArr[3]);
+            }else if (current == MouseActions.FREEDRAW) {
+                outputGraphics.setStroke(new BasicStroke(6));
+                outputGraphics.drawPolyline(xArr[0], yArr[0], numPoints[0]);
             }
             return output;
         }

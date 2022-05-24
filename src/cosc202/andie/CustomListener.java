@@ -38,7 +38,6 @@ public class CustomListener implements MouseInputListener {
             }else{
             Andie.imagePanel.getImage().apply(new DrawApply(Andie.imagePanel, MouseActions.current, MouseActions.colour));
             }
-           // Andie.imagePanel.getImage().apply(new CropSelection());
             ImageAction.target.repaint();
             ImageAction.target.revalidate();
             pressed = false;
@@ -62,6 +61,9 @@ public class CustomListener implements MouseInputListener {
         if (entered && pressed && running) {
             setCurrentX(e.getX());
             setCurrentY(e.getY());
+            if(MouseActions.current == MouseActions.FREEDRAW){
+
+            }
         }
     }
 
