@@ -319,7 +319,7 @@ public class MouseActions {
             //f.setVisible(true);
             //f.setLocationRelativeTo(null);
             //f.pack();
-            CustomColourPanel frame = new CustomColourPanel("HSV", false);
+            CustomColourPanel frame = new CustomColourPanel("HSV", true, false);
         }
 
     //     @Override

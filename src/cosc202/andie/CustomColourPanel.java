@@ -13,32 +13,35 @@ import javax.swing.event.ChangeListener;
      * Constructor for CustomColourPanel that also instantiates a colour chooser panel
      */
 public class CustomColourPanel implements ChangeListener {
-    protected static JDialog frame;
-    protected static JColorChooser chooser = new JColorChooser();
-    protected static JPanel previewP = new JPanel();
-    protected static JButton ok = new JButton("Ok");
-    protected static JButton cancel = new JButton("cancel");
-    protected static JButton add = new JButton("add");
-    protected static JLabel previewText = new JLabel("Colour preview");
-    protected static JPanel p = new JPanel();
-    protected static JPanel buttonP = new JPanel();
-    protected static JPanel textPanel = new JPanel();
-    protected static JPanel dummyPanel2 = new JPanel();
-    protected static JPanel previewPanels = new JPanel();
-    protected static ArrayList<Color> colourArray = new ArrayList<Color>();
+    protected JDialog frame;
+    protected JColorChooser chooser;
+    protected JPanel previewP;
+    protected JButton ok;
+    protected JButton cancel;
+    protected JButton add;
+    protected JLabel previewText;
+    protected JPanel p;
+    protected JPanel buttonP;
+    protected JPanel textPanel;
+    protected JPanel dummyPanel2;
+    protected JPanel previewPanels;
+    protected ArrayList<Color> colourArray;
 
     /**
      * Constructor for CustomColourPanel that also instantiates a colour chooser panel
      */
-    public CustomColourPanel(String colorType, boolean modal) {
+    public CustomColourPanel(String colorType, boolean multiple, boolean modal) {
         frame = new JDialog(Andie.frame, "Choose a colour", modal);
 
         ArrayList<JButton> buttons = new ArrayList<JButton>();
+        colourArray = new ArrayList<Color>();
+        chooser = new JColorChooser();
         Listener l = new Listener(buttons, chooser);
         //Set dimensions and layout of the frame
         frame.setSize(new Dimension(650, 400));
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
+        p = new JPanel();
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
         //Removes all chooser panels apart from HSV
         AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
@@ -49,30 +52,42 @@ public class CustomColourPanel implements ChangeListener {
             }
         }
         chooser.getSelectionModel().addChangeListener(this);
+        previewP = new JPanel();
         previewP.setBackground(MouseActions.colour);
 
         //Set panel and button sizes
         previewP.setPreferredSize(new Dimension(100, 100));
+        ok = new JButton("Ok");
         ok.setPreferredSize(new Dimension(60, 20));
+        cancel = new JButton("cancel");
         cancel.setPreferredSize(new Dimension(60, 20));
+        add = new JButton("add");
         add.setPreferredSize(new Dimension(60, 20));
+        textPanel = new JPanel();
         textPanel.setPreferredSize(new Dimension(60, 20));
+        dummyPanel2 = new JPanel();
         dummyPanel2.setPreferredSize(new Dimension(60, 20));
 
         //
+        previewPanels = new JPanel();
         previewPanels.add(previewP);
         previewPanels.add(dummyPanel2);
+        previewText = new JLabel("Colour preview");
         textPanel.add(previewText);
         textPanel.add(dummyPanel2);
         // add buttons to the buttons arraylist
         buttons.add(ok);
         buttons.add(cancel);
         buttons.add(add);
+        
 
         //add buttons to the button panel
+        buttonP = new JPanel();
         buttonP.add(ok);
         buttonP.add(cancel);
-        buttonP.add(add);
+        if(multiple) {
+            buttonP.add(add);
+        }
 
         //Add button listeners
         ok.addActionListener(l);
@@ -113,6 +128,7 @@ public class CustomColourPanel implements ChangeListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == buttons.get(0)) {
                 MouseActions.colour = chooser.getColor();
+                colourArray.add(chooser.getColor());
                 frame.dispose();
             }
             if (e.getSource() == buttons.get(1)) {
