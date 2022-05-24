@@ -243,7 +243,7 @@ public class MouseActions {
         }
     }
 
-    public class MouseColourAction extends ImageAction implements ChangeListener {
+    public class MouseColourAction extends ImageAction{
 
         /**
          * <p>

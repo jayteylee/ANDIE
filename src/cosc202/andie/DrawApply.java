@@ -3,13 +3,27 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
-
+/**
+ * <p>
+ * ImageOperation to add drawn shapes onto an image
+ * </p>
+ * 
+ * <p>
+ * The user can draw lines, filled and unfilled rectanges and ovals and change
+ * the colour based on HSV values.
+ * </p>
+ * 
+ * <p>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * </p>
+ * 
+ * @author Jake Norton
+ */
 public class DrawApply implements ImageOperation, Serializable{
     private int current = 0;
     private Color colour;
     private int[] coordArr = new int[4];
     private int[] lineArr = new int[4];
-    private double zoom;
 
     public DrawApply(ImagePanel panel, int current, Color colour ) {
         this.coordArr = calcCoordinates();
@@ -30,13 +44,13 @@ public class DrawApply implements ImageOperation, Serializable{
         int lineArr[] = new int[4];
         double temp;
         //lineArr[0] = CustomListener.getStartX()* Andie.imagePanel.getZoom();
-        temp = (CustomListener.getStartX()* Andie.imagePanel.getZoom())/100;
+        temp = CustomListener.getStartX()/ (Andie.imagePanel.getZoom()/100);
         lineArr[0] = (int)temp;
-        temp = (CustomListener.getStartY()* Andie.imagePanel.getZoom())/100;
+        temp = CustomListener.getStartY()/ (Andie.imagePanel.getZoom()/100);
         lineArr[1] = (int)temp;
-        temp = (CustomListener.getCurrentX()* Andie.imagePanel.getZoom())/100;
+        temp = CustomListener.getCurrentX()/ (Andie.imagePanel.getZoom()/100);
         lineArr[2] = CustomListener.getCurrentX();
-        temp = (CustomListener.getCurrentY()* Andie.imagePanel.getZoom())/100;
+        temp = CustomListener.getCurrentY()/ (Andie.imagePanel.getZoom()/100);
         lineArr[3] = CustomListener.getCurrentY();
         return lineArr;
     }

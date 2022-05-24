@@ -146,8 +146,12 @@ public class Andie {
      */
     protected static void resizeFrame(){
         frame.pack();
-        if(frame.getSize().getWidth()> xSize || frame.getSize().getHeight()> ySize){
+        if(frame.getSize().getWidth()> xSize && frame.getSize().getHeight()> ySize){
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }else if(frame.getSize().getWidth()> xSize){
+            frame.setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        }else if(frame.getSize().getHeight()> xSize){
+            frame.setExtendedState(JFrame.MAXIMIZED_VERT);
         }
     } 
     /**
