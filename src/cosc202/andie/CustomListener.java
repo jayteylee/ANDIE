@@ -1,12 +1,16 @@
 package cosc202.andie;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.event.MouseInputListener;
 
 public class CustomListener implements MouseInputListener {
     private static boolean entered = false;
     private static boolean pressed = false;
     private static boolean running = false;
+    private static ArrayList<Integer> xList = new ArrayList<Integer>();
+    private static ArrayList<Integer> yList = new ArrayList<Integer>();
     private static int startX = 0;
     private static int startY = 0;
     private static int endX = 0;
@@ -23,10 +27,15 @@ public class CustomListener implements MouseInputListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
         pressed = true;
-        if (entered) {
+        if (entered && running) {
             setStartX(e.getX());
             setStartY(e.getY());
+            if(MouseActions.current == MouseActions.FREEDRAW){
+                CustomListener.xList = new ArrayList<Integer>();
+                CustomListener.yList = new ArrayList<Integer>();
+            }
         }
     }
 
@@ -38,7 +47,6 @@ public class CustomListener implements MouseInputListener {
             }else{
             Andie.imagePanel.getImage().apply(new DrawApply(Andie.imagePanel, MouseActions.current, MouseActions.colour));
             }
-           // Andie.imagePanel.getImage().apply(new CropSelection());
             ImageAction.target.repaint();
             ImageAction.target.revalidate();
             pressed = false;
@@ -62,7 +70,26 @@ public class CustomListener implements MouseInputListener {
         if (entered && pressed && running) {
             setCurrentX(e.getX());
             setCurrentY(e.getY());
+            if(MouseActions.current == MouseActions.FREEDRAW){
+                xList.add(currentX);
+                yList.add(currentY);
+               }
         }
+    }
+    public static ArrayList<Integer> getxList() {
+        return xList;
+    }
+
+    public static void setxList(ArrayList<Integer> xList) {
+        CustomListener.xList = xList;
+    }
+
+    public static ArrayList<Integer> getyList() {
+        return yList;
+    }
+
+    public static void setyList(ArrayList<Integer> yList) {
+        CustomListener.yList = yList;
     }
 
     @Override
@@ -151,5 +178,7 @@ public class CustomListener implements MouseInputListener {
         endY = 0;
         currentX = 0;
         currentY = 0;
+        CustomListener.xList = new ArrayList<>();
+        CustomListener.yList = new ArrayList<>();
     }
 }
