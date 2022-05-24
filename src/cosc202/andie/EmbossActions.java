@@ -42,6 +42,8 @@ public class EmbossActions {
         actions.add(new EmbossFilter6Action("Bottom right emboss", null, "Apply a bottom right emboss filter", Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new EmbossFilter7Action("Bottom middle emboss", null, "Apply a bottom middle emboss filter", Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new EmbossFilter8Action("Bottom left emboss", null, "Apply a bottom left emboss filter", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new SoberHorizontalAction("Horizontal Sober", null, "Apply a horizontal sober filter", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new SoberVerticalAction("Vertical Sober", null, "Apply a vertical sober filter", Integer.valueOf(KeyEvent.VK_S)));
     }
 
     /**
@@ -355,4 +357,77 @@ public class EmbossActions {
             target.getParent().revalidate();
         }   
     }
+
+    public class SoberHorizontalAction extends ImageAction {
+        /**
+        * <p>
+        * Create a new horizontal sober action.
+        * </p>
+        * 
+        * @param name The name of the action (ignored if null).
+        * @param icon An icon to use to represent the action (ignored if null).
+        * @param desc A brief description of the action  (ignored if null).
+        * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+        */
+        SoberHorizontalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
+        }
+
+        /**
+         * <p>
+         * Callback for when emboss the image from top left action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the EmbossFilter1 is triggered.
+         * It applys the emboss simulation starting from top left of the image. {@link EmbossFilter1}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            target.getImage().apply(new SoberHorizontal());
+            target.repaint();
+            target.getParent().revalidate();
+        }   
+    }
+
+    public class SoberVerticalAction extends ImageAction {
+        /**
+        * <p>
+        * Create a new horizontal sober action.
+        * </p>
+        * 
+        * @param name The name of the action (ignored if null).
+        * @param icon An icon to use to represent the action (ignored if null).
+        * @param desc A brief description of the action  (ignored if null).
+        * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+        */
+        SoberVerticalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
+        }
+
+        /**
+         * <p>
+         * Callback for when emboss the image from top left action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the EmbossFilter1 is triggered.
+         * It applys the emboss simulation starting from top left of the image. {@link EmbossFilter1}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            target.getImage().apply(new SoberVertical());
+            target.repaint();
+            target.getParent().revalidate();
+        }   
+    }
+    
 }
