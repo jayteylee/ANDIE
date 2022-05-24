@@ -47,6 +47,14 @@ Tested on many images with different colour palettes and sizes. Did some more in
 
 ----
 
+***Posterize***: Jack
+
+Accessed by: Colour menu (Posterize option)
+
+The user has an option to choose the colour bands used during the posterizing. A modal window opens and the user can select colors in the form of A-R-G-B in a colour chooser. Clicking okay in the colour chooser adds the colour to the list.
+
+----
+
 ## Tranformation operations
 
 ***Resize:*** Jack
@@ -162,6 +170,20 @@ Testing mainly involved checking the implementation of the methods called by the
 
 ----
 
+***Handling edge cases for the filters***: Jack
+
+The default Java convolution isn't perfect and does not deal with the edges of images very well.
+
+I reimplemented the convolution so that only a couple lines of code would have to be changed. The new convolution operation deals with pixels over the edge by choosing nearest pixel.
+
+----
+
+***Negative results from filters***: Jack
+
+The negative results are dealt with during the convolution. In the constructor of the convolution class, a boolean is set to true indicating that an offset needs to be applied for negative results. The rest is automatically dealt with inside the convolution class.
+
+----
+
 ## Our Feature
 ***Free Draw:*** (Jay & Jake)
 
@@ -191,6 +213,8 @@ Exceptions were handled for when the user tries to save a file but has not opene
 (Jake) Found a problem with the saveAs method which would show an open dialog box instead of a save dialog box.
 
 (Jake)I think there may still be some edge problems with export and save to do with file extensions, however I think I have the major problems sorted. If the file does not contain a jpg, jpeg, png, JFIF extension, it will have .jpg appended to the file. This can lead to strange naming, if for example the file was test.txt it would be saved as test.txt.jpg. However the save would still work fine.
+
+(Jack) The colour chooser window would only open once and would not open again after it was closed. This was due to the variables being declared and assigned statically. Changing them to non-static and assigining them inside the constructor fixed the issue. 
 
 ----
 
