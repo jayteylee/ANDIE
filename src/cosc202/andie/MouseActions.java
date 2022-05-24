@@ -38,15 +38,15 @@ public class MouseActions {
      */
     public MouseActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MouseDrawLineAction("Draw Line", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawOvalAction("Draw oval", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseColourAction("Choose colour", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseFreeDrawAction("Free Draw", null, "free draw tool", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawLineAction("Draw Line", null, "Draws a straight line", Integer.valueOf(KeyEvent.VK_L)));
+        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Draws an empty rectangle", Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Draws a filled rectangle",
+                Integer.valueOf(KeyEvent.VK_T)));
+        actions.add(new MouseDrawOvalAction("Draw oval", null, "Draws an empty oval", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Draws a filled oval",
+                Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new MouseColourAction("Choose colour", null, "Choose a colour", Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new MouseFreeDrawAction("Free Draw", null, "free draw tool", Integer.valueOf(KeyEvent.VK_D)));
 
     }
 
@@ -74,7 +74,7 @@ public class MouseActions {
          */
         MouseDrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -110,7 +110,7 @@ public class MouseActions {
          */
         MouseFreeDrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
 
         /**
@@ -146,7 +146,7 @@ public class MouseActions {
          */
         MouseDrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -182,7 +182,7 @@ public class MouseActions {
          */
         MouseDrawFillRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -218,7 +218,7 @@ public class MouseActions {
          */
         MouseDrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -254,7 +254,7 @@ public class MouseActions {
          */
         MouseDrawFillOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -290,7 +290,7 @@ public class MouseActions {
          */
         MouseColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
         /**
