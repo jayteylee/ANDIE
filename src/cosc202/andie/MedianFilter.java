@@ -11,7 +11,7 @@ import java.awt.Graphics;
  * </p>
  * 
  * <p>
- * A Mean filter blurs an image by replacing each pixel by the median of the
+ * A Median filter blurs an image by replacing each pixel by the median of the
  * pixels in a surrounding neighborhood.
  * </p>
  * 
