@@ -1,10 +1,15 @@
 package cosc202.andie;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.Color;
 
+/**
+ * <p>
+ * Crop Selection to crop an image based on the selected area.
+ * </p>
+ * 
+ * @author Jay Lee
+ */
 public class CropSelection implements ImageOperation, java.io.Serializable {
 
     private int[] coordArr = new int[4];

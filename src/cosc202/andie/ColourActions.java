@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -36,7 +37,7 @@ public class ColourActions {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new BrightnessAndContrastAction("Contrast and Brightness", null, "Changes contrast and brightness", Integer.valueOf(KeyEvent.VK_C)));
-        actions.add(new PosterizeAction("Posterize", null, "Reduce the images color palette", null));
+        actions.add(new PosterizeAction("Posterize", null, "Reduce the images color palette", Integer.valueOf(KeyEvent.VK_Z)));
     }
 
     /**
@@ -150,23 +151,95 @@ public class ColourActions {
 
         PosterizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
             //TODO Auto-generated constructor stub
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // JFrame frame = new JFrame("Select color bands");
-            // //JPanel panel = new JPanel(new BorderLayout());
-            // frame.setLocationRelativeTo(Andie.frame);
-            // frame.setResizable(false);
-            // frame.add(panel);
-            // frame.setSize(200, 200);
-            // frame.setVisible(true);
-            CustomColourPanel colourPanel = new CustomColourPanel("RGB", true);
-            int colourBands[] = {0};
-            target.getImage().apply(new Posterize(colourBands));
-            target.repaint();
-            target.getParent().revalidate();
+            class CustomCellRenderer extends JLabel implements ListCellRenderer<Color> {
+
+                @Override
+                public Component getListCellRendererComponent(JList<? extends Color> list, Color color, int index,
+                        boolean isSelected, boolean cellHasFocus) {
+                    String s = "A:"+color.getAlpha()+" R:"+color.getRed()+" G:"+color.getGreen()+" B:"+color.getBlue();
+                    setText(s);
+                    setEnabled(true);
+                    setFont(list.getFont());
+                    setOpaque(true);
+                    return this;
+                }
+            }
+
+            Vector<Color> colours = new Vector<>();
+            JList<Color> list = new JList<Color>(colours);
+
+            class MouseListener extends MouseAdapter {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int selectedIndex = list.locationToIndex(e.getPoint());
+                    //System.out.println("Clicked " + selectedIndex);
+                    if(selectedIndex == list.getSelectedIndices()[0]) {
+                        list.clearSelection();
+                    }
+                }
+            }
+
+            list.setCellRenderer(new CustomCellRenderer());
+            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            list.addMouseListener(new MouseListener());
+
+            JScrollPane scrollPane = new JScrollPane(list);
+            JPanel mainPanel = new JPanel();
+            mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+            mainPanel.add(scrollPane);
+
+            JDialog frame = new JDialog(Andie.frame, "Color bands", true);
+            JPanel buttonPanel = new JPanel();
+            JButton posterizeButton = new JButton("Posterize");
+            JButton addButton = new JButton("Add color band");
+
+            class ButtonListener implements ActionListener {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() == addButton) {
+                        CustomColourPanel colourChooser = new CustomColourPanel("RGB", false, true);
+                        colours.add(colourChooser.colourArray.get(0));
+                        list.setListData(colours);
+                    }
+                    if(e.getSource() == posterizeButton) {
+                        frame.dispose();
+                        Color coloursArr[] = new Color[colours.size()];
+                        coloursArr = colours.toArray(coloursArr);
+                        int coloursIntArr[] = new int[coloursArr.length];
+                        for(int i = 0; i < coloursIntArr.length; i++) {
+                            coloursIntArr[i] = (coloursArr[i].getAlpha() << 24) | (coloursArr[i].getRed() << 16)
+                             | (coloursArr[i].getGreen() << 8) | (coloursArr[i].getBlue());
+                        }
+                        target.getImage().apply(new Posterize(coloursIntArr));
+                        target.repaint();
+                        target.getParent().revalidate();
+                    }
+                    
+                }
+
+            }
+
+            ButtonListener bListener = new ButtonListener();
+
+            addButton.addActionListener(bListener);
+            posterizeButton.addActionListener(bListener);
+            
+            buttonPanel.add(posterizeButton);
+            buttonPanel.add(addButton);
+            mainPanel.add(buttonPanel);
+
+            frame.setSize(new Dimension(350, 200));
+            frame.setResizable(false);
+            frame.add(mainPanel);
+            frame.setVisible(true);
+            frame.pack();
         }
 
     }

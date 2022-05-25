@@ -34,16 +34,16 @@ public class EmbossActions {
      */
     public EmbossActions() {
         actions = new ArrayList<Action>();
-        actions.add(new EmbossFilter1Action("Top left emboss", null, "Apply a top left emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter2Action("Mid left emboss", null, "Apply a middle left emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter3Action("Top mid emboss", null, "Apply a top mid emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter4Action("Top right emboss", null, "Apply a top right emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter5Action("Mid right emboss", null, "Apply a middle right emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter6Action("Bottom right emboss", null, "Apply a bottom right emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter7Action("Bottom middle emboss", null, "Apply a bottom middle emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new EmbossFilter8Action("Bottom left emboss", null, "Apply a bottom left emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new SoberHorizontalAction("Horizontal Sober", null, "Apply a horizontal sober filter", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new SoberVerticalAction("Vertical Sober", null, "Apply a vertical sober filter", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new EmbossFilter1Action("Top left emboss", null, "Apply a top left emboss filter", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new EmbossFilter2Action("Mid left emboss", null, "Apply a middle left emboss filter", Integer.valueOf(KeyEvent.VK_2)));
+        actions.add(new EmbossFilter3Action("Top mid emboss", null, "Apply a top mid emboss filter", Integer.valueOf(KeyEvent.VK_3)));
+        actions.add(new EmbossFilter4Action("Top right emboss", null, "Apply a top right emboss filter", Integer.valueOf(KeyEvent.VK_4)));
+        actions.add(new EmbossFilter5Action("Mid right emboss", null, "Apply a middle right emboss filter", Integer.valueOf(KeyEvent.VK_5)));
+        actions.add(new EmbossFilter6Action("Bottom right emboss", null, "Apply a bottom right emboss filter", Integer.valueOf(KeyEvent.VK_6)));
+        actions.add(new EmbossFilter7Action("Bottom middle emboss", null, "Apply a bottom middle emboss filter", Integer.valueOf(KeyEvent.VK_7)));
+        actions.add(new EmbossFilter8Action("Bottom left emboss", null, "Apply a bottom left emboss filter", Integer.valueOf(KeyEvent.VK_8)));
+        actions.add(new SoberHorizontalAction("Horizontal Sober", null, "Apply a horizontal sober filter", Integer.valueOf(KeyEvent.VK_9)));
+        actions.add(new SoberVerticalAction("Vertical Sober", null, "Apply a vertical sober filter", Integer.valueOf(KeyEvent.VK_0)));
     }
 
     /**

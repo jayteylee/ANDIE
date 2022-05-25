@@ -38,15 +38,15 @@ public class MouseActions {
      */
     public MouseActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MouseDrawLineAction("Draw Line", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawOvalAction("Draw oval", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Start recording",
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseColourAction("Choose colour", null, "Start recording", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new MouseFreeDrawAction("Free Draw", null, "free draw tool", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawLineAction("Draw Line", null, "Draws a straight line", Integer.valueOf(KeyEvent.VK_L)));
+        actions.add(new MouseDrawRectAction("Draw Rectangle", null, "Draws an empty rectangle", Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new MouseDrawFillRectAction("Draw filled rectangle", null, "Draws a filled rectangle",
+                Integer.valueOf(KeyEvent.VK_T)));
+        actions.add(new MouseDrawOvalAction("Draw oval", null, "Draws an empty oval", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new MouseDrawFillOvalAction("Draw filled oval", null, "Draws a filled oval",
+                Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new MouseColourAction("Choose colour", null, "Choose a colour", Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new MouseFreeDrawAction("Free Draw", null, "free draw tool", Integer.valueOf(KeyEvent.VK_D)));
 
     }
 
@@ -74,7 +74,7 @@ public class MouseActions {
          */
         MouseDrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -110,7 +110,7 @@ public class MouseActions {
          */
         MouseFreeDrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
         }
 
         /**
@@ -146,7 +146,7 @@ public class MouseActions {
          */
         MouseDrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -182,7 +182,7 @@ public class MouseActions {
          */
         MouseDrawFillRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -218,7 +218,7 @@ public class MouseActions {
          */
         MouseDrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -254,7 +254,7 @@ public class MouseActions {
          */
         MouseDrawFillOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK));
         }
 
         /**
@@ -290,7 +290,7 @@ public class MouseActions {
          */
         MouseColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.SHIFT_DOWN_MASK));
         }
 
         /**
@@ -306,7 +306,53 @@ public class MouseActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            CustomColourPanel frame = new CustomColourPanel("HSV", false);
+            // f.setSize(new Dimension(650, 400));
+            // f.setLayout(new FlowLayout());
+            // f.setResizable(false);
+
+            // AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
+            // for (AbstractColorChooserPanel accp : panels) {
+            //     System.out.println(accp.getDisplayName());
+            //     if (!accp.getDisplayName().equals("HSV")) {
+            //         chooser.removeChooserPanel(accp);
+            //     }
+            // }
+            // chooser.getSelectionModel().addChangeListener(this);
+            // ArrayList<JButton> buttons = new ArrayList<JButton>();
+
+            // p.setBackground(Color.black);
+            // chooser.setBackground(Color.BLACK);
+            // previewP.setBackground(MouseActions.colour);
+            // // previewP.setSize(1000, 1000);
+            // previewP.setPreferredSize(new Dimension(100, 100));
+            // p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+            // ok.setPreferredSize(new Dimension(60, 20));
+            // cancel.setPreferredSize(new Dimension(60, 20));
+            // dummyPanel1.setPreferredSize(new Dimension(60, 20));
+            // dummyPanel2.setPreferredSize(new Dimension(60, 20));
+            // previewPanels.add(previewP);
+            // previewPanels.add(dummyPanel2);
+            // dummyPanel1.add(previewText);
+            // dummyPanel1.add(dummyPanel2);
+            // buttons.add(ok);
+            // buttons.add(cancel);
+            // buttonP.add(ok);
+            // buttonP.add(cancel);
+            // Listener l = new Listener(buttons, chooser);
+            // ok.addActionListener(l);
+            // cancel.addActionListener(l);
+            // chooser.setPreviewPanel(previewP);
+            // p.add(chooser);
+            // p.add(dummyPanel1);
+            // p.add(previewPanels);
+            // p.add(dummyPanel2);
+            // p.add(buttonP);
+            // //p.add(new DrawPanel(Andie.imagePanel, current, MouseActions.colour));
+            // f.add(p);
+            //f.setVisible(true);
+            //f.setLocationRelativeTo(null);
+            //f.pack();
+            CustomColourPanel frame = new CustomColourPanel("HSV", true, false);
         }
      }
 }
