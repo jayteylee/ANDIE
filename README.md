@@ -35,7 +35,7 @@ The current implementation of the filter is known to be very slow when run with 
 ***Gaussian Blur:*** Daniel
 Accessed by: Filter menu (Gaussian blur option); 
 Keyboard shortcut ‘G’.
-Tested on different images with different colours and sizes. One of the issue I face is when we apply the Gaussian blur filter to an image, the pixels of the image will be shifted slightly upwards.
+Tested on different images with different colours and sizes. One of the issue I face is when we apply the Gaussian blur filter to an image, the pixels of the image will be shifted slightly upwards. 
 
 ----
 
@@ -52,6 +52,13 @@ Tested on many images with different colour palettes and sizes. Did some more in
 Accessed by: Colour menu (Posterize option)
 
 The user has an option to choose the colour bands used during the posterizing. A modal window opens and the user can select colors in the form of A-R-G-B in a colour chooser. Clicking okay in the colour chooser adds the colour to the list.
+
+----
+***Emboss and Sober***: Daniel
+
+Accessed by: Emboss menu (Emboss options and Sober options); Keyboard shortcut '0 - 9'
+
+The user has different emboss options to choose from based on the direction of simulation that they want to apply to. There are 8 different directions that they can choose from, and another 2 options where they can choose to do it vertically or horizontally.
 
 ----
 
