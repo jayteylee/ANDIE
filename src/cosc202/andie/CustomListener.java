@@ -1,12 +1,23 @@
 package cosc202.andie;
 
 import java.awt.event.MouseEvent;
-import javax.swing.event.MouseInputListener;
+import java.util.ArrayList;
 
+import javax.swing.event.MouseInputListener;
+/**
+ * <p>
+ * A Custom listener class to handle mouse drag and click operations.
+ * Once running, it tracks starting x,y coordinates and while dragging the current x,y coordinates
+ * </p>
+ * 
+ * @author Jake Norton
+ */
 public class CustomListener implements MouseInputListener {
     private static boolean entered = false;
     private static boolean pressed = false;
     private static boolean running = false;
+    private static ArrayList<Integer> xList = new ArrayList<Integer>();
+    private static ArrayList<Integer> yList = new ArrayList<Integer>();
     private static int startX = 0;
     private static int startY = 0;
     private static int endX = 0;
@@ -20,20 +31,32 @@ public class CustomListener implements MouseInputListener {
     @Override
     public void mouseClicked(MouseEvent e) {
     }
-
+    /**Once pressed, set pressed boolean to true.
+     * If the listener is running and the mouse is on the listened to panel, set the start x and y coordinates
+     * of the mouse.
+     * If the current operation is freedraw, create new arraylists for the x and y coordinates
+     */
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) { 
         pressed = true;
-        if (entered) {
+        if (entered && running) {
             setStartX(e.getX());
             setStartY(e.getY());
+            if(MouseActions.current == MouseActions.FREEDRAW){
+                CustomListener.xList = new ArrayList<Integer>();
+                CustomListener.yList = new ArrayList<Integer>();
+            }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if (CustomListener.running && CustomListener.entered) {
-            Andie.imagePanel.getImage().apply(new DrawApply(Andie.imagePanel, MouseActions.current, MouseActions.colour));
+            if(MouseActions.current == MouseActions.CROP){
+             Andie.imagePanel.getImage().apply(new CropSelection());
+            }else{
+            Andie.imagePanel.getImage().apply(new DrawApply(MouseActions.current, MouseActions.colour));
+            }
             ImageAction.target.repaint();
             ImageAction.target.revalidate();
             pressed = false;
@@ -57,7 +80,26 @@ public class CustomListener implements MouseInputListener {
         if (entered && pressed && running) {
             setCurrentX(e.getX());
             setCurrentY(e.getY());
+            if(MouseActions.current == MouseActions.FREEDRAW){
+                xList.add(currentX);
+                yList.add(currentY);
+               }
         }
+    }
+    public static ArrayList<Integer> getxList() {
+        return xList;
+    }
+
+    public static void setxList(ArrayList<Integer> xList) {
+        CustomListener.xList = xList;
+    }
+
+    public static ArrayList<Integer> getyList() {
+        return yList;
+    }
+
+    public static void setyList(ArrayList<Integer> yList) {
+        CustomListener.yList = yList;
     }
 
     @Override
@@ -146,5 +188,7 @@ public class CustomListener implements MouseInputListener {
         endY = 0;
         currentX = 0;
         currentY = 0;
+        CustomListener.xList = new ArrayList<>();
+        CustomListener.yList = new ArrayList<>();
     }
 }

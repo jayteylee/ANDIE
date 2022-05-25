@@ -149,7 +149,7 @@ public class ImagePanel extends JPanel {
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
             if(CustomListener.isRunning()){
-            DrawPanel d = new DrawPanel(this, MouseActions.current, MouseActions.colour);
+            DrawPanel d = new DrawPanel(MouseActions.current, MouseActions.colour);
             d.paintComponent(g);
             repaint();
             revalidate();

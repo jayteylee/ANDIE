@@ -39,7 +39,6 @@ public class FilterActions {
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_N)));
         actions.add(new GaussianBlurAction("Gaussian blur", null, "Apply gaussian blur", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply emboss filter", Integer.valueOf(KeyEvent.VK_E)));
     }
 
     /**
@@ -210,17 +209,4 @@ public class FilterActions {
         }
     }
     
-    public class EmbossFilterAction extends ImageAction{
-
-        EmbossFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic){
-            super(name, icon, desc, mnemonic);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, 0));
-        }
-        
-        public void actionPerformed(ActionEvent e){
-            target.getImage().apply(new EmbossFilter());
-            target.repaint();
-            target.getParent().revalidate();
-        }
-    }
 }
