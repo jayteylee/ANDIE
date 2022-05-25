@@ -29,6 +29,9 @@ public class Andie {
     protected static Toolkit tk = Toolkit.getDefaultToolkit();  
     protected static int xSize = ((int) tk.getScreenSize().getWidth());  
     protected static int ySize = ((int) tk.getScreenSize().getHeight()); 
+    protected static JToolBar tbar = new JToolBar();
+    Toolbar toolbar = new Toolbar();
+    protected static ImagePanel imagePanel = new ImagePanel();
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -64,9 +67,9 @@ public class Andie {
         }catch (Exception e) {
             System.err.println("Failed to load ANDIE icon");
         }
-
+        
         // The main content area is an ImagePanel
-        ImagePanel imagePanel = new ImagePanel();
+        //ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -96,26 +99,54 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
+        //
+        MacroActions macroActions = new MacroActions();
+        menuBar.add(macroActions.createMenu());
+        //
+        MouseActions mouseActions = new MouseActions();
+        menuBar.add(mouseActions.createMenu());
+        // Actions that will apply different emboss based on the directions
+        EmbossActions embossActions = new EmbossActions();
+        menuBar.add(embossActions.createEmbossMenu());    
+
         //Creates a toolbar
         Toolbar toolbar = new Toolbar();
-        JToolBar tbar = toolbar.createToolBar();
+        tbar = toolbar.createToolBar();
         frame.setMinimumSize(new Dimension(520,450));
         frame.add(tbar, BorderLayout.NORTH);
         frame.setJMenuBar(menuBar);
+        imagePanel.getImage().open("bin/whiteboard.jpg");
         frame.pack();
         frame.setVisible(true);
         
        
     }
     /**
+     * This method reinitialises the toolbar to enable the macro record button to change to red when recording
+     * @throws Exception
+     * @author Jake Norton
+     */
+    protected static void resetToolbar() throws Exception{
+        frame.remove(tbar);
+        Toolbar toolbar = new Toolbar();
+        tbar = toolbar.createToolBar();
+        frame.add(tbar, BorderLayout.NORTH);
+        frame.setVisible(true);
+        resizeFrame();
+    }
+    /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the
      * screen size, maximise frame.
-     * @author Jake
+     * @author Jake Norton
      */
     protected static void resizeFrame(){
         frame.pack();
-        if(frame.getSize().getWidth()> xSize || frame.getSize().getHeight()> ySize){
+        if(frame.getSize().getWidth()> xSize && frame.getSize().getHeight()> ySize){
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }else if(frame.getSize().getWidth()> xSize){
+            frame.setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        }else if(frame.getSize().getHeight()> xSize){
+            frame.setExtendedState(JFrame.MAXIMIZED_VERT);
         }
     } 
     /**

@@ -207,5 +207,6 @@ public class FilterActions {
             target.repaint();
             target.getParent().revalidate();
         }
-    }   
+    }
+    
 }
