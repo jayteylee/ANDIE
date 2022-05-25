@@ -10,7 +10,8 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
     /** 
-     * Constructor for CustomColourPanel that also instantiates a colour chooser panel
+     * This class creates a custom colour panel
+     * @author Jake Norton, Jack Bredenbeck
      */
 public class CustomColourPanel implements ChangeListener {
     protected JDialog frame;
@@ -28,7 +29,8 @@ public class CustomColourPanel implements ChangeListener {
     protected ArrayList<Color> colourArray;
 
     /**
-     * Constructor for CustomColourPanel that also instantiates a colour chooser panel
+     * Constructor for CustomColourPanel that also instantiates a colour chooser panel, 
+     * depending on colorType and whether it creates an add button or not.
      */
     public CustomColourPanel(String colorType, boolean multiple, boolean modal) {
         frame = new JDialog(Andie.frame, "Choose a colour", modal);
@@ -46,7 +48,6 @@ public class CustomColourPanel implements ChangeListener {
         //Removes all chooser panels apart from HSV
         AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels) {
-            System.out.println(accp.getDisplayName());
             if (!accp.getDisplayName().equals(colorType)) {
                 chooser.removeChooserPanel(accp);
             }
@@ -58,15 +59,15 @@ public class CustomColourPanel implements ChangeListener {
         //Set panel and button sizes
         previewP.setPreferredSize(new Dimension(100, 100));
         ok = new JButton("Ok");
-        ok.setPreferredSize(new Dimension(60, 20));
+        ok.setPreferredSize(new Dimension(80, 20));
         cancel = new JButton("cancel");
-        cancel.setPreferredSize(new Dimension(60, 20));
+        cancel.setPreferredSize(new Dimension(80, 20));
         add = new JButton("add");
-        add.setPreferredSize(new Dimension(60, 20));
+        add.setPreferredSize(new Dimension(80, 20));
         textPanel = new JPanel();
-        textPanel.setPreferredSize(new Dimension(60, 20));
+        textPanel.setPreferredSize(new Dimension(100, 20));
         dummyPanel2 = new JPanel();
-        dummyPanel2.setPreferredSize(new Dimension(60, 20));
+        dummyPanel2.setPreferredSize(new Dimension(100, 20));
 
         //
         previewPanels = new JPanel();
@@ -83,6 +84,7 @@ public class CustomColourPanel implements ChangeListener {
 
         //add buttons to the button panel
         buttonP = new JPanel();
+        buttonP.setPreferredSize(new Dimension(500,40));
         buttonP.add(ok);
         buttonP.add(cancel);
         if(multiple) {
@@ -109,12 +111,17 @@ public class CustomColourPanel implements ChangeListener {
         frame.pack();
         frame.setVisible(true);
     }
-
+    /**
+     * This method changes the background of the preview panel depending on the colour chosen
+     * or the colour chooser component
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
         previewP.setBackground(chooser.getColor());
     }
-
+    /**
+     * Action listener class to handle actions on the buttons on the custom colour chooser
+     */
     public class Listener implements ActionListener {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
         JColorChooser chooser;

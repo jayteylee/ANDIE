@@ -306,53 +306,7 @@ public class MouseActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            // f.setSize(new Dimension(650, 400));
-            // f.setLayout(new FlowLayout());
-            // f.setResizable(false);
-
-            // AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
-            // for (AbstractColorChooserPanel accp : panels) {
-            //     System.out.println(accp.getDisplayName());
-            //     if (!accp.getDisplayName().equals("HSV")) {
-            //         chooser.removeChooserPanel(accp);
-            //     }
-            // }
-            // chooser.getSelectionModel().addChangeListener(this);
-            // ArrayList<JButton> buttons = new ArrayList<JButton>();
-
-            // p.setBackground(Color.black);
-            // chooser.setBackground(Color.BLACK);
-            // previewP.setBackground(MouseActions.colour);
-            // // previewP.setSize(1000, 1000);
-            // previewP.setPreferredSize(new Dimension(100, 100));
-            // p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-            // ok.setPreferredSize(new Dimension(60, 20));
-            // cancel.setPreferredSize(new Dimension(60, 20));
-            // dummyPanel1.setPreferredSize(new Dimension(60, 20));
-            // dummyPanel2.setPreferredSize(new Dimension(60, 20));
-            // previewPanels.add(previewP);
-            // previewPanels.add(dummyPanel2);
-            // dummyPanel1.add(previewText);
-            // dummyPanel1.add(dummyPanel2);
-            // buttons.add(ok);
-            // buttons.add(cancel);
-            // buttonP.add(ok);
-            // buttonP.add(cancel);
-            // Listener l = new Listener(buttons, chooser);
-            // ok.addActionListener(l);
-            // cancel.addActionListener(l);
-            // chooser.setPreviewPanel(previewP);
-            // p.add(chooser);
-            // p.add(dummyPanel1);
-            // p.add(previewPanels);
-            // p.add(dummyPanel2);
-            // p.add(buttonP);
-            // //p.add(new DrawPanel(Andie.imagePanel, current, MouseActions.colour));
-            // f.add(p);
-            //f.setVisible(true);
-            //f.setLocationRelativeTo(null);
-            //f.pack();
-            CustomColourPanel frame = new CustomColourPanel("HSV", true, false);
+            CustomColourPanel frame = new CustomColourPanel("HSV", false, false);
         }
      }
 }
