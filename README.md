@@ -117,6 +117,7 @@ No formal testing framework was used however different images and crops of diffe
 Accessed by: Draw menu and keyboard shortcuts shown below
 
 The operations include:
+
     * Drawing lines
     * Drawing empty rectangles
     * Drawing empty ovals
@@ -126,7 +127,7 @@ The operations include:
     * Colour selection panel
 
 No formal testing framework was used however a lot of testing has been done with different shapes, sizes and mouse drag directions. Additionally undo/redo/save/export functionality has been tested. All but the free drawing is accurate when the image is zoomed, the free draw currently will warp somewhat when the image has been zoomed in or zoomed out. 
-There is also a custom selection panel by selecting the choose colour option in the draw menu. This will allow you to select a new colour in the hsv format
+There is also a custom selection panel by selecting the choose colour option in the draw menu. This will allow you to select a new colour in the HSV format.
 
 
 
@@ -184,6 +185,13 @@ For all non-filter functions I decided to make the shortcuts double keyed and fo
 
 Seeing as there are 10 different emboss filters, I assigned each number key to each of the filters. For the drawing features, I decided to make the shortcuts double keyed with Alt/Option being the base key in the keyboard shortcut.
 However, in the case of the 'free draw' feature, I decided to make it single keyed to make it quicker to use.
+___
+***Macros***: Jake
+Accessed by: Macro menu and the record and stop/save on the toolbar.
+
+The macro function shows it is recording when the toolbar icon changes to the red version. The macro save and load will default to open in the macros folder in andie as macros should be for general use and having them in one place makes sense. 
+Found the different object signature problem with legacy macros/ops files, currently this bug is not handled and macros will have to be remade if the methods involved change there signature.
+
 ___
 
 ***Toolbar for common operations***: Jake
@@ -243,9 +251,13 @@ Exceptions were handled for when the user tries to save a file but has not opene
 
 (Jake) The default image currently being used when opening the program can be saved over. I have added a bandaid fix to the save operation which will add a 1 to the end of the file name to prevent this, however I think there is a more robust solution. 
 
+(Jake) Fixed a problem with drawing operations for when the image was zoomed
+
 (Jake) Had to change implementation of drawing classes to ensure they saved instances of all the variables as using static values makes and undo/redo/save operation unreliable.
 
 (Jake) Had to split the procedural drawing panel and the draw apply method as having a class extend a JComponent adds problems with incompatiblity of serialization. 
+
+(Jake) There is potential for corrupting ops/macro files when the methods involved are changed. This happens due to the object signature changing and rendering its serials differing between versions.
 
 ----
 
