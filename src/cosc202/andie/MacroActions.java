@@ -65,6 +65,12 @@ public class MacroActions {
          */
         public void actionPerformed(ActionEvent e) {
           EditableImage.macroRunning = true;
+          try {
+            Andie.resetToolbar();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         }
 
     }
@@ -124,6 +130,11 @@ public class MacroActions {
                     System.out.println(ex);
                     JOptionPane.showMessageDialog(null, "An error occured while saving the image.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+            try {
+                Andie.resetToolbar();
+            } catch (Exception e1) {
+                e1.printStackTrace();
             }
 
         }

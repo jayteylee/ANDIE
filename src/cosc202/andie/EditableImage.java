@@ -206,6 +206,10 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
+       // System.out.println(imageFilename);
+        if(imageFilename.equals("bin/whiteboard.jpg")){
+            imageFilename = "bin/whiteboard1.jpg";
+        }
         // Write image file based on file extension
         if (!imageFilename.contains(".jpg") && !imageFilename.contains(".png") && !imageFilename.contains(".jpeg")
                 && !imageFilename.contains(".JFIF")) {

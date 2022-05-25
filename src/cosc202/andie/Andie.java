@@ -121,6 +121,11 @@ public class Andie {
         
        
     }
+    /**
+     * This method reinitialises the toolbar to enable the macro record button to change to red when recording
+     * @throws Exception
+     * @author Jake Norton
+     */
     protected static void resetToolbar() throws Exception{
         frame.remove(tbar);
         Toolbar toolbar = new Toolbar();
@@ -132,7 +137,7 @@ public class Andie {
     /**
      * A method which resizes the frame according to the new image size. If the image size is larger than the
      * screen size, maximise frame.
-     * @author Jake
+     * @author Jake Norton
      */
     protected static void resizeFrame(){
         frame.pack();

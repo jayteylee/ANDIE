@@ -19,17 +19,17 @@ public class MouseActions {
     protected static final int DRAWLINE = 5;
     protected static final int FREEDRAW = 6;
     protected static int current;
-    protected static JFrame f = new JFrame("Choose new colour");
-    protected static JColorChooser chooser = new JColorChooser();
-    protected static JPanel previewP = new JPanel();
-    protected static JButton ok = new JButton("Ok");
-    protected static JButton cancel = new JButton("cancel");
-    protected static JLabel previewText = new JLabel("Colour preview");
-    protected static JPanel p = new JPanel();
-    protected static JPanel buttonP = new JPanel();
-    protected static JPanel dummyPanel1 = new JPanel();
-    protected static JPanel dummyPanel2 = new JPanel();
-    protected static JPanel previewPanels = new JPanel();
+    // protected static JFrame f = new JFrame("Choose new colour");
+    // protected static JColorChooser chooser = new JColorChooser();
+    // protected static JPanel previewP = new JPanel();
+    // protected static JButton ok = new JButton("Ok");
+    // protected static JButton cancel = new JButton("cancel");
+    // protected static JLabel previewText = new JLabel("Colour preview");
+    // protected static JPanel p = new JPanel();
+    // protected static JPanel buttonP = new JPanel();
+    // protected static JPanel dummyPanel1 = new JPanel();
+    // protected static JPanel dummyPanel2 = new JPanel();
+    // protected static JPanel previewPanels = new JPanel();
 
     /**
      * <p>
@@ -51,7 +51,7 @@ public class MouseActions {
     }
 
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Mouse");
+        JMenu fileMenu = new JMenu("Draw");
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));

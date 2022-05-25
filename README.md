@@ -112,6 +112,24 @@ Accessed by: Image menu (Crop Selection option); Keyboard shortcut CTRL + C
 
 No formal testing framework was used however different images and crops of different sizes were trialed to check whether the crop selection was behaving as expected.
 
+----
+***Drawing Operations*** Jake
+Accessed by: Draw menu and keyboard shortcuts shown below
+
+The operations include:
+    * Drawing lines
+    * Drawing empty rectangles
+    * Drawing empty ovals
+    * Drawing filled rectangles
+    * Drawing filled rectangles
+    * Free drawing - more in its own section
+    * Colour selection panel
+
+No formal testing framework was used however a lot of testing has been done with different shapes, sizes and mouse drag directions. Additionally undo/redo/save/export functionality has been tested. All but the free drawing is accurate when the image is zoomed, the free draw currently will warp somewhat when the image has been zoomed in or zoomed out. 
+There is also a custom selection panel by selecting the choose colour option in the draw menu. This will allow you to select a new colour in the hsv format
+
+
+
 ### **Table of Keyboard Shortcuts:** Jay
 
 | ***Function*** | ***Keyboard Shortcut*** |
@@ -172,7 +190,7 @@ ___
 
 Accessed by: Toolbar frame on the andie window. 
 
-Toolbar includes: Open, save, export, zoom in, zoom out, rotate clockwise, rotate anticlockwise, flip horizontal, flip vertical.
+Toolbar includes: Open, save, export, zoom in, zoom out, rotate clockwise, rotate anticlockwise, flip horizontal, flip vertical, macro start and stop recording.
 Testing mainly involved checking the implementation of the methods called by the toolbar worked as intended. One issue I ran into was when implementing the resizeFrame method on the toolbar operations as the toolbar was calling a separate instance of actionsPerformed and so with one implementation that method would only work from the menu. However with the current implementation that has been fixed.
 
 ----
@@ -222,6 +240,12 @@ Exceptions were handled for when the user tries to save a file but has not opene
 (Jake)I think there may still be some edge problems with export and save to do with file extensions, however I think I have the major problems sorted. If the file does not contain a jpg, jpeg, png, JFIF extension, it will have .jpg appended to the file. This can lead to strange naming, if for example the file was test.txt it would be saved as test.txt.jpg. However the save would still work fine.
 
 (Jack) The colour chooser window would only open once and would not open again after it was closed. This was due to the variables being declared and assigned statically. Changing them to non-static and assigining them inside the constructor fixed the issue. 
+
+(Jake) The default image currently being used when opening the program can be saved over. I have added a bandaid fix to the save operation which will add a 1 to the end of the file name to prevent this, however I think there is a more robust solution. 
+
+(Jake) Had to change implementation of drawing classes to ensure they saved instances of all the variables as using static values makes and undo/redo/save operation unreliable.
+
+(Jake) Had to split the procedural drawing panel and the draw apply method as having a class extend a JComponent adds problems with incompatiblity of serialization. 
 
 ----
 
