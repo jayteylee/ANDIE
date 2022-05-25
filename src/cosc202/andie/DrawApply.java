@@ -35,8 +35,8 @@ public class DrawApply implements ImageOperation, Serializable{
         this.xArr = new int [CustomListener.getxList().size()];
         this.yArr = new int [CustomListener.getyList().size()];
                 for(int i = 0; i < CustomListener.getxList().size(); i++){
-                    this.xArr[i] = CustomListener.getxList().get(i);
-                    this.yArr[i] = CustomListener.getyList().get(i);
+                    this.xArr[i] = (int) (CustomListener.getxList().get(i)/ (Andie.imagePanel.getZoom()/100));
+                    this.yArr[i] = (int) (CustomListener.getyList().get(i)/ (Andie.imagePanel.getZoom()/100));
                     }
     }
     /**

@@ -129,7 +129,8 @@ The operations include:
     * Free drawing - more in its own section
     * Colour selection panel
 
-No formal testing framework was used however a lot of testing has been done with different shapes, sizes and mouse drag directions. Additionally undo/redo/save/export functionality has been tested. All but the free drawing is accurate when the image is zoomed, the free draw currently will warp somewhat when the image has been zoomed in or zoomed out. 
+No formal testing framework was used however a lot of testing has been done with different shapes, sizes and mouse drag directions. Additionally undo/redo/save/export functionality has been tested. The drawn shapes should be accurate when the image is zoomed, though there seems to be some thickening of the lines.
+
 There is also a custom selection panel by selecting the choose colour option in the draw menu. This will allow you to select a new colour in the HSV format.
 
 
