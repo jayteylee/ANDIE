@@ -106,7 +106,10 @@ Testing involved checking what happened with or without the inclusion of file ex
 ----
 
 ## Mouse operations
+***Mouse Selection***
 
+All the mouse selection is run through the CustomListener class. When running it will do various tasks based on what the current operation is. The operation will start once the mouse has entered the panel and the mouse has been pressed, it will then continue while the user is dragging the mouse and end when the mouse press is released.
+____
 ***Crop Selection:*** Jay
 Accessed by: Image menu (Crop Selection option); Keyboard shortcut CTRL + C
 
