@@ -1,6 +1,8 @@
 ## Context
 Andie is an image editing program. 'Andie' stands for A-non-destructible-image-editing program. This means that all changes made to an image (greyscale, blurring, etc.) can be undone. The edited image is output with an extra file that stores the operations applied on the image. 
 
+This was a group project that I tacked as a part of COSC202 (Software Development) paper at the University of Otago. In this project I was responsible for implementing the Median Filter, Rotate image function, crop selection and keyboard short cuts. This project provided my first ever experience of coding and developing as a team. I thoroughly enjoyed working with the other team members on this project where we all learned a lot from each other.
+
 ## Github repo
 The repository can be cloned from https://altitude.otago.ac.nz/cosc202-vscoders/andie.git
 
